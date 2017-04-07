@@ -1,0 +1,492 @@
+# -----------------------------------------------
+# Getting started with Stats
+#-----------------------------------------------
+
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(ggfortify)
+
+#-----------------------------------------------
+# Hello
+#-----------------------------------------------
+
+rm(list = ls())
+setwd("~/Dropbox/R4All_Share/modules/0 - datasets/")
+
+#----------------------------------------------------
+# general linear models - regression
+#----------------------------------------------------
+rm(list = ls())
+
+# Find the room, get the file
+dd <- read.csv(file="plant.growth.rate.csv")
+str(dd)
+
+# Make a figure ------ PLOT YOUR DATA
+ggplot(dd, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
+	geom_point(col = "cornflowerblue", size = 3) +
+  labs(x = expression(paste("Soil Moisture ", 
+	bar(x)/mu)), y = "Growth Rate (mm/week)") + theme_bw() + 
+	theme(axis.title = element_text(size = rel(1.5)))
+
+
+# make a model: INTRODUCING.... the formulae.
+
+mod1 <- lm(plant.growth.rate ~ soil.moisture.content, data = dd)
+names(mod1)
+mod2 <- lm(plant.growth.rate ~ soil.moisture.content,
+           data = slice(dd, c(-9, -18, -24)))
+
+
+# diagnostics with ggfortify
+autoplot(mod1, smooth.colour = NA)
+
+# Anova Table
+anova(mod1)
+summary(mod1)
+
+# ONLY with a single variable regression
+ggplot(dd, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
+	geom_point(col = "cornflowerblue", size = 3) + geom_smooth(method = "lm", 
+	se = FALSE)
+
+
+newxdata <- expand.grid(soil.moisture.content=seq(0.249, 1.99, length=100))
+p1 <- predict(mod1, newdata = newxdata, interval="prediction")
+preds <- cbind(p1, newxdata)
+
+p2 <- predict(mod2, newdata = newxdata, interval="prediction")
+preds2 <- cbind(p2, newxdata)
+
+
+ggplot(data=preds, aes(x=soil.moisture.content,
+                  y=fit)) +
+  geom_line() +
+  geom_smooth(aes(ymin=lwr, ymax=upr), stat="identity") +
+  geom_point(data=dd, mapping=aes(x = soil.moisture.content,
+                                  y = plant.growth.rate)) +
+  geom_line(data=preds2, aes(x=soil.moisture.content,
+                             y=fit), colour="red")
+
+
+ggplot(dd, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
+  geom_point(col = "cornflowerblue", size = 3) +
+  geom_smooth(method = "lm")
+
+
+#  lets make some new values of soil moisture 
+# so we can generate predictions from the model
+# note to self: you must use the explanatory variable NAME
+# that's the one on the x-axis...
+newX <- expand.grid(soil.moisture.content = seq(from = 0.2, 
+	to = 2, length = 10))
+
+# look at it
+newX
+
+# Step 2
+# lets get the prediction (line) and the confidence 
+# bands using predict()
+newY <- predict(mod1, newdata = newX, interval = "confidence")
+
+# look at what it produces
+newY
+
+# Step 3: Housekeeping
+
+# housekeeping (brush the two data frames together)
+addThese <- data.frame(newX, newY)
+addThese
+
+# make sure names match: change fit to plant.growth.rate
+addThese <- rename(addThese, plant.growth.rate = fit)
+addThese
+
+# Step 4	
+# layers of fun
+ggplot(dd, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
+	geom_point(size = 5, col = "cornflowerblue") + geom_smooth(data = addThese, 
+	aes(ymin = lwr, ymax = upr), stat = "identity")
+
+#----------------------------------------------------
+# general linear models - ANOVA - daphniagrowth.csv
+#----------------------------------------------------
+rm(list = ls())
+
+## read in the data
+dd <- read.csv("Daphniagrowth.csv")
+
+## look at the structure of the data
+str(dd)
+tbl_df(dd)
+
+
+# plot
+ggplot(dd, aes(x = parasite, y = growth.rate)) +
+  geom_boxplot() +
+	theme(axis.text.x = element_text(angle = 90, vjust = 1, size = 15))
+
+
+
+# summarise the data by parasite
+growth.stats <- 
+dd %>% 
+	group_by(parasite) %>% 
+		summarise(
+			meanGR = mean(growth.rate), 
+			seGR = sd(growth.rate)/sqrt(n()), 
+			lwr = meanGR - seGR, 
+			upr = meanGR + seGR)
+
+# create the limits aesthetics for error bars
+limits <- aes(ymin = lwr, ymax = upr)
+
+# construct a fancy picture 
+# note that we use the growth stats first,
+# then add the raw data....
+
+ggplot(growth.stats, aes(x = parasite, y = meanGR)) + 
+	#first add the points from the growth stats"
+	geom_point(colour = "red", size = 8, alpha = 0.5) + 
+	
+	# now add the error bars from the limits"
+	geom_errorbar(limits, width = 0.1, col = "red", alpha = 0.8) + 
+	
+	# now add the raw data from the original dataframe
+	geom_point(data = dd, aes(x = parasite, y = growth.rate), size = 3, 
+		colour = "darkgreen", alpha = 0.3) + 
+
+	# extras
+	theme(axis.text.x = element_text(angle = 90, vjust = 1)) + 
+	coord_flip()
+
+# BUILD THE MODEL
+mod2 <- lm(growth.rate ~ parasite, data = dd)
+
+# diagnostics
+autoplot(mod2, smooth.colour = NA)
+
+## model interpretation
+anova(mod2) ## the parasite treatment explains a large amount of variation in daphnia growth rate
+
+summary(mm) ## Shows the effects of the parasites on growth rate, relative to the control (Intercept)
+
+# --------------------------------------------------
+# RELEVELING when reference is not alphabetical
+# --------------------------------------------------
+
+## note that the parasite variable is a factor, so lm will automatically do anova:
+ggplot(dd, aes(x = parasite, y = growth.rate)) + geom_boxplot()
+
+# to set a level, before the model
+dd <- mutate(dd, parasite = relevel(parasite, ref = "Pasteuria ramosa"))
+levels(dd$parasite)
+
+# new plot with new levels
+ggplot(dd, aes(x = parasite, y = growth.rate)) + geom_boxplot()
+# new model with new levels
+summary(lm(growth.rate ~ parasite, data = dd))
+
+# reset to control
+dd <- mutate(dd, parasite = relevel(parasite, ref = "control"))
+
+## --------------------- EXTRAS ----------------------------------------------
+
+# How to fit a Tukey or other post-hoc comparison using the multcomp library
+mod2.aov <- aov(mod2) # repackage the model for a Tukey Test
+tukey.out <- TukeyHSD(mod2.aov) # generate tukey test
+tukey.out # table
+
+# plot, setting margins and 1 x 1 grid and rotated axis labels
+par(mfrow = c(1, 1), mar = c(5, 20, 4, 2))
+plot(tukey.out, las = 2)
+
+# --------------
+library(multcomp)
+tukey.par <- glht(mm, linfct = mcp(parasite = "Tukey"))
+summary(tukey.par)
+par(mfrow = c(1, 1), mar = c(5, 20, 4, 2))
+plot(tukey.par)
+
+# RESET PLOT MARGINS
+par(mar = c(5, 4, 4, 2))
+
+## Set up orthogonal (planned) contrasts: rather than ALL pairwise....
+## some specific examples
+c1 <- c(-1, 1/3, 1/3, 1/3) # control vs overall parasite mean
+c2 <- c(0, -1, 1/2, 1/2) # parasite 1 vs 2 & 3
+c3 <- c(0, 0, -1/2, 1/2) # parasite 2 vs 3
+
+# combine the hypotheses
+mat <- cbind(c1, c2, c3)
+
+# allocate them to the treatment
+contrasts(dd$parasite) <- mat
+
+# run the model returning THESE hypotheses
+mmcheck <- lm(growth.rate ~ parasite, data = dd)
+summary(mmcheck)
+
+# now set up a contrast to compare copntrol to mean of all 3 parasites
+levels(dd$parasite)
+contrastmatrix <- cbind(c(0, 1, 1, 1))
+contrasts(dd$parasite, how.many = 1) <- contrastmatrix
+
+# rerun
+mod2 <- lm(growth.rate ~ parasite, data = dd)
+summary(mod2)
+
+
+#----------------------------------------------------
+# general linear models - two way ANOVA - growth.csv
+#----------------------------------------------------
+rm(list = ls())
+
+dd <- read.csv("growth.csv")
+
+# alter reference level NOW to control
+dd <- mutate(dd, supplement = relevel(supplement, ref = "control"))
+
+# raw data
+p1 <- ggplot(dd, aes(x = supplement, y = gain, colour = diet)) + 
+	geom_point()
+
+# the interaction plot via ggplot step 1
+cows <- dd %>%
+	group_by(diet, supplement) %>%
+		summarise(growth = mean(gain))
+
+# Interaction Plot via ggplot step 2
+# note group argument to make sure lines connect what you want connected
+
+p2 <- ggplot(cows, aes(x = supplement, y = growth, group = diet, colour = diet)) + 
+	geom_point() + 
+	geom_line()
+
+# both on the same picture (needs gridExtra)
+grid.arrange(p1, p2, ncol = 2)
+
+# BASE functions
+with(dd, interaction.plot(supplement, diet, gain))
+
+## and the model will have the control treatment as the intercept.
+## Note that we use * to fit the main effects and the interaction term
+
+mm <- lm(gain ~ supplement * diet, data = dd)
+# mm <- lm(gain ~ supplement + diet + supplemenet:diet, data = dd)
+
+## model diagnostics
+autoplot(mm, smooth.colour = NA)
+
+## There is little evidence of an interaction, but strong main effects
+anova(mm)
+
+## Again, no clear interactions terms (there should not be,
+## given the lack of a significant interaction term by F-test) 
+summary(mm)
+## The table looks rather scary, but is explained in the powerpoint presentation.
+
+#----------------------------------------------------
+# general linear models - ANCOVA
+#----------------------------------------------------
+
+# Get the data
+rm(list = ls())
+limp <- read.csv("limpet.csv")
+
+str(limp)
+
+# note use of scale_colour_manual
+ggplot(limp, aes(x = DENSITY, y = EGGS, colour = SEASON)) + 
+	geom_point(size = 5) + scale_colour_manual(values = c("yellowgreen", 
+	"salmon3")) + theme_bw()
+
+# make the model
+fit2 <- lm(EGGS ~ DENSITY * SEASON, data = limp) # linear model with interacti
+fit2 <- lm(EGGS ~ DENSITY + SEASON + SEASON:DENSITY, data = limp) # linear model with interacti
+
+# check the assumptions
+autoplot(fit2, smooth.colour=NA)
+
+# examine the results
+anova(fit2) # ANOVA tables with sequential sums of squares
+summary(fit2) # coefficients
+
+#----------------------------------------------------#----------------------------------------------------
+# STEP 1
+# construct a data frame of where you want predicted values 
+# to be "located" on your graph
+# play around with this to see what happens when you 
+# fix DENSITY to its mean, etc....
+#----------------------------------------------------
+newX <- expand.grid(DENSITY = seq(from = 8, to = 50, length = 10), 
+	SEASON = levels(limp$SEASON))
+newX
+
+# STEP 2
+# get the predictions at the values and levels 
+# specified above
+newY <- predict(fit2, newdata = newX, interval = "confidence")
+newY
+
+# Step 3
+# Housekeeping
+PlotThis <- data.frame(newX, newY)
+
+# Step 4 + extras
+# Now use geom_smooth() to make a lovely visualisation
+# of your raw data and the fitted values from the model
+# and the 95% CI band around them
+ggplot(limp, aes(x = DENSITY, y = EGGS, colour = SEASON)) + 
+	geom_point(size = 5) +
+  geom_smooth(data = filter(PlotThis, SEASON=="spring"),
+              aes(y=fit, ymin = lwr, ymax = upr), stat = "identity") 
+
+
+
+
+
+
+
+
+
++ ....e_m_p_t_y.... = 0
+# If you want to set custom colours
+# do so for the raw data (colour) and the bands (fill)
+scale_colour_manual(values = c("darkgreen", "hotpink")) + scale_fill_manual(values = c("darkgreen", 
+	"hotpink")) + ....e_m_p_t_y.... = 0
+# adding some annotation to a graph
+annotate("text", x = 40, y = 2.88, label = "Hello") + ....e_m_p_t_y.... = 0
+# using maths expressions on the x axis
+# see ?plotmath
+xlab(expression(paste(bar(x), phi))) + theme_bw()
+#-----------------------------------------------
+# Getting specific predictions
+#-----------------------------------------------
+
+newX <- expand.grid(DENSITY = 40, SEASON = "spring")
+# get the predictions at the values and levels 
+# specified above
+newY <- predict(fit2, newdata = newX, interval = "confidence")
+# housekeeping
+data.frame(newX, newY)
+
+#-----------------------------------------------
+# t-test practical
+#-----------------------------------------------
+
+# read the data and explore
+rm(list=ls())
+tt <- read.csv("GardenOzone.csv")
+str(tt)
+tbl_df(tt)
+
+# Make a helpful plot linked to the question about two means
+ggplot(tt, aes(x = Ozone)) +
+  geom_histogram(bins=5) +
+  facet_wrap(~Garden.location, ncol = 1)
+
+ggplot(tt, aes(x = Ozone)) +
+  geom_dotplot(bins = 10) +
+  facet_wrap(~Garden.location, ncol=1) 
+
+
+# check the means and some assumptions about variance
+summarise(group_by(tt, Garden.location),
+          meanOzone = mean(Ozone), 
+	varOzone = var(Ozone))
+
+# Model Formulae syntax for t-test with a data frame
+# note default is welch and unequal variance is OK
+t.test(Ozone ~ Garden.location,
+       data = tt,
+       var.equal = FALSE)
+
+
+ggplot(tt, aes(x = Garden.location,
+               y = Ozone)) +
+  geom_boxplot() +
+  geom_point(position=position_jitter(width=0.05)) +
+  coord_flip()
+  
+
+
+
+#--------------------------------------------------
+# chi-square (Hadleyverse version)
+#--------------------------------------------------
+
+## read in the data
+
+dd <- read.csv("ladybirds.csv")
+glimpse(dd)
+str(dd)
+
+## get the number of each colour in each habitat type
+lb <- group_by(dd, Habitat, colour) %>%
+  summarise(obs = sum(number))
+
+lb # LOOK AT IT.
+
+# make a plot
+
+ggplot(lb, aes(x = colour, y = obs, fill = colour)) +
+  geom_bar(stat = "identity") + 
+	facet_wrap(~Habitat) +
+  scale_fill_manual(values = c(black="black", red="red"))
+
+# the contingency table
+lb_matrix <- xtabs(obs ~ Habitat + colour, data = lb)
+
+# the test
+chisq.test(lb_matrix)
+
+
+
+# ---------------------------------------------
+# USING BASE GRAPHICS
+# remake the original plot
+# ---------------------------------------------
+
+par(mfrow = c(1, 1), mar = c(5, 4, 4, 2))
+plot(EGGS ~ DENSITY, data = limp, cex = 2, pch = 19, col = c("green", 
+	"red")[SEASON], xlab = list("DENSITY", cex = 1.3), ylab = list("EGGS", 
+	cex = 1.3), ylim = c(0.2, 3), xlim = c(0, 60))
+
+# NOW add the lines/points you made - each one of these 
+# grabs a subset of the PlotThis data corresponding to SEASON 
+
+# Summer
+lines(EGGS ~ DENSITY, data = subset(PlotThis, SEASON == "summer"), 
+	col = "red")
+
+lines(lwr ~ DENSITY, data = subset(PlotThis, SEASON == "summer"), 
+	col = "red", lty = 2)
+
+lines(upr ~ DENSITY, data = subset(PlotThis, SEASON == "summer"), 
+	col = "red", lty = 2)
+
+# Spring
+lines(EGGS ~ DENSITY, data = subset(PlotThis, SEASON == "spring"), 
+	col = "green")
+
+lines(lwr ~ DENSITY, data = subset(PlotThis, SEASON == "spring"), 
+	col = "green", lty = 2)
+
+lines(upr ~ DENSITY, data = subset(PlotThis, SEASON == "spring"), 
+	col = "green", lty = 2)
+
+legend(40, 3, c("Spring", "Summer"), col = c("green", "red"), 
+	pch = 19)
+
+# Making transparent confidence bands in base graphics
+# note refernce to lengths in PlotThis
+xx <- c(seq(0, 60, length = 10), seq(60, 0, length = 10))
+yy <- c(PlotThis$upr[1:10], rev(PlotThis$lwr[1:10]))
+yy2 <- c(PlotThis$upr[11:20], rev(PlotThis$lwr[11:20]))
+
+polygon(xx, yy, col = rgb(0.19, 0.19, 0.19, 0.3), border = FALSE)
+polygon(xx, yy2, col = rgb(0.19, 0.19, 0.19, 0.3), border = FALSE)
+
+
