@@ -1,57 +1,103 @@
-# -----------------------------------------------
-# Getting started with Stats
-#-----------------------------------------------
+---
+title: "Basic statistics in R"
+output: html_document
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**There is a presentation which goes with this handout, use it to add notes if you need to.**
+
+Before we start, remember we need to do a couple of things...
+
+#### 1. Set the working directory
+See the introduction handout if you can't remember how.
+
+Check it worked using:
+```{r}
+list.files()
+```
+
+#### 2. Load the packages needed
+We already downloaded these and don't need to do that again. 
+```{r}
 library(ggplot2)
 library(dplyr)
 library(gridExtra)
 library(ggfortify)
+```
 
-#-----------------------------------------------
-# Hello
-#-----------------------------------------------
+#### 3. Import the data
+We are going to work with the dataset `plant.growth.rate.csv`
+```{r}
+growth <- read.csv("plant.growth.rate.csv")
+```
 
-rm(list = ls())
-setwd("~/Dropbox/R4All_Share/modules/0 - datasets/")
+#### 4. Look at the data
+```{r}
+glimpse(growth)
+```
 
-#----------------------------------------------------
-# general linear models - regression
-#----------------------------------------------------
-rm(list = ls())
+### Which statistic do I need?
+Before you start think very carefully about what your *question* is, why it is interesting, and how you'd plot it on a graph. If you can plot something, you can usually do the statistics!
 
-# Find the room, get the file
-dd <- read.csv(file="plant.growth.rate.csv")
-str(dd)
+As a (very) vague rule of thumb: 
 
-# Make a figure ------ PLOT YOUR DATA
-ggplot(dd, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
+1. If you have a continuous response (Y) variable, and a categorical predictor/explanatory (X) variable you'll need a t-test (two groups), or analysis of variance (ANOVA; two or more groups). You'd plot this as a boxplot (or barplot if you really want to). 
+
+2. If you have a continuous response (Y) variable, and a continuous predictor/explanatory (X) variable you'll need a regression (one X), or multiple regression (two or more Xs). You'd plot this as a scatter plot.
+
+3. If you have a continuous response (Y) variable, and a continuous predictor/explanatory (X) variable AND a categorical explanatory variable you'll need an analysis of covariance (ANCOVA). You'd plot this as a scatter plot with two or more lines (one for each category of X).
+
+There are many other options though, this is not exhaustive and isn't always the best statistic to use for a given problem/dataset.
+
+### How do we do statistics - step by step
+
+1. PLOT your data
+2. Fit your model
+3. Look at the assumptions
+4. Look at the results
+5. Add interpretation to your graph
+
+### General linear models - regression
+First we'll use the plant growth dataset to demonstrate a linear regression...
+
+1. Plot the data
+Make a scatter plot of `soil.moisture.content` on the x axis and `plant.growth.rate` on the y axis.
+```{r}
+ggplot(dd, aes(x = soil.moisture.content, 
+               y = plant.growth.rate)) + 
 	geom_point(col = "cornflowerblue", size = 3) +
-  labs(x = expression(paste("Soil Moisture ", 
-	bar(x)/mu)), y = "Growth Rate (mm/week)") + theme_bw() + 
-	theme(axis.title = element_text(size = rel(1.5)))
+  labs(x = "Soil Moisture", y = "Growth Rate (mm/week)") +      theme_bw()
+```
 
-
-# make a model: INTRODUCING.... the formulae.
-
-mod1 <- lm(plant.growth.rate ~ soil.moisture.content, data = dd)
-names(mod1)
-mod2 <- lm(plant.growth.rate ~ soil.moisture.content,
-           data = slice(dd, c(-9, -18, -24)))
-
+2. Make a model
+```{r}
+model1 <- lm(plant.growth.rate ~ soil.moisture.content, data = dd)
+```
 
 # diagnostics with ggfortify
+```{r}
 autoplot(mod1, smooth.colour = NA)
+```
 
 # Anova Table
+```{r}
 anova(mod1)
+```
+```{r}
 summary(mod1)
+```
 
+```{r}
 # ONLY with a single variable regression
 ggplot(dd, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
 	geom_point(col = "cornflowerblue", size = 3) + geom_smooth(method = "lm", 
 	se = FALSE)
+```
 
-
+```{r}
 newxdata <- expand.grid(soil.moisture.content=seq(0.249, 1.99, length=100))
 p1 <- predict(mod1, newdata = newxdata, interval="prediction")
 preds <- cbind(p1, newxdata)

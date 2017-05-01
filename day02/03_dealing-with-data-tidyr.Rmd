@@ -1,0 +1,164 @@
+---
+title: "Dealing with data - `tidyr`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+**There is a presentation which goes with this handout, use it to add notes if you need to.**
+
+Before we start, remember we need to do a couple of things...
+
+#### 1. Set the working directory
+See the introduction handout if you can't remember how.
+
+Check it worked using:
+```{r}
+list.files()
+```
+
+#### 2. Load the packages needed
+We already downloaded these and don't need to do that again. 
+```{r}
+library(dplyr)
+library(tidyr)
+library(lubridate)
+```
+
+#### 3. Import the data
+```{r}
+museum1 <- read.csv("museum1.csv")
+museum2 <- read.csv("museum2.csv")
+```
+
+### Dealing with messy data: `tidyr`
+Hopefully we've taught you how to avoid making your own messy datasets! However, messy data often comes from other people (OPD - other people's data!), i.e. collaborators, supervisors, previous students of your supervisor, field technicians etc. To deal with this we can use `tidyr` and other tools like `dplyr` and `lubridate`.
+
+Let's learn a few simple ways to deal with common issues in messy data.
+
+First lets have a look at the first museum dataset.
+
+```{r}
+head(museum1)
+```
+
+In `museum1` we have information on how many specimens for each species are found in three different locations across the museum (the mammal tower, spirit collection and warehouse). 
+
+Why is this untidy? What do we need to change?
+
+### Combining multiple columns for one variable: `gather`
+We need to combine the `MammalTower`, `SpiritCollection` and `Warehouse` columns into one column called `Location`. We also add a new column called `Number` that will contain the numbers that were in the `MammalTower`, `SpiritCollection` and `Warehouse` columns. 
+
+```{r}
+museum1 %>%
+  gather(Location, Number, MammalTower:Warehouse)
+```
+
+What if you need to undo this and put these variables into different columns again? We can use the `tidyr` function `spread`.
+
+```{r}
+new.museum1 <-
+  museum1 %>%
+    gather(Location, Number, MammalTower:Warehouse)
+
+new.museum1 %>%
+  spread(Location, Number)
+```
+
+#### PRACTICAL
+
+Tidy `museum1` and arrange with `Species` in alphabetical order (clue - this will require a `dplyr` function).
+
+```{r}
+museum1 %>%
+  gather(Location, Number, MammalTower:Warehouse) %>%
+  arrange(Species)
+```
+
+Next we'll play with `museum2` which is messy in some different ways.
+
+Let's have a look at the dataset.
+
+```{r}
+head(museum2)
+```
+
+In `museum2` we have information on a number of specimens. Each has an associated species name and collection date. We also have information on the sex and age of the specimen.
+
+Why is this untidy? What do we need to change? There are several problems.
+
+### Dealing with multiple variables in one column: `separate`
+First, the `Status` column has both sex and age data. To tidy this we want to split these into separate columns.
+
+```{r}
+museum2 %>%
+  separate(Status, c("Sex", "Age"), sep = " ")
+```
+
+`sep = " "` tells R that sex and age were separated in the `Status` column by a space. You may have things separated by `.` or `_` or something else.
+
+We can combine columns and reverse this using the function `unite`.
+```{r}
+new.museum2 <-
+  museum2 %>%
+    separate(Status, c("Sex", "Age"), sep = " ")
+
+new.museum2 %>%
+unite(Status, 
+  c(Sex, Age), sep = "_")
+```
+
+### Fixing dates and times with `lubridate`
+Another issue in `museum2` are the collection dates. Dates and times are a real pain in data analysis. Luckily `lubridate` can help you fix these problems.
+
+First to demonstrate the issue let's arrange the `museum2` by `CollectionDate`. What do you notice? 
+
+```{r}
+museum2 %>%
+  arrange(CollectionDate)
+```
+
+This happens because R doens't know that we treat dates (and times) differently to normal numbers. Note that R thinks `CollectionDate` is a *factor*.
+
+```{r}
+tbl_df(museum2)
+```
+
+To fix this we need to *parse* the dates with the `lubridate` function `dmy`. Note we use `dmy` because our data are in day, month, year format. If the dates were in month, date, year format, we'd use `mdy` and so on. We create a new variable called `DateCollected` and store this in a dataframe called `new.museum2`.
+
+```{r}
+new.museum2 <- 
+  museum2 %>%
+    mutate(DateCollected = dmy(CollectionDate)) %>%
+    select(-CollectionDate)
+
+new.museum2
+```
+
+See how this changes the date variable
+
+```{r}
+tbl_df(new.museum2)
+```
+
+```{r}
+new.museum2 %>%
+  arrange(DateCollected)
+```
+
+#### PRACTICAL
+
+Make a new dataframe called `tidy.museum`, tidied as much as possible using the tools you've just learned. 
+
+```{r}
+tidy.museum <- 
+  museum2 %>%
+    mutate(DateCollected = dmy(CollectionDate)) %>%
+    separate(Status, c("Sex","Age")," ") %>%
+    select(-CollectionDate)
+
+tidy.museum
+```

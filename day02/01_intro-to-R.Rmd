@@ -1,5 +1,5 @@
 ---
-title: "intro-to-R.Rmd"
+title: "Introduction to R"
 output: html_document
 ---
 
@@ -7,10 +7,9 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introduction to R
-There is a presentation which goes with this handout, use it to add notes if you need to.
+**There is a presentation which goes with this handout, use it to add notes if you need to.**
 
-## The basics
+### The basics
 First let's use R really simply as an enormous calculator...
 
 Try and run each of the commands below. Remember you need to click on the green arrow on the right hand side. Some of these may not work. Try and think about *why* and see if you can fix them. Make notes to yourself to explain what each is doing.
@@ -44,17 +43,19 @@ sin(2 * pi)
 2^10
 ```
 
-```{r}
+```{r, eval = F}
 squareroot(81)
 ```
+What is the function for square root? How could you find this out?
 
-## Thinking about functions and arguments
+### Thinking about functions and arguments
 To get R to do things we use functions. For example, in the exercise above `log` and `sin` and `pi` are all functions (and so are `+`, `*`, `-`, `\`, and `^` for that matter). Again run the code below and make comments to help yourself remember what is going on with each step.
 
 What does the function `:` do in the code below?
 ```{r}
 1:10
 ```
+What does the [1] represent? Try `1:100` to see if you can work it out.
 
 We can get the same result using the function `seq`:
 ```{r}
@@ -62,46 +63,36 @@ seq(from = 1, to = 10, by = 1)
 ```
 Adjust the numbers to see what happens. What are the words `by`, `from` and `to`?
 
-
-
 What is different when you run this code?
 ```{r}
 seq(from = 1, to = 10, length = 20)
 ```
 
-
-We can also "assign" values to objects, i.e. give them names. Let's mak an object called `x`.
+We can also "assign" values to objects, i.e. give them names. Let's make an object called `x`.
 ```{r}
 x <- 1:10
 ```
-How do we "see" x?
+How do we "see" x? Add a bit of code so you can look at x.
 
 Let's make another object called `y`.
 ```{r}
 y <- 1:10
 ```
 
-Why doesn't this code work? Fix it and think about the answer. How are `x` and `y` added together?
-```{r}
+```{r, eval = F}
 x + Y
 ```
-
+Why doesn't this code work? Fix it and think about the answer. How are `x` and `y` added together?
 
 ### Some conventions
 - `<-` is the "assignment operator"
 - functions have arguments (`by`, `from`, `to` and `length` are arguments of `seq`)
 - R is vectorised - when you add two vectors together, it is element-by-element
-The Console vs. The Script
- CTRL - 1 vs CTRL - 2
-? or ?? or help() or help.start() to get help
- or google it
-> is the prompt
+- `>` is the prompt
+- R is case sensitive
+- Spaces don't matter, except in variable names
  
-Indexing
-
-Using scripts
-
-## R packages - installing and loading
+### R packages - installing and loading
 Packages are R's special magic power. The basic version of R that you all downloaded is called `base` R. However, to get R to do some of the specialised analyses we need, we need to add packages that were designed to run these analyses. There are packages to help with pretty much anything you could ever need. Today we'll use some packages for manipulating and tidying data (`dplyr` and `tidyr`) and plotting nice graphs (`ggplot2` and `gridExtra`).
 
 R packages need to be installed and loaded for you to use them. It's useful to think of this like an app on your smart phone. To use an app you download it from the App Store once, but everytime you want to use it on your phone you have to tap it. R packages are similar. We download them once (using `install.packages("package_name")` or the Packages menu on RStudio) but need to load them in each R session we need them for.
@@ -116,20 +107,63 @@ library(ggplot2)
 library(gridExtra)
 library(tidyr)
 ```
+Note that you'll get a bunch of warnings when you do this. These just tell you that R already has some functions with the same names as those in `dplyr` and `tidyr`, and that from now on it will use the `dplyr` and `tidyr` versions by default. This is fine!
 
-## Setting the working directory
+### Setting the working directory
 When you want to read data into R, you need to tell R where to look. There are several ways to do this. When using an `.Rmd` file like this one, RStudio will cleverly look in the folder the `.Rmd` file is in. We call this setting the working directory - the folder the `.Rmd` file is in is now your working directory. Any files or figures you make and write to file will also go to that folder.
 
-Sometimes you won't have a `.Rmd` file. In that case you can set the working directory really simply by going to the Session menu in RStudio, then picking Choose Working Directory and choose the right folder.
+Sometimes you won't have a `.Rmd` file. In that case you can set the working directory really simply by going to the Session menu in RStudio, then picking Choose Working Directory and choosing the right folder.
 
 You can check this worked using
 ```{r}
 list.files()
 ```
-This will print a list of the file names in your working directory.
+This will print a list of the file names in your working directory. You could also click on the Files tab (on the bottom right hand window in RStudio, if you haven't moved them around) and see what files are in your working directory.
 
-## Importing data
-Once you've set the working directory to the correct folder, it's easy to read in data! 
+### Importing data
+Once you've set the working directory to the correct folder, it's easy to read in data. We'll play with the `compensation.csv` dataset today.
 
+```{r}
 compensation <- read.csv("compensation.csv")
+```
 
+Now we're ready to start playing with the data. 
+
+### Viewing the data with base R
+The next, and very important step, of any data analysis is to check that R read in your dataset correctly.
+
+Base R has a number of ways of doing this. Try out the following and add notes about what each of them does.
+
+```{r}
+dim(compensation) 
+```
+
+```{r}
+names(compensation)
+```
+
+```{r}
+head(compensation)
+```
+
+```{r}
+tail(compensation)
+```
+
+```{r}
+str(compensation)
+```
+
+```{r, eval = F}
+compensation
+```
+
+Note that each R analysis should begin with the same few steps:
+
+1. Load the libraries you need
+2. Set the working directory (if you need to)
+3. Check the files are in the directory
+4. Read in the data
+5. LOOK at the data
+
+**Remember to also make plenty of notes to tell yourself what you are doing and WHY...**
