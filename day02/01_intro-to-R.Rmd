@@ -93,21 +93,21 @@ Why doesn't this code work? Fix it and think about the answer. How are `x` and `
 - Spaces don't matter, except in variable names
  
 ### R packages - installing and loading
-Packages are R's special magic power. The basic version of R that you all downloaded is called `base` R. However, to get R to do some of the specialised analyses we need, we need to add packages that were designed to run these analyses. There are packages to help with pretty much anything you could ever need. Today we'll use some packages for manipulating and tidying data (`dplyr` and `tidyr`) and plotting nice graphs (`ggplot2` and `gridExtra`).
+Packages are R's special magic power. The basic version of R that you all downloaded is called `base` R. However, to get R to do some of the specialised analyses we need, we need to add packages that were designed to run these analyses. There are packages to help with pretty much anything you could ever need. Today we'll use some packages for manipulating and tidying data (`dplyr`, `tidyr` and `lubridate`) and plotting nice graphs (`ggplot2`).
 
 R packages need to be installed and loaded for you to use them. It's useful to think of this like an app on your smart phone. To use an app you download it from the App Store once, but everytime you want to use it on your phone you have to tap it. R packages are similar. We download them once (using `install.packages("package_name")` or the Packages menu on RStudio) but need to load them in each R session we need them for.
 
 We load them using the function `library(package_name)`.
 
-Install the following packages (`dplyr`, `tidyr`, `ggplot2` and `gridExtra`), then load them as below.
+To make things easier, a lot of the packages we will use have been bundled up into one package called `tidyverse`. We can install all of the packages in one go using `install.packages("tidyverse")`
+
+We then load them as below.
 
 ```{r}
-library(dplyr)
-library(ggplot2)
-library(gridExtra)
-library(tidyr)
+library(tidyverse)
 ```
-Note that you'll get a bunch of warnings when you do this. These just tell you that R already has some functions with the same names as those in `dplyr` and `tidyr`, and that from now on it will use the `dplyr` and `tidyr` versions by default. This is fine!
+
+Note that you'll get some warnings when you do this. These just tell you that R already has some functions with the same names as those in `dplyr` and `tidyr`, and that from now on it will use the `dplyr` and `tidyr` versions by default. This is fine!
 
 ### Setting the working directory
 When you want to read data into R, you need to tell R where to look. There are several ways to do this. When using an `.Rmd` file like this one, RStudio will cleverly look in the folder the `.Rmd` file is in. We call this setting the working directory - the folder the `.Rmd` file is in is now your working directory. Any files or figures you make and write to file will also go to that folder.

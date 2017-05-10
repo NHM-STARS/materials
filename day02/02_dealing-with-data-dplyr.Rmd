@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Before we start, remember we need to do a couple of things...
 
 #### 1. Set the working directory
-See the introduction handout if you can't remember how.
+See the introduction to R handout if you can't remember how.
 
 Check it worked using:
 ```{r}
@@ -23,8 +23,7 @@ list.files()
 #### 2. Load the packages needed
 We already downloaded these and don't need to do that again. 
 ```{r}
-library(dplyr)
-library(tidyr)
+library(tidyverse)
 ```
 
 #### 3. Import the data
@@ -67,7 +66,7 @@ Next let's subset our data using the `dplyr` functions `select` and `slice`.
 
 What do these functions do?
 ```{r}
-select(compensation, Fruit)
+select(compensation, Root)
 ```
 
 ```{r}
@@ -75,7 +74,7 @@ select(compensation, Root, Fruit)
 ```
 
 ```{r}
-select(compensation, -Grazing)
+select(compensation, -Root)
 ```
 
 **`slice` rows**
