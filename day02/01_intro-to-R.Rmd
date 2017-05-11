@@ -99,7 +99,7 @@ R packages need to be installed and loaded for you to use them. It's useful to t
 
 We load them using the function `library(package_name)`.
 
-To make things easier, a lot of the packages we will use have been bundled up into one package called `tidyverse`. We can install all of the packages in one go using `install.packages("tidyverse")`
+To make things easier, a lot of the packages we will use have been bundled up into one package called `tidyverse` (more on this later). We can install all of the packages in one go using `install.packages("tidyverse")`
 
 We then load them as below.
 
@@ -107,7 +107,7 @@ We then load them as below.
 library(tidyverse)
 ```
 
-Note that you'll get some warnings when you do this. These just tell you that R already has some functions with the same names as those in `dplyr` and `tidyr`, and that from now on it will use the `dplyr` and `tidyr` versions by default. This is fine!
+Note that you might get some warnings when you do this. These just tell you that R already has some functions with the same names as those in `dplyr` and `tidyr`, and that from now on it will use the `dplyr` and `tidyr` versions by default. This is fine!
 
 ### Setting the working directory
 When you want to read data into R, you need to tell R where to look. There are several ways to do this. When using an `.Rmd` file like this one, RStudio will cleverly look in the folder the `.Rmd` file is in. We call this setting the working directory - the folder the `.Rmd` file is in is now your working directory. Any files or figures you make and write to file will also go to that folder.
@@ -121,10 +121,10 @@ list.files()
 This will print a list of the file names in your working directory. You could also click on the Files tab (on the bottom right hand window in RStudio, if you haven't moved them around) and see what files are in your working directory.
 
 ### Importing data
-Once you've set the working directory to the correct folder, it's easy to read in data. We'll play with the `compensation.csv` dataset today.
+Once you've set the working directory to the correct folder, it's easy to read in data. We'll play with the `compensation.csv` dataset today. To read in a csv file we can use `read.csv` in base R. But since we are using the `tidyverse` let's use the newer `read_csv` function from the `readr` package which is part of the `tidyverse`. 
 
 ```{r}
-compensation <- read.csv("compensation.csv")
+compensation <- read_csv("compensation.csv")
 ```
 
 Now we're ready to start playing with the data. 
@@ -160,7 +160,7 @@ compensation
 
 Note that each R analysis should begin with the same few steps:
 
-1. Load the libraries you need
+1. Load the libraries/packages you need using `library(package_name)`
 2. Set the working directory (if you need to)
 3. Check the files are in the directory
 4. Read in the data
