@@ -29,7 +29,7 @@ library(tidyverse)
 #### 3. Import the data
 We are going to work with the dataset `compensation.csv`
 ```{r}
-compensation <- read.csv("compensation.csv")
+compensation <- read_csv("compensation.csv")
 ```
 
 #### 4. Look at the data
@@ -44,7 +44,7 @@ We will do this below using `dplyr` instead...
 
 Each `dplyr` function does one thing, and does it very quickly and efficiently. It works on dataframes to produce new dataframes. 
 
-With each `dplyr` function the first argument is always the name of the dataframe (here `compensation`).
+With each `dplyr` function the first argument is always the name of the dataframe (here we called it `compensation`).
 
 ### Viewing data with `dplyr`
 We can also look at our data using `dplyr`. Make notes on what these do.
@@ -129,11 +129,11 @@ compensation %>%
 ```
 
 ### Subsetting by attributes: `filter`
-`filter` will allow you to subset a dataframe by its attributes, for example we can select only the dataframe for rows where the Fruit value is greater than 80 as follows:
+`filter` will allow you to subset a dataframe by its attributes, for example we can select only the dataframe for rows where the Root value is less than or equal to 10 as follows:
 
 ```{r}
-compensation %>%
-  filter(Fruit > 80)
+compensation %>% 
+  filter(Root <= 10)
 ```
 
 Note that `filter` uses *logical operators*. R has lots of these built in:
@@ -149,7 +149,21 @@ Try out some of these in the code above.
 
 #### PRACTICAL
 
-1. Using two `dplyr` functions, and piping, create a dataframe containing the **Root** values where Fruit is greater than 80. 
+1. Create a new data frame containing only rows where the Fruit values > 80.
+
+```{r}
+compensation %>%
+  filter(Fruit > 80)
+```
+
+2. Create a new dataframe containing only the Ungrazed rows.
+
+```{r}
+compensation %>%
+  filter(Grazing == "Ungrazed")
+```
+
+3. Using two `dplyr` functions, and piping, create a dataframe containing the **Root** values where Fruit is greater than 80. 
 
 ```{r}
 root.fruit80 <- 
@@ -160,12 +174,6 @@ root.fruit80 <-
 root.fruit80
 ```
 
-2. Create a new dataframe containing only the Ungrazed rows.
-
-```{r}
-compensation %>%
-  filter(Grazing != "Ungrazed")
-```
 
 ### Creating new columns: `mutate`
 Often we want to create new columns in our data. For example if we want to transform our data, or perform some kind of calculation using multiple columns, and then use this again. `mutate` does this.
@@ -193,9 +201,10 @@ compensation %>%
   arrange(Grazing, Fruit)
 ```
 
+Use the help files to work out how to arrange compensation with Grazing in reverse alphabetical order.
 ```{r}
 compensation %>%
-  arrange(Grazing, -Fruit)
+  arrange(desc(Grazing))
 ```
 
 ### Renaming variables: `rename`
@@ -210,34 +219,47 @@ compensation %>%
 My favourite bit of `dplyr` is how easy it makes summarising data. We do this using the `summarise` function. We can use summarise to extract all kinds fo summary stats using various functions including means, standard deviations, variances etc.
 
 What R functions can we use to get the following?
+
 - mean
 - standard deviation
 - variance
 - sample size
 - standard error (you might need to look up the formula for this in Google. Note there is no inbuilt R function!)
 
-Let's extract the mean and standard deviation of the Fruit column.
+Let's extract the mean of the Fruit column.
 
 ```{r}
 compensation %>% 
   summarise(
-    meanFruit = mean(Fruit),
-    sdFruit = sd(Fruit))
+    meanF = mean(Fruit))
 ```
 
-`meanFruit` and `sdFruit` are just labels we can use to make it clear what each thing is doing. Note that these results print to the screen. How would we change the code so we store the mean and standard deviation for us to use later?  
+`meanF` is just a label we can use to make it clear what we extracted. Note that these results print to the screen. How would we change the code so we store the mean and standard deviation for us to use later?  
+
+Now calculate the mean and standard deviation of the Fruit column and save it for later use.
+
+```{r}
+summary.data <- 
+compensation %>% 
+  summarise(
+    meanF = mean(Fruit),
+    sdF = sd(Fruit))
+
+summary.data
+```
+
 
 ### Summarising by groups: `group_by`
 We can also really easily summarise by groups, so for example if we want the mean of the Grazed and Ungrazed fruits...
 
 ```{r}
-summaryFruit <- compensation %>% 
+summary.fruit <- compensation %>% 
   group_by(Grazing) %>%
   summarise(
     meanFruit = mean(Fruit),
     sdFruit = sd(Fruit))
 
-summaryFruit
+summary.fruit
 ```
 
 Note that we can also string together several `dplyr` functions.
@@ -245,9 +267,9 @@ Note that we can also string together several `dplyr` functions.
 ```{r}
 compensation %>%
   mutate(FRratio = Fruit/Root) %>%
-    group_by(Grazing) %>%
-      summarise(
-        meanFRrat = mean(FRratio))
+  group_by(Grazing) %>%
+  summarise(
+    meanFRrat = mean(FRratio))
 ```
 
 #### PRACTICAL
@@ -255,7 +277,7 @@ compensation %>%
 Create a new dataframe, with a name of your choice, that contains the mean and standard error of the Fruit column, for the Grazed and Ungrazed groups.
 
 ```{r}
-MrPedantic <- 
+pedantic <- 
   compensation %>%
     group_by(Grazing) %>%
       summarise(
@@ -263,5 +285,5 @@ MrPedantic <-
         seFruit = sqrt(var(Fruit)/n())
       )
 
-MrPedantic
+pedantic
 ```

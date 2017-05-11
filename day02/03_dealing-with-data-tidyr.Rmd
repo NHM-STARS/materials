@@ -1,5 +1,5 @@
 ---
-title: "Dealing with data - `tidyr`"
+title: "Dealing with data - `tidyr` and `lubridate`"
 output: html_document
 ---
 
@@ -23,15 +23,13 @@ list.files()
 #### 2. Load the packages needed
 We already downloaded these and don't need to do that again. 
 ```{r}
-library(dplyr)
-library(tidyr)
-library(lubridate)
+library(tidyverse)
 ```
 
 #### 3. Import the data
 ```{r}
-museum1 <- read.csv("museum1.csv")
-museum2 <- read.csv("museum2.csv")
+museum1 <- read_csv("museum1.csv")
+museum2 <- read_csv("museum2.csv")
 ```
 
 ### Dealing with messy data: `tidyr`
@@ -57,30 +55,35 @@ museum1 %>%
   gather(Location, Number, MammalTower:Warehouse)
 ```
 
-What if you need to undo this and put these variables into different columns again? We can use the `tidyr` function `spread`.
+Remember we need to assign the dataframe to a name if we want to use it.
 
 ```{r}
-new.museum1 <-
+tidy.museum <-
   museum1 %>%
     gather(Location, Number, MammalTower:Warehouse)
+```
 
-new.museum1 %>%
+### Splitting one column into many columns: `spread`
+
+What if you need to undo this `gather` and put these variables into different columns again? We can use the `tidyr` function `spread`. This is mostly useful for multivariate statistics (e.g. principal components etc).
+
+```{r}
+tidy.museum %>%
   spread(Location, Number)
 ```
 
 #### PRACTICAL
 
-Tidy `museum1` and arrange with `Species` in alphabetical order (clue - this will require a `dplyr` function).
+Tidy `museum1` and arrange with `Species` in reverse alphabetical order (clue - this will require a `dplyr` function).
 
 ```{r}
 museum1 %>%
   gather(Location, Number, MammalTower:Warehouse) %>%
-  arrange(Species)
+  arrange(desc(Species))
 ```
 
-Next we'll play with `museum2` which is messy in some different ways.
 
-Let's have a look at the dataset.
+Next we'll play with `museum2` which is messy in some different ways. Let's have a look at the dataset.
 
 ```{r}
 head(museum2)
@@ -94,21 +97,18 @@ Why is this untidy? What do we need to change? There are several problems.
 First, the `Status` column has both sex and age data. To tidy this we want to split these into separate columns.
 
 ```{r}
-museum2 %>%
-  separate(Status, c("Sex", "Age"), sep = " ")
+tidy.museum2 <-
+  museum2 %>%
+    separate(Status, c("Sex", "Age"), sep = " ")
 ```
 
 `sep = " "` tells R that sex and age were separated in the `Status` column by a space. You may have things separated by `.` or `_` or something else.
 
-We can combine columns and reverse this using the function `unite`.
-```{r}
-new.museum2 <-
-  museum2 %>%
-    separate(Status, c("Sex", "Age"), sep = " ")
+We can combine columns using the function `unite`.
 
-new.museum2 %>%
-unite(Status, 
-  c(Sex, Age), sep = "_")
+```{r}
+tidy.museum2 %>%
+  unite(Sex_Age, c(Sex, Age), sep = "_")
 ```
 
 ### Fixing dates and times with `lubridate`
@@ -121,13 +121,27 @@ museum2 %>%
   arrange(CollectionDate)
 ```
 
-This happens because R doens't know that we treat dates (and times) differently to normal numbers. Note that R thinks `CollectionDate` is a *factor*.
+This happens because R doens't know that we treat dates (and times) differently to normal numbers. Note that R thinks `CollectionDate` is a *character*.
 
 ```{r}
 tbl_df(museum2)
 ```
 
-To fix this we need to *parse* the dates with the `lubridate` function `dmy`. Note we use `dmy` because our data are in day, month, year format. If the dates were in month, date, year format, we'd use `mdy` and so on. We create a new variable called `DateCollected` and store this in a dataframe called `new.museum2`.
+To fix this we need to *parse* the dates with the `lubridate` function `dmy`. Note we use `dmy` because our data are in day, month, year format. If the dates were in month, date, year format, we'd use `mdy` and so on. 
+
+First we need to load the library `lubridate`, as it isn't part of the `tidyverse`. Normally we'd do this at the start of the script.
+```{r}
+library(lubridate)
+```
+
+`lubridate` can cope with dates with all kinds of separators. Try these out to see how it arranges dates in a standard format.
+```{r}
+dmy("01/12/1998")
+dmy("01-12-1998")
+dmy("01.12.1998")
+```
+
+Now let's try and fix our dates. We will create a new variable called `DateCollected` and store this in a dataframe called `new.museum2`.
 
 ```{r}
 new.museum2 <- 
@@ -138,11 +152,15 @@ new.museum2 <-
 new.museum2
 ```
 
-See how this changes the date variable
+Note that we also removed the now extraneous `CollectionDate` variable. 
+
+See how this changes the date variable, is it still a character?
 
 ```{r}
 tbl_df(new.museum2)
 ```
+
+Did `lubridate` fix the sort issue?
 
 ```{r}
 new.museum2 %>%
@@ -151,7 +169,7 @@ new.museum2 %>%
 
 #### PRACTICAL
 
-Make a new dataframe called `tidy.museum`, tidied as much as possible using the tools you've just learned. 
+Using museum2, make a new dataframe called `tidy.museum`, tidied as much as possible using the tools you've just learned. 
 
 ```{r}
 tidy.museum <- 
@@ -162,3 +180,5 @@ tidy.museum <-
 
 tidy.museum
 ```
+
+**Want to learn more data wrangling? Check out the Data Wrangling with dplyr and tidyr cheatsheet, in Help > Cheatsheets**
