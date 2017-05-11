@@ -517,7 +517,7 @@ ggplot(cows, aes(x = supplement, y = gain, colour = diet)) +
 
 You have probably noticed that we have a problem here - the first thing alphabetically is **not** the control. So we need to relevel.
 ```{r}
-cows <- mutate(cows, supplement = relevel(supplement, ref = "control"))
+cows <- mutate(cows, supplement = relevel(as.factor(supplement), ref = "control"))
 ```
 
 Plot it again to check it worked.
@@ -528,7 +528,7 @@ ggplot(cows, aes(x = supplement, y = gain, colour = diet)) +
 
 #### 2. Make a model (with an interaction term)
 ```{r}
-model5 <- lm(gain ~ supplement + diet + supplemenet:diet, data = cows)
+model5 <- lm(gain ~ supplement*diet, data = cows)
 ```
 
 #### 3. Check the assumptions using model diagnostics in `ggfortify`
