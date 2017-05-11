@@ -20,18 +20,16 @@ list.files()
 ```
 
 #### 2. Load the packages needed
-We already downloaded these and don't need to do that again. 
+We already downloaded these and don't need to do that again. You may need to install `ggfortify` if you didn't do that already.
 ```{r}
-library(ggplot2)
-library(dplyr)
-library(gridExtra)
+library(tidyverse)
 library(ggfortify)
 ```
 
 #### 3. Import the data
 We are going to work with the dataset `plant.growth.rate.csv`
 ```{r}
-growth <- read.csv("plant.growth.rate.csv")
+growth <- read_csv("plant.growth.rate.csv")
 ```
 
 #### 4. Look at the data
@@ -39,7 +37,7 @@ growth <- read.csv("plant.growth.rate.csv")
 glimpse(growth)
 ```
 
-### Which statistic do I need?
+### Which statistics do I need?
 Before you start think very carefully about what your *question* is, why it is interesting, and how you'd plot it on a graph. If you can plot something, you can usually do the statistics!
 
 As a (very) vague rule of thumb: 
@@ -50,7 +48,7 @@ As a (very) vague rule of thumb:
 
 3. If you have a continuous response (Y) variable, and a continuous predictor/explanatory (X) variable AND a categorical explanatory variable you'll need an analysis of covariance (ANCOVA). You'd plot this as a scatter plot with two or more lines (one for each category of X).
 
-There are many other options though, this is not exhaustive and isn't always the best statistic to use for a given problem/dataset.
+There are **many** other options though, this is not exhaustive and isn't always the best statistic to use for a given problem/dataset. Also note that we are only covering very basic statistics here. Many problems need something more complex.
 
 ### How do we do statistics - step by step
 
@@ -63,121 +61,133 @@ There are many other options though, this is not exhaustive and isn't always the
 ### General linear models - regression
 First we'll use the plant growth dataset to demonstrate a linear regression...
 
-1. Plot the data
+#### 1. Plot the data
 Make a scatter plot of `soil.moisture.content` on the x axis and `plant.growth.rate` on the y axis.
 ```{r}
-ggplot(dd, aes(x = soil.moisture.content, 
+ggplot(growth, aes(x = soil.moisture.content, 
                y = plant.growth.rate)) + 
 	geom_point(col = "cornflowerblue", size = 3) +
-  labs(x = "Soil Moisture", y = "Growth Rate (mm/week)") +      theme_bw()
+  labs(x = "Soil Moisture", y = "Growth Rate") +
+  theme_bw()
 ```
 
-2. Make a model
+#### 2. Make a model
 ```{r}
-model1 <- lm(plant.growth.rate ~ soil.moisture.content, data = dd)
+model1 <- lm(plant.growth.rate ~ soil.moisture.content, data = growth)
 ```
 
-# diagnostics with ggfortify
+#### 3. Check the assumptions using model diagnostics in `ggfortify`
 ```{r}
-autoplot(mod1, smooth.colour = NA)
+autoplot(model1, smooth.colour = NA)
 ```
 
-# Anova Table
+#### 4. Look at the results
+We use `anova` to look at the **main effects**. Add notes so you know what the output means.
 ```{r}
-anova(mod1)
-```
-```{r}
-summary(mod1)
+anova(model1)
 ```
 
+We use `summary` to look at the parameter estimates. Add notes so you know what the output means.
 ```{r}
-# ONLY with a single variable regression
-ggplot(dd, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
-	geom_point(col = "cornflowerblue", size = 3) + geom_smooth(method = "lm", 
-	se = FALSE)
+summary(model1)
 ```
 
+#### 5. Add interpretation to the graph
+How do you add a regression line in `ggplot`?
 ```{r}
-newxdata <- expand.grid(soil.moisture.content=seq(0.249, 1.99, length=100))
-p1 <- predict(mod1, newdata = newxdata, interval="prediction")
-preds <- cbind(p1, newxdata)
-
-p2 <- predict(mod2, newdata = newxdata, interval="prediction")
-preds2 <- cbind(p2, newxdata)
+ggplot(growth, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
+	geom_point(col = "cornflowerblue", size = 3) + 
+  geom_smooth(method = "lm", se = TRUE)
+```
 
 
-ggplot(data=preds, aes(x=soil.moisture.content,
-                  y=fit)) +
-  geom_line() +
-  geom_smooth(aes(ymin=lwr, ymax=upr), stat="identity") +
-  geom_point(data=dd, mapping=aes(x = soil.moisture.content,
-                                  y = plant.growth.rate)) +
-  geom_line(data=preds2, aes(x=soil.moisture.content,
-                             y=fit), colour="red")
+`geom_smooth(method = “lm”)` is designed so you can explore your data quickly. However, it only draw the correct line and confidence intervals when you have one Y and one X variable. Otherwise we need a more complex workflow…
 
+#### Adding lines to regression plots - predictions workflow
 
-ggplot(dd, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
-  geom_point(col = "cornflowerblue", size = 3) +
-  geom_smooth(method = "lm")
+##### 1. Create a new X variable, with the same name as the one in your graph, ranging from the minimum and maximum values of the variable in your data. We can use `expand.grid` to do this, and the function `seq`.
+```{r}
+newX <- expand.grid(soil.moisture.content = select(growth, seq(min(soil.moisture.content), max(soil.moisture.content), length = 100)))
 
+# Look at newX
+head(newX)
+```
 
-#  lets make some new values of soil moisture 
-# so we can generate predictions from the model
-# note to self: you must use the explanatory variable NAME
-# that's the one on the x-axis...
-newX <- expand.grid(soil.moisture.content = seq(from = 0.2, 
-	to = 2, length = 10))
+##### 2. Next make your new Y variable, by using the model you created to predict what Y values go with the X values you just made. We can make predictions using `predict`. Look at `newY`. What are `fit`, `lwr` and `upr`?
 
-# look at it
-newX
+```{r}
+newY <- predict(model1, newdata = newX, interval = "confidence")
 
-# Step 2
-# lets get the prediction (line) and the confidence 
-# bands using predict()
-newY <- predict(mod1, newdata = newX, interval = "confidence")
+# Look at newY
+head(newY)
+```
 
-# look at what it produces
-newY
+3. Do some "housekeeping": stick `newX` and `newY` together into one dataframe.
 
-# Step 3: Housekeeping
-
-# housekeeping (brush the two data frames together)
+```{r}
 addThese <- data.frame(newX, newY)
-addThese
 
-# make sure names match: change fit to plant.growth.rate
+# Look at addThese
+head(addThese)
+```
+
+##### 4. Final bit of "housekeeping": rename `fit` to the name of your Y variable, in this case `plant.growth.rate`.
+
+```{r}
 addThese <- rename(addThese, plant.growth.rate = fit)
-addThese
 
-# Step 4	
-# layers of fun
-ggplot(dd, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
-	geom_point(size = 5, col = "cornflowerblue") + geom_smooth(data = addThese, 
-	aes(ymin = lwr, ymax = upr), stat = "identity")
+# Look at addThese
+head(addThese)
+```
 
-#----------------------------------------------------
-# general linear models - ANOVA - daphniagrowth.csv
-#----------------------------------------------------
-rm(list = ls())
+##### 5. Now we can plot the graph. We plot the same graph as earlier, but with a different `geom_smooth` line. Note that we are using the `addThese` data for the line, and the `growth` data for the original data points.
 
-## read in the data
-dd <- read.csv("Daphniagrowth.csv")
+```{r}
+ggplot(growth, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
+  geom_point(col = "cornflowerblue", size = 3) +
+  geom_smooth(data = addThese, aes(ymin = lwr, ymax = upr), stat = "identity")
+```
 
-## look at the structure of the data
-str(dd)
-tbl_df(dd)
+Note there is a bug in `ggplot2` which means you might get the error message `Ignoring unknown aesthetics: ymin, ymax`. Just ignore this!
 
+##### Getting specific predictions
+If you want to predict the value of `soil.moisture.content = 1.25`:
+```{r}
+newX <- expand.grid(soil.moisture.content = 1.25)
+prediction <- predict(model1, newdata = newX, interval = "confidence")
 
-# plot
-ggplot(dd, aes(x = parasite, y = growth.rate)) +
-  geom_boxplot() +
-	theme(axis.text.x = element_text(angle = 90, vjust = 1, size = 15))
+# Look at the prediction
+prediction
+```
 
+### General linear models - ANOVA
+Next we will move on to ANOVA - analysis of variance.
 
+To start, we need to add the data and look at it. We are going to work with the dataset `daphnia.growth.csv`.
+```{r}
+daphnia <- read_csv("daphnia.growth.csv")
+glimpse(daphnia)
+```
 
+We will then follow the same steps as before:
+
+1. PLOT your data
+2. Fit your model
+3. Look at the assumptions
+4. Look at the results
+5. Add interpretation to your graph
+
+#### 1. Plot the data
+```{r}
+ggplot(daphnia, aes(x = parasite, y = growth.rate)) +
+  geom_boxplot()
+```
+
+To draw the other plot in the presentation...
+```{r}
 # summarise the data by parasite
 growth.stats <- 
-dd %>% 
+daphnia %>% 
 	group_by(parasite) %>% 
 		summarise(
 			meanGR = mean(growth.rate), 
@@ -185,10 +195,7 @@ dd %>%
 			lwr = meanGR - seGR, 
 			upr = meanGR + seGR)
 
-# create the limits aesthetics for error bars
-limits <- aes(ymin = lwr, ymax = upr)
-
-# construct a fancy picture 
+# plot the graph
 # note that we use the growth stats first,
 # then add the raw data....
 
@@ -196,343 +203,346 @@ ggplot(growth.stats, aes(x = parasite, y = meanGR)) +
 	#first add the points from the growth stats"
 	geom_point(colour = "red", size = 8, alpha = 0.5) + 
 	
-	# now add the error bars from the limits"
-	geom_errorbar(limits, width = 0.1, col = "red", alpha = 0.8) + 
+	# now add the error bars
+	geom_errorbar(aes(ymin = lwr, ymax = upr), width = 0.1, col = "red", alpha = 0.8) + 
 	
 	# now add the raw data from the original dataframe
-	geom_point(data = dd, aes(x = parasite, y = growth.rate), size = 3, 
-		colour = "darkgreen", alpha = 0.3) + 
+	geom_point(data = daphnia, aes(x = parasite, y = growth.rate), size = 3, 
+		colour = "darkgreen", alpha = 0.3)
+```
 
-	# extras
-	theme(axis.text.x = element_text(angle = 90, vjust = 1)) + 
-	coord_flip()
+#### 2. Make a model
+```{r}
+model2 <- lm(growth.rate ~ parasite, data = daphnia)
+```
 
-# BUILD THE MODEL
-mod2 <- lm(growth.rate ~ parasite, data = dd)
+#### 3. Check the assumptions using model diagnostics in `ggfortify`
+```{r}
+autoplot(model2, smooth.colour = NA)
+```
 
-# diagnostics
-autoplot(mod2, smooth.colour = NA)
+#### 4. Look at the results
+We use `anova` to look at the **main effects**. Add notes so you know what the output means.
+```{r}
+anova(model2)
+```
 
-## model interpretation
-anova(mod2) ## the parasite treatment explains a large amount of variation in daphnia growth rate
+We use `summary` to look at the parameter estimates. Add notes so you know what the output means.
+```{r}
+summary(model2)
+```
 
-summary(mm) ## Shows the effects of the parasites on growth rate, relative to the control (Intercept)
+#### Releveling when reference is not alphabetically first
 
-# --------------------------------------------------
-# RELEVELING when reference is not alphabetical
-# --------------------------------------------------
+This is pretty simple, you just set as the `ref` whatever all your groups need to be comapred to. Note that you need to tell R to treat `parasite` as a factor using `as.factor`.
+```{r}
+daphnia.relevel <- mutate(daphnia, parasite = relevel(as.factor(parasite), ref = "Pasteuria ramosa"))
+```
 
-## note that the parasite variable is a factor, so lm will automatically do anova:
-ggplot(dd, aes(x = parasite, y = growth.rate)) + geom_boxplot()
+So you can see that it worked, plot the boxplot again
+```{r}
+ggplot(daphnia.relevel, aes(x = parasite, y = growth.rate)) +
+  geom_boxplot()
+```
 
-# to set a level, before the model
-dd <- mutate(dd, parasite = relevel(parasite, ref = "Pasteuria ramosa"))
-levels(dd$parasite)
+#### How to fit a Tukey or other *post-hoc* comparison
 
-# new plot with new levels
-ggplot(dd, aes(x = parasite, y = growth.rate)) + geom_boxplot()
-# new model with new levels
-summary(lm(growth.rate ~ parasite, data = dd))
+If you have a balanced design this is easy. First change the model as it is fitted using `aov` not `lm`, then use `TukeyHSD`.
+```{r}
+model2.aov <- aov(model2) # repackage the model for a Tukey Test
+tukey.out <- TukeyHSD(model2.aov) # generate Tukey test
+tukey.out 
+```
 
-# reset to control
-dd <- mutate(dd, parasite = relevel(parasite, ref = "control"))
+Alternatively you can use the package `multicomp`. Remember to install it first. ***CAVEAT, loading `multicomp` qill mask the `dplyr` function `select`***. To fix you have to shut down R and start it up again. I have commented this out here to prevent this issue.
 
-## --------------------- EXTRAS ----------------------------------------------
+```{r}
+# library(multcomp)
+# Requires parasite to be a factor, so we need to mutate it in the data first
+# daphnia <- mutate(daphnia, parasite = as.factor(parasite))
+# Run the model
+# model2 <- lm(growth.rate ~ parasite, data = daphnia)
+# Use the Tukey test
+# tukey.par <- glht(model2, linfct = mcp(parasite = "Tukey"))
+# summary(tukey.par)
+```
 
-# How to fit a Tukey or other post-hoc comparison using the multcomp library
-mod2.aov <- aov(mod2) # repackage the model for a Tukey Test
-tukey.out <- TukeyHSD(mod2.aov) # generate tukey test
-tukey.out # table
+### General linear models - ANCOVA
+Next we will move on to ANCOVA - analysis of covariance.
 
-# plot, setting margins and 1 x 1 grid and rotated axis labels
-par(mfrow = c(1, 1), mar = c(5, 20, 4, 2))
-plot(tukey.out, las = 2)
+To start, we need to add the data and look at it. We are going to work with the dataset `limpet.csv`.
+```{r}
+limpet <- read_csv("limpet.csv")
+glimpse(limpet)
+```
 
-# --------------
-library(multcomp)
-tukey.par <- glht(mm, linfct = mcp(parasite = "Tukey"))
-summary(tukey.par)
-par(mfrow = c(1, 1), mar = c(5, 20, 4, 2))
-plot(tukey.par)
+We will then follow the same steps as before:
 
-# RESET PLOT MARGINS
-par(mar = c(5, 4, 4, 2))
+1. PLOT your data
+2. Fit your model
+3. Look at the assumptions
+4. Look at the results
+5. Add interpretation to your graph
 
-## Set up orthogonal (planned) contrasts: rather than ALL pairwise....
-## some specific examples
-c1 <- c(-1, 1/3, 1/3, 1/3) # control vs overall parasite mean
-c2 <- c(0, -1, 1/2, 1/2) # parasite 1 vs 2 & 3
-c3 <- c(0, 0, -1/2, 1/2) # parasite 2 vs 3
+#### 1. Plot the data
+Make a scatter plot of `DENSITY` on the x axis and `EGGS` on the y axis, coloured by `SEASON`.
+```{r}
+ggplot(limpet, aes(x = DENSITY, y = EGGS, colour = SEASON)) + 
+	geom_point(size = 5) + 
+  theme_bw()
+```
 
-# combine the hypotheses
-mat <- cbind(c1, c2, c3)
+#### 2. Make a model (with an interaction term)
+```{r}
+model3 <- lm(EGGS ~ DENSITY * SEASON, data = limpet)
+# Note that the * is shorthand for:
+# model3 <- lm(EGGS ~ DENSITY + SEASON + SEASON:DENSITY, data = limpet)
+```
 
-# allocate them to the treatment
-contrasts(dd$parasite) <- mat
+#### 3. Check the assumptions using model diagnostics in `ggfortify`
+```{r}
+autoplot(model3, smooth.colour = NA)
+```
 
-# run the model returning THESE hypotheses
-mmcheck <- lm(growth.rate ~ parasite, data = dd)
-summary(mmcheck)
+#### 4. Look at the results
+We use `anova` to look at the **main effects**. Add notes so you know what the output means.
+```{r}
+anova(model3)
+```
 
-# now set up a contrast to compare copntrol to mean of all 3 parasites
-levels(dd$parasite)
-contrastmatrix <- cbind(c(0, 1, 1, 1))
-contrasts(dd$parasite, how.many = 1) <- contrastmatrix
+We use `summary` to look at the parameter estimates. Add notes so you know what the output means.
+```{r}
+summary(model3)
+```
 
-# rerun
-mod2 <- lm(growth.rate ~ parasite, data = dd)
-summary(mod2)
+#### 5. Add interpretation to the graph
+How do you add a regression line in `ggplot`?
 
+Remember `geom_smooth(method = “lm”)` is designed so you can explore your data quickly. However, it only draw the correct line and confidence intervals when you have one Y and one X variable. This is not true here. In fact here it will split the data into two groups (spring and summer) and fit models separately to each. This artificially makes the confidence intervals smaller.
 
-#----------------------------------------------------
-# general linear models - two way ANOVA - growth.csv
-#----------------------------------------------------
-rm(list = ls())
+#### Adding lines to regression plots - predictions workflow
 
-dd <- read.csv("growth.csv")
+##### 1. Create a new X variable, with the same name as the one in your graph, ranging from the minimum and maximum values of the variable in your data. We can use `expand.grid` to do this, and the function `seq`.
+```{r}
+newX <- expand.grid(DENSITY = seq(from = 8, to = 45, length = 100),
+                    SEASON = c("spring", "summer"))
 
-# alter reference level NOW to control
-dd <- mutate(dd, supplement = relevel(supplement, ref = "control"))
-
-# raw data
-p1 <- ggplot(dd, aes(x = supplement, y = gain, colour = diet)) + 
-	geom_point()
-
-# the interaction plot via ggplot step 1
-cows <- dd %>%
-	group_by(diet, supplement) %>%
-		summarise(growth = mean(gain))
-
-# Interaction Plot via ggplot step 2
-# note group argument to make sure lines connect what you want connected
-
-p2 <- ggplot(cows, aes(x = supplement, y = growth, group = diet, colour = diet)) + 
-	geom_point() + 
-	geom_line()
-
-# both on the same picture (needs gridExtra)
-grid.arrange(p1, p2, ncol = 2)
-
-# BASE functions
-with(dd, interaction.plot(supplement, diet, gain))
-
-## and the model will have the control treatment as the intercept.
-## Note that we use * to fit the main effects and the interaction term
-
-mm <- lm(gain ~ supplement * diet, data = dd)
-# mm <- lm(gain ~ supplement + diet + supplemenet:diet, data = dd)
-
-## model diagnostics
-autoplot(mm, smooth.colour = NA)
-
-## There is little evidence of an interaction, but strong main effects
-anova(mm)
-
-## Again, no clear interactions terms (there should not be,
-## given the lack of a significant interaction term by F-test) 
-summary(mm)
-## The table looks rather scary, but is explained in the powerpoint presentation.
-
-#----------------------------------------------------
-# general linear models - ANCOVA
-#----------------------------------------------------
-
-# Get the data
-rm(list = ls())
-limp <- read.csv("limpet.csv")
-
-str(limp)
-
-# note use of scale_colour_manual
-ggplot(limp, aes(x = DENSITY, y = EGGS, colour = SEASON)) + 
-	geom_point(size = 5) + scale_colour_manual(values = c("yellowgreen", 
-	"salmon3")) + theme_bw()
-
-# make the model
-fit2 <- lm(EGGS ~ DENSITY * SEASON, data = limp) # linear model with interacti
-fit2 <- lm(EGGS ~ DENSITY + SEASON + SEASON:DENSITY, data = limp) # linear model with interacti
-
-# check the assumptions
-autoplot(fit2, smooth.colour=NA)
-
-# examine the results
-anova(fit2) # ANOVA tables with sequential sums of squares
-summary(fit2) # coefficients
-
-#----------------------------------------------------#----------------------------------------------------
-# STEP 1
-# construct a data frame of where you want predicted values 
-# to be "located" on your graph
-# play around with this to see what happens when you 
-# fix DENSITY to its mean, etc....
-#----------------------------------------------------
-newX <- expand.grid(DENSITY = seq(from = 8, to = 50, length = 10), 
-	SEASON = levels(limp$SEASON))
-newX
-
-# STEP 2
-# get the predictions at the values and levels 
-# specified above
-newY <- predict(fit2, newdata = newX, interval = "confidence")
-newY
-
-# Step 3
-# Housekeeping
-PlotThis <- data.frame(newX, newY)
-
-# Step 4 + extras
-# Now use geom_smooth() to make a lovely visualisation
-# of your raw data and the fitted values from the model
-# and the 95% CI band around them
-ggplot(limp, aes(x = DENSITY, y = EGGS, colour = SEASON)) + 
-	geom_point(size = 5) +
-  geom_smooth(data = filter(PlotThis, SEASON=="spring"),
-              aes(y=fit, ymin = lwr, ymax = upr), stat = "identity") 
+# Look at newX
+head(newX)
+```
 
 
+##### 2. Next make your new Y variable, by using the model you created to predict what Y values go with the X values you just made. We can make predictions using `predict`. Look at `newY`. What are `fit`, `lwr` and `upr`?
 
+```{r}
+newY <- predict(model3, newdata = newX, interval = "confidence")
 
+# Look at newY
+head(newY)
+```
 
+3. Do some "housekeeping": stick `newX` and `newY` together into one dataframe.
 
+```{r}
+addThese <- data.frame(newX, newY)
 
+# Look at addThese
+head(addThese)
+```
 
+##### 4. Final bit of "housekeeping": rename `fit` to the name of your Y variable, in this case `EGGS`.
 
-+ ....e_m_p_t_y.... = 0
-# If you want to set custom colours
-# do so for the raw data (colour) and the bands (fill)
-scale_colour_manual(values = c("darkgreen", "hotpink")) + scale_fill_manual(values = c("darkgreen", 
-	"hotpink")) + ....e_m_p_t_y.... = 0
-# adding some annotation to a graph
-annotate("text", x = 40, y = 2.88, label = "Hello") + ....e_m_p_t_y.... = 0
-# using maths expressions on the x axis
-# see ?plotmath
-xlab(expression(paste(bar(x), phi))) + theme_bw()
-#-----------------------------------------------
-# Getting specific predictions
-#-----------------------------------------------
+```{r}
+addThese <- rename(addThese, EGGS = fit)
 
+# Look at addThese
+head(addThese)
+```
+
+##### 5. Now we can plot the graph. We plot the same graph as earlier, but with a different `geom_smooth` line. Note that we are using the `addThese` data for the line, and the `limpet` data for the original data points.
+
+```{r}
+ggplot(limpet, aes(x = DENSITY, y = EGGS, colour = SEASON)) + 
+  geom_point(size = 3) +
+  geom_smooth(data = addThese, aes(ymin = lwr, ymax = upr), stat = "identity")
+```
+
+Note there is a bug in `ggplot2` which means you might get the error message `Ignoring unknown aesthetics: ymin, ymax`. Just ignore this!
+
+If you want to set custom colours do so for the raw data (colour) and the bands (fill).
+```{r}
+ggplot(limpet, aes(x = DENSITY, y = EGGS, colour = SEASON, fill = SEASON)) + 
+  geom_point(size = 3) +
+  geom_smooth(data = addThese, aes(ymin = lwr, ymax = upr), stat = "identity") +
+  scale_colour_manual(values = c("darkgreen", "hotpink")) + 
+  scale_fill_manual(values = c("darkgreen", "hotpink"))
+```
+
+##### Getting specific predictions
+If you want to predict the value of `EGGS` for a `DENSITY = 40` and `SEASON = spring`:
+```{r}
 newX <- expand.grid(DENSITY = 40, SEASON = "spring")
-# get the predictions at the values and levels 
-# specified above
-newY <- predict(fit2, newdata = newX, interval = "confidence")
-# housekeeping
-data.frame(newX, newY)
+prediction <- predict(model3, newdata = newX, interval = "confidence")
 
-#-----------------------------------------------
-# t-test practical
-#-----------------------------------------------
+# Look at the prediction
+prediction
+```
 
-# read the data and explore
-rm(list=ls())
-tt <- read.csv("GardenOzone.csv")
-str(tt)
-tbl_df(tt)
+### T tests
+Let's do some slightly simpler tests now and look at the t test.
 
-# Make a helpful plot linked to the question about two means
-ggplot(tt, aes(x = Ozone)) +
-  geom_histogram(bins=5) +
+To start, we need to add the data and look at it. We are going to work with the dataset `garden.ozone.csv`.
+```{r}
+ozone <- read_csv("garden.ozone.csv")
+glimpse(ozone)
+```
+
+We will then follow the same steps as before:
+
+1. PLOT your data
+2. Fit your model
+3. Look at the assumptions
+4. Look at the results
+5. Add interpretation to your graph
+
+#### 1. Plot the data
+```{r}
+ggplot(ozone, aes(x = Ozone)) +
+  geom_histogram(bins = 10) +
   facet_wrap(~Garden.location, ncol = 1)
+```
 
-ggplot(tt, aes(x = Ozone)) +
-  geom_dotplot(bins = 10) +
-  facet_wrap(~Garden.location, ncol=1) 
-
-
-# check the means and some assumptions about variance
-summarise(group_by(tt, Garden.location),
-          meanOzone = mean(Ozone), 
-	varOzone = var(Ozone))
-
-# Model Formulae syntax for t-test with a data frame
-# note default is welch and unequal variance is OK
-t.test(Ozone ~ Garden.location,
-       data = tt,
+#### 2. Make a model
+```{r}
+model4 <- t.test(Ozone ~ Garden.location,
+       data = ozone,
        var.equal = FALSE)
+```
 
+#### 3. Check the assumptions
+```{r}
+ozone %>%
+  group_by(Garden.location) %>%
+  summarise(meanOzone = mean(Ozone), 
+	          varOzone = var(Ozone))
+```
 
-ggplot(tt, aes(x = Garden.location,
-               y = Ozone)) +
+#### 4. Look at the results
+```{r}
+model4
+```
+
+Another way to plot the results with all the data.
+```{r}
+ggplot(ozone, aes(x = Garden.location, y = Ozone)) +
   geom_boxplot() +
-  geom_point(position=position_jitter(width=0.05)) +
-  coord_flip()
-  
+  geom_point(position = position_jitter(width = 0.05))
+```
 
+### Chi Squared tests
+Finally let's do a chi squared test
 
+To start, we need to add the data and look at it. We are going to work with the dataset `ladybirds.csv`.
+```{r}
+ladybird <- read_csv("ladybirds.csv")
+glimpse(ladybird)
+```
 
-#--------------------------------------------------
-# chi-square (Hadleyverse version)
-#--------------------------------------------------
+We will then follow the same steps as before:
 
-## read in the data
+1. PLOT your data
+2. Fit your model
+3. Look at the assumptions
+4. Look at the results
+5. Add interpretation to your graph
 
-dd <- read.csv("ladybirds.csv")
-glimpse(dd)
-str(dd)
+#### 1. Plot the data
+This is a little tricker for Chi squared, as the numbers we are interested in are the number of ladybirds in each of four groups - black rural, black urban, red rural and red urban. So first we need to extract these numbers using `dplyr`.
 
-## get the number of each colour in each habitat type
-lb <- group_by(dd, Habitat, colour) %>%
+```{r}
+lb <- 
+  ladybird %>%
+  group_by(Habitat, colour) %>%
   summarise(obs = sum(number))
 
-lb # LOOK AT IT.
+# Look at lb
+lb
+```
 
-# make a plot
-
+We can then plot a barplot (yuk)
+```{r}
 ggplot(lb, aes(x = colour, y = obs, fill = colour)) +
   geom_bar(stat = "identity") + 
 	facet_wrap(~Habitat) +
-  scale_fill_manual(values = c(black="black", red="red"))
+  scale_fill_manual(values = c(black = "black", red = "red"))
+```
 
-# the contingency table
-lb_matrix <- xtabs(obs ~ Habitat + colour, data = lb)
+#### 2. Make a model
+This bit is also slightly different as we need the numbers to be in a matrix. In a chi square test we call this  matrix a *contingency table*. We can make one easily using a function called `xtabs`.
+```{r}
+lb.matrix <- xtabs(obs ~ Habitat + colour, data = lb)
 
-# the test
-chisq.test(lb_matrix)
+# Look at it
+lb.matrix
+```
 
-
-
-# ---------------------------------------------
-# USING BASE GRAPHICS
-# remake the original plot
-# ---------------------------------------------
-
-par(mfrow = c(1, 1), mar = c(5, 4, 4, 2))
-plot(EGGS ~ DENSITY, data = limp, cex = 2, pch = 19, col = c("green", 
-	"red")[SEASON], xlab = list("DENSITY", cex = 1.3), ylab = list("EGGS", 
-	cex = 1.3), ylim = c(0.2, 3), xlim = c(0, 60))
-
-# NOW add the lines/points you made - each one of these 
-# grabs a subset of the PlotThis data corresponding to SEASON 
-
-# Summer
-lines(EGGS ~ DENSITY, data = subset(PlotThis, SEASON == "summer"), 
-	col = "red")
-
-lines(lwr ~ DENSITY, data = subset(PlotThis, SEASON == "summer"), 
-	col = "red", lty = 2)
-
-lines(upr ~ DENSITY, data = subset(PlotThis, SEASON == "summer"), 
-	col = "red", lty = 2)
-
-# Spring
-lines(EGGS ~ DENSITY, data = subset(PlotThis, SEASON == "spring"), 
-	col = "green")
-
-lines(lwr ~ DENSITY, data = subset(PlotThis, SEASON == "spring"), 
-	col = "green", lty = 2)
-
-lines(upr ~ DENSITY, data = subset(PlotThis, SEASON == "spring"), 
-	col = "green", lty = 2)
-
-legend(40, 3, c("Spring", "Summer"), col = c("green", "red"), 
-	pch = 19)
-
-# Making transparent confidence bands in base graphics
-# note refernce to lengths in PlotThis
-xx <- c(seq(0, 60, length = 10), seq(60, 0, length = 10))
-yy <- c(PlotThis$upr[1:10], rev(PlotThis$lwr[1:10]))
-yy2 <- c(PlotThis$upr[11:20], rev(PlotThis$lwr[11:20]))
-
-polygon(xx, yy, col = rgb(0.19, 0.19, 0.19, 0.3), border = FALSE)
-polygon(xx, yy2, col = rgb(0.19, 0.19, 0.19, 0.3), border = FALSE)
+We can then perform the test.
+```{r}
+chisq.test(lb.matrix)
+```
 
 
+### General linear models - two way ANOVA
+We are not going to talk about this at all, but for completeness here is a two way ANOVA example.
+
+To start, we need to add the data and look at it. We are going to work with the dataset `growth.csv`.
+```{r}
+cows <- read_csv("growth.csv")
+glimpse(cows)
+```
+
+We will then follow the same steps as before:
+
+1. PLOT your data
+2. Fit your model
+3. Look at the assumptions
+4. Look at the results
+5. Add interpretation to your graph
+
+#### 1. Plot the data
+```{r}
+ggplot(cows, aes(x = supplement, y = gain, colour = diet)) + 
+	geom_point()
+```
+
+You have probably noticed that we have a problem here - the first thing alphabetically is **not** the control. So we need to relevel.
+```{r}
+cows <- mutate(cows, supplement = relevel(supplement, ref = "control"))
+```
+
+Plot it again to check it worked.
+```{r}
+ggplot(cows, aes(x = supplement, y = gain, colour = diet)) + 
+	geom_point()
+```
+
+#### 2. Make a model (with an interaction term)
+```{r}
+model5 <- lm(gain ~ supplement + diet + supplemenet:diet, data = cows)
+```
+
+#### 3. Check the assumptions using model diagnostics in `ggfortify`
+```{r}
+autoplot(model5, smooth.colour = NA)
+```
+
+#### 4. Look at the results
+We use `anova` to look at the **main effects**. Add notes so you know what the output means. There is little evidence of an interaction, but strong main effects.
+```{r}
+anova(model5)
+```
+
+We use `summary` to look at the parameter estimates. Add notes so you know what the output means. The table looks rather scary, but is explained in the powerpoint presentation. It is similar to the ANCOVA/ANOVA outputs.
+```{r}
+summary(model5)
+```
