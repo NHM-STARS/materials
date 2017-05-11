@@ -1,0 +1,959 @@
+---
+title: "Introduction to Project and Data Management"
+author: "Computational and data literacy skills for research"
+date: "15 May 2017, NHM"
+output:
+  html_document:
+    fig_width: 7
+    self_contained: no
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+---
+
+
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+
+```{r, echo = F}
+
+if(names(rmarkdown::metadata$output)[1] == "html_document"){
+    hash <- "#"}
+if(names(rmarkdown::metadata$output)[1] == "ioslides_presentation"){
+    hash <- ""}
+```
+
+<br>
+
+## The grand vision
+
+> Hans Rosling on open data in 2006
+
+<iframe width="470" height="250" src="https://goo.gl/ry6AiG" frameborder="0" allowfullscreen></iframe>
+
+<p class="accent_border"><b>How do we get there?</p></b>
+
+<br>
+
+
+## Drivers of better data management
+
+- Funders: value for money, impact, reputation
+    - NERC data policy
+- Publishers: many now require code and data.
+- Supervisors and immediate research group
+- Your wider scientific community
+
+### Yourselves! 
+
+#### be your own best friend:
+
+> aim to create secure datasets that are easy to use and REUSE
+
+
+#`r hash` meta - responsibilities
+
+## RDM at postgraduate level 
+
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> &quot;Remember what you did in your Master program? Yeah? Well, don&#39;t do that anymore.&quot;</p>&mdash; Nate Hough-Snee (@NHoughSnee) <a href="https://twitter.com/NHoughSnee/status/556235794466082816">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">Act as though every short term study will become a long term one <a href="https://twitter.com/tomjwebb">@tomjwebb</a>. Needs to be reproducible in 3, 20, 100 yrs</p>&mdash; oceans initiative (@oceansresearch) <a href="https://twitter.com/oceansresearch/status/556107891610894337">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+
+
+## Plan your RDM {data-background="https://raw.githubusercontent.com/BillMills/scienceXpython/gh-pages/img/debugging.gif"}
+
+- **Start early**. Make an RDM plan before collecting data.
+    - [**RDM checklist**](http://www.dcc.ac.uk/sites/default/files/documents/resource/DMP/DMP_Checklist_2013.pdf)
+
+- Anticipate **data products** as part of your thesis **outputs**
+- Think about what technologies to use
+
+### **Take initiative. You are now responsible:**
+
+<br>
+
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/Coleman.png">
+
+<br>
+<br>
+
+## {.columns-2}
+
+### BES guide to data management
+
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/BES.png" height=500px>
+
+<br>
+
+This guide for early career researchers explains what data and data management are, and provides advice and examples of best practices in data management, including case studies from researchers currently working in ecology and evolution.
+
+<br>
+
+#### [download](http://www.britishecologicalsociety.org/wp-content/uploads/Publ_Data-Management-Booklet.pdf)
+
+<br>
+<br>
+
+##
+
+### Nine simple ways to make it easier to (re)use your data
+
+<br>
+
+We describe nine simple ways to make it easy to reuse the data that you share and also make it easier to work with it yourself. Our recommendations focus on making your data understandable, easy to analyze, and readily available to the wider community of scientists.
+
+<br>
+<br>
+
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/ethan.png" height=200px>
+
+
+
+#### [download](http://ojs.library.queensu.ca/index.php/IEE/article/view/4608/4898)
+
+<br>
+<br>
+
+
+##
+
+### [storify](https://storify.com/tomjwebb/advice-on-research-data-management) by Tom Webb [\@tomjwebb](https://twitter.com/tomjwebb)
+
+<br>
+
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/storify.png" height=300px>
+
+<br>
+<br>
+
+##
+
+### [blog post](https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/) by Dynamic ecology [\@DynamicEcology](https://twitter.com/DynamicEcology)
+
+<br>
+
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/vulpes.png" height=300px>
+
+<br>
+<br>
+
+##
+
+### data carpentry
+
+- available [free online](http://www.datacarpentry.org/lessons/#ecology-workshop)
+- look out for training sessions
+
+
+
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/data_carpentry.png" height="350">
+
+<br>
+<br>
+
+## 
+
+### **seek help from support teams**
+
+Most university libraries have assistants dedicated to RDM:
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> <a href="https://twitter.com/ScientificData">@ScientificData</a> Talk to their librarian for data management strategies <a href="https://twitter.com/hashtag/datainfolit?src=hash">#datainfolit</a></p>&mdash; Yasmeen Shorish (@yasmeen_azadi) <a href="https://twitter.com/yasmeen_azadi/status/556129700129800192">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+<br>
+
+#`r hash` Data collection 
+
+## Before collection
+- if you're going to record data manually, produce data entry sheets or tables. Design them with both ease of entry and digitisation in mind.
+- if you are doing fieldwork consider using a pencil!
+- think in good time about variable definitions and naming
+- think about what other ancilliary data might be useful. Include in your collection plan
+
+<br>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> at minimum conform units, data fields to existing public databases,  traits=TRY,  collections=DarwinCore, plots=SALVIASVegBank</p>&mdash; Brian J. Enquist (@bjenquist) <a href="https://twitter.com/bjenquist/status/556122032123826177">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<br>
+
+## record...everything! 
+
+#### Even details that seem insignificant may prove vital to your research, or to interoperability with others' work:
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> record every detail about how/where/why it is collected</p>&mdash; Sal Keith (@Sal_Keith) <a href="https://twitter.com/Sal_Keith/status/556110605053349888">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<br>
+
+## Data entering
+
+### extreme but in many ways defendable
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> stay away from excel at all costs?</p>&mdash; Timothée Poisot (@tpoi) <a href="https://twitter.com/tpoi/status/556107000950829056">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+## excel: `read only`
+
+<blockquote class="twitter-tweet" data-conversation="none" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> <a href="https://twitter.com/tpoi">@tpoi</a> excel is fine for data entry. Just save in plain text format like csv. Some additional tips: <a href="https://t.co/8fUv9PyVjC">pic.twitter.com/8fUv9PyVjC</a></p>&mdash; Jaime Ashander (@jaimedash) <a href="https://twitter.com/jaimedash/status/556113131932381185">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/jaimedash">@jaimedash</a> just don’t let excel anywhere near dates or times.  <a href="https://twitter.com/tomjwebb">@tomjwebb</a> <a href="https://twitter.com/tpoi">@tpoi</a> <a href="https://twitter.com/larysar">@larysar</a></p>&mdash; Dave Harris (@davidjayharris) <a href="https://twitter.com/davidjayharris/status/556126474550263809">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+
+## spreadsheet advice 
+
+<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">God bless the UK Gov’t Statistical Service Good Practice Team. Sane spreadsheet advice. <a href="https://t.co/MLQMvnBzkV">https://t.co/MLQMvnBzkV</a> <a href="http://t.co/OD7GzfVKLW">pic.twitter.com/OD7GzfVKLW</a></p>&mdash; Jenny Bryan (@JennyBryan) <a href="https://twitter.com/JennyBryan/status/538013071826898944">November 27, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+
+## databases: more robust
+
+- good qc and advisable for multiple contributors
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> databases? <a href="https://twitter.com/swcarpentry">@swcarpentry</a> has a good course on SQLite</p>&mdash; Timothée Poisot (@tpoi) <a href="https://twitter.com/tpoi/status/556142573308608513">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> <a href="https://twitter.com/tpoi">@tpoi</a> if the data are moderately complex, or involve multiple people, best to set up a database with well designed entry form 1/2</p>&mdash; Luca Borger (@lucaborger) <a href="https://twitter.com/lucaborger/status/556226732496535552">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+## databases: benefits {.columns-2}
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> Entering via a database management system (e.g., Access, Filemaker) can make entry easier &amp; help prevent data entry errors <a href="https://twitter.com/tpoi">@tpoi</a></p>&mdash; Ethan White (@ethanwhite) <a href="https://twitter.com/ethanwhite/status/556119480493813760">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> it also prevents a lot of different bad practices. It is possible to do some of this in Excel. <a href="https://twitter.com/tpoi">@tpoi</a></p>&mdash; Ethan White (@ethanwhite) <a href="https://twitter.com/ethanwhite/status/556119826582605824">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+<br>
+<br>
+
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/ethanwhite">@ethanwhite</a> +1 Enforcing data types, options from selection etc, just some useful things a DB gives you, if you turn them on <a href="https://twitter.com/tomjwebb">@tomjwebb</a> <a href="https://twitter.com/tpoi">@tpoi</a></p>&mdash; Gavin Simpson (@ucfagls) <a href="https://twitter.com/ucfagls/status/556120176748290048">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<br>
+
+## data formats
+
+- csv files most common
+- Text files are the most general file format
+
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> It has to be interoperability/openness - can I read your data with whatever I use, without having to convert it?</p>&mdash; Paul Swaddle (@paul_swaddle) <a href="https://twitter.com/paul_swaddle/status/556148166270406656">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+- more unusual formats will need instruction on use.
+
+<br>
+
+## ensure data is machine readable
+
+### bad
+
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/bad_xl1.png" width=600px>
+
+##
+
+### bad
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/bad_xl2.png" width=600px>
+
+##
+
+### good 
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/good_xl.png" width=600px>
+
+##
+
+### ok
+
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/ok_xl.png" width=600px>
+
+- could help data entry
+- `.csv` copy would need to be saved.
+
+<br>
+
+## file naming
+
+- **Give files descriptive, consistent names**, e.g. “AK_IUCNDataExtraction_20131002.csv”
+    - include any pertinent parameter information
+    
+### **machine writeable = machine readable**
+
+```{r, eval=FALSE}
+write.csv(df, paste("variable_", res, month, sep ="_"))
+
+df <- read.csv(paste("variable_", res, month, sep ="_"))
+
+```
+
+
+<br>
+
+
+## Use good null values
+
+### Missing values are a fact of life
+
+- Usually, best solution is to **leave blank**
+- **`NA`** or **`NULL`** are also good options
+- **NEVER use `0`**. Avoid numbers like **`-999`**
+- Don’t make up your own code for missing values
+
+
+<br>
+
+## [**`read.csv()`**](http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html) utilities
+
+- **`na.string`:** character vector of values to be coded missing and replaced with `NA` to argument eg
+- **`strip.white`:** Logical. if `TRUE` strips leading and trailing white space from unquoted character fields 
+- **`blank.lines.skip`:** Logical: if `TRUE` blank lines in the input are ignored.
+- **`fileEncoding`:** if you're getting funny characters, you probably need to specify the correct encoding.
+
+```{r, eval=FALSE}
+read.csv(file, na.strings = c("NA", "-999"), strip.white = TRUE, 
+         blank.lines.skip = TRUE, fileEncoding = "mac")
+```
+
+<br>
+
+## basic quality control
+
+#### Have a look at your data with `Viewer(df)`
+
+<br>
+<br>
+
+- Check **empty cells**
+- Check the **range of values** (and value types) in each column matches expectation. Use `summary(df)`
+- Check **units of measurement**
+- Check your **software interprets your data correctly** eg.   
+    for a data frame `df`;
+    - `head(df)` (see top few rows) and `str(df)` (see object structure) are useful.
+
+<br>
+
+## make your data alignable and generalisable
+
+What information would other users require to combine your data with theirs?
+
+- time `temporal (time of day, day, month, year, season)`
+- space `geography (lat, lon)`
+- taxonomy `species name; authority / source`
+- provide information on **extent** and **resolution**
+- consider writing some **simple QA tests** (eg. checks against *number of dimensions*, *sum of numeric columns* etc)
+
+<br>
+
+<br>
+
+#`r hash` data management
+
+## raw data are sacrosanct
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> don&#39;t, not even with a barge pole, not for one second, touch or otherwise edit the raw data files. Do any manipulations in script</p>&mdash; Gavin Simpson (@ucfagls) <a href="https://twitter.com/ucfagls/status/556107371634634755">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> <a href="https://twitter.com/srsupp">@srsupp</a> Keep one or a few good master data files (per data collection of interest), and code your formatting with good annotation.</p>&mdash; Desiree Narango (@DLNarango) <a href="https://twitter.com/DLNarango/status/556128407445323778">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+
+## from raw to analytical data
+
+### [the repeatable pipeline](https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/)
+<p class="accent_border"><b>Do not manually edit raw data</b></p>
+
+<p class="accent_border"><b>Keep a clean pipeline of data processing from raw to analytical.</b></p>
+
+<img src="https://dynamicecology.files.wordpress.com/2016/08/pipeline1.jpg" height="150">
+
+
+- Ideally, incorporate checks to ensure correct processing of data through to analytical.
+- Clearly document any processing.
+    - Well-commented script-based manipulation (e.g. in R) makes this easy
+  
+<br>
+  
+## Croucher's Law
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Ran out of <a href="https://twitter.com/hashtag/JupyterICMS?src=hash">#JupyterICMS</a> looking for my wallet. Hotel and back. Started to panic. I had left it by presentation machine! <a href="https://twitter.com/hashtag/CrouchersLaw?src=hash">#CrouchersLaw</a> <a href="https://t.co/GFLnZrdfkX">pic.twitter.com/GFLnZrdfkX</a></p>&mdash; Mike Croucher (@walkingrandomly) <a href="https://twitter.com/walkingrandomly/status/820970653302013952">January 16, 2017</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+
+## automated = reproducible
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/s3JldKoA0zw" frameborder="0" allowfullscreen></iframe>
+
+<br>
+
+## use R projects
+
+### Keep your work [tidy and self-contained](https://nicercode.github.io/blog/2013-04-05-projects/)
+
+<img src="https://image.slidesharecdn.com/20150422reproresr8-160404131652/95/reproducible-research-in-r-and-r-studio-21-638.jpg?cb=1459775831" height="150">
+
+#### use sensible / standardised file system structure
+
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/proj_str.png" height="150">
+
+<br>
+
+## Know your masters
+
+- identify the `master` copy of files
+- keep it safe and and accessible
+- consider version control
+- consider centralising
+
+<br>
+
+<img src="http://www.revit-lebanon.com/images/Revit_A_3/Adv-12.jpg" width=300px>
+
+<br>
+
+## avoid catastrophe
+
+<br>
+
+### Backup on disk
+
+- consider using backup software like [Time Machine](https://support.apple.com/en-gb/HT201250) (mac) or [File History](http://www.thundercloud.net/infoave/new/windows-10-has-a-time-machine/) (Windows 10)
+
+
+### Backup in the cloud
+
+- dropbox, googledrive etc.
+- if [installed](https://tools.google.com/dlpage/drive) on your system, can programmatically access them through `R`
+- some version control
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> Back it up</p>&mdash; Ben Bond-Lamberty (@BenBondLamberty) <a href="https://twitter.com/BenBondLamberty/status/556120946722222080">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+
+## The Open Science Framework [osf.io](https://osf.io/)
+
+- version controlled
+- easily shareable
+- works with other apps
+- work on an interface with R ([OSFr](https://github.com/chartgerink/osfr)) is in progress. See more [here](https://youtu.be/cnE3AcdeGVY)
+
+<br>
+
+## OSF intro
+
+
+<iframe width="450" height="250" src="https://www.youtube.com/embed/2TV21gOzfhw" frameborder="0" allowfullscreen></iframe>
+
+# METADATA - Documenting your data
+
+
+## Documenting your data {.columns-2}
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> I see tons of spreadsheets that i don&#39;t understand anything (or the stduent), making it really hard to share.</p>&mdash; Erika Berenguer (@Erika_Berenguer) <a href="https://twitter.com/Erika_Berenguer/status/556111838715580417">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> Create a tab on your excel sheet that explains exactly what you did to get each part of the data and how you have treat it so far.</p>&mdash; Erika Berenguer (@Erika_Berenguer) <a href="https://twitter.com/Erika_Berenguer/status/556109844659597312">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+<br>
+<br>
+<br>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> <a href="https://twitter.com/SuseJohnston">@SuseJohnston</a> Write comments into any data or code file as if for yourself one year from now when you won&#39;t recall the details.</p>&mdash; Albert Cardona (@albertcardona) <a href="https://twitter.com/albertcardona/status/556113639594528769">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<br>
+
+## {.columns-2}
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/srsupp">@srsupp</a> <a href="https://twitter.com/tomjwebb">@tomjwebb</a> Document! Many sharing platforms exist (e.g. <a href="https://twitter.com/figshare">@figshare</a>), but w/o documentation/metadata, research data aren&#39;t v. useful</p>&mdash; Jonathan Petters (@jon_petters) <a href="https://twitter.com/jon_petters/status/556146541921320961">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> <a href="https://twitter.com/ScientificData">@ScientificData</a> &quot;Document. Everything.&quot; Data without documentation has no value.</p>&mdash; Sven Kochmann (@indianalytics) <a href="https://twitter.com/indianalytics/status/556120920881115136">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="it" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> Annotate, annotate, annotate!</p>&mdash; CanJFishAquaticSci (@cjfas) <a href="https://twitter.com/cjfas/status/556109252788379649">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+
+## {.columns-2}
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> Have good metadata so others can understand it/use it</p>&mdash; Nathan B Furey (@NBFurey) <a href="https://twitter.com/NBFurey/status/556113773811867648">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/Sal_Keith">@Sal_Keith</a> +1 Metadata essential &amp; prerequisite for the new breed of data journals like <a href="https://twitter.com/ScientificData">@ScientificData</a> or repos like <a href="https://twitter.com/datadryad">@datadryad</a> <a href="https://twitter.com/tomjwebb">@tomjwebb</a></p>&mdash; Gavin Simpson (@ucfagls) <a href="https://twitter.com/ucfagls/status/556111062517284864">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+<br>
+<br>
+<br>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="und" dir="ltr">Document all the metadata (including protocols).<a href="https://twitter.com/tomjwebb">@tomjwebb</a></p>&mdash; Ward Appeltans (@WrdAppltns) <a href="https://twitter.com/WrdAppltns/status/556108414955560961">January 16, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+## 
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">You download a zip file of <a href="https://twitter.com/hashtag/OpenData?src=hash">#OpenData</a>. Apart from your data file(s), what else should it contain?</p>&mdash; Leigh Dodds (@ldodds) <a href="https://twitter.com/ldodds/status/828657155863638016">February 6, 2017</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br>
+
+## #otherpeoplesdata dream match!
+
+> imagine an open data set
+
+It's out there somewhere:
+
+<br>
+
+#### How would you locate it?
+
+<br>
+
+- what details would you need to know to determine relevance? 
+- what information would you need to know to use it?
+<br>
+
+> #### Think about all you would neeed to understand someone else's data. In 18 months **YOU  will be that other person with your own data.**
+
+<br>
+
+## metadata 
+
+> ### Information that **describes, explains, locates**, or in some way makes it easier to **find, access**, and **use** a resource (in this case, data). 
+
+<br>
+
+<img src="http://www.webhostingsecretrevealed.net/wp-content/uploads/2014/09/who-what-when-how-why.jpg" height="150px" width="300px">
+
+<br>
+
+<br>
+
+#`r hash` exercise 2:
+
+### introduce your data
+
+<br>
+
+## prepare it to share it 
+
+### Let's start documenting your data!
+
+- in pairs describe the **who, what, when, where, why** of your dataset.
+- use the **Data Reuse Checklist** to guide your description.
+
+### Data Reuse Checklist
+
+http://mozillascience.github.io/checklist/
+
+<br>
+<br>
+
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/msl logo.png" height="100px" width="300px">
+
+<br>
+
+## metadata = data about data
+
+#### Backbone of digital curation. Without it a digital resource may be irretrievable, unidentifiable or unusable. 
+
+
+<p class="accent_border"><b>Descriptive</b></p>
+
+- *enables identification, location and retrieval of data, often includes use of controlled vocabularies for classification and indexing.*
+
+<p class="accent_border"><b>Technical</b></p>
+
+- *describes the technical processes used to produce, or required to use a digital data object.*
+
+<p class="accent_border"><b>Administrative</b></p>
+
+- *used to manage administrative aspects of the digital object e.g. intellectual property rights and acquisition.*
+
+
+This usually takes the form of a structured set of elements. 
+
+<br>
+
+## elements of metadata
+
+- #### Structured data files:
+    - readable by machines and humans, accessible through the web
+- #### controlled vocabularies eg. [NERC Vocabulary server](https://www.bodc.ac.uk/resources/products/web_services/vocab/)
+    - allows for connectivity of data
+    
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/NERC_vocab.png" width=400px>   
+    
+### KEY TO SEARCH FUNCTION
+
+By structuring & adhering to controlled vocabularies, data can be combined, accessed and searched!
+
+<p class="accent_border"><b>Different communities develop different standards which define both the structure and content of metadata.</b></p>
+
+<br>
+
+## Ecological Metadata Language (EML) {.smaller}
+
+#### last decade -> tremendous explosion of ecological and environmental data -> potential for broad-scale or synthetic research
+
+<br>
+
+### But  
+
+- extremely heterogeneous and complexity 
+
+- dispersed across many separate repositories. 
+
+- ##### data are **largely unorganized and inaccessible**
+
+<br>
+
+### [**Ecological Metadata Language (EML)**](http://www.dcc.ac.uk/resources/metadata-standards/eml-ecological-metadata-language) 
+#### a metadata standard developed by and for the ecology discipline. 
+
+EML is a [set of XML schema](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/index.html) documents that allow for the **structural expression of metadata**.
+
+
+#### harmonising ecological data
+
+<big>**Wide adoption and use of EML will create exciting new opportunities for data discovery, access, integration and synthesis.**</big>
+ 
+<br>
+
+## example EML
+
+**EML = extensible markup language**: Emphasis on simplicity, generality, and usability across the Internet.
+
+#### similar to html: what the web is made of!
+
+```{r, echo=FALSE}
+library(EML)
+f <- system.file("xsd/test/eml.xml", package = "EML")
+eml <- read_eml(f)
+eml
+```
+
+<br>
+
+## Documenting your data
+
+- Start at the very least by **creating a metadata tab within your raw data spreadsheet**
+- Ideally set up a system of **normalised tables** [see section 3 in this post](https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/) and **`README`** and **`vignette`** documents to manage and document metadata.
+- finally, when you're ready to publish:
+
+### structure metadata into an `EML` file, a searchable, shareable file.
+
+<br>      
+	
+#### **Different types data require different metadata**
+
+<p class="accentborder"><b>Ensure everything someone might need to understand your data is documented</p></b>
+    
+
+<br>
+
+<br>
+
+## Documenting your data
+
+- Start at the very least by **creating a metadata tab within your raw data spreadsheet**
+- Ideally set up a system of **normalised tables** [see section 3 in this post](https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/) and **`README`** and **`vignette`** documents to manage and document metadata.
+- finally, when you're ready to publish:
+
+### structure metadata into an `EML` file, a searchable, shareable file.
+
+<br>      
+	
+#### **Different types data require different metadata**
+
+<p class="accentborder"><b>Ensure everything someone might need to understand your data is documented</p></b>
+    
+
+<br>
+
+## Example EML workflow
+
+### Bird Trait Networks project 
+
+<br> 
+I'm using data from a project in which we ***compiled large dataset on bird reproductive, morphological, physiological, life history and ecological traits across as many bird species as possible*** to perform a network analysis on associations between trait pairs.
+
+<br>
+
+#### Let's use a simplified subset of the data to explore some of the concepts and tools from **producing an `eml`**
+
+- all materials can be found [here](https://github.com/annakrystalli/ACCE_RDM/tree/master/example).
+
+<br>
+
+- I'll include some dummy data sourced from the `eml` package [vignette on creating an EML](https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd) to cover broader scope of data.
+
+```{r, message=FALSE, echo=F}
+options(stringsAsFactors = FALSE)
+
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+
+### SETTINGS ##############################################################
+input.folder <- "assets/data/"
+
+### FILES #################################################################
+
+attr_tbl <- read.csv(paste("assets/data/","attr_tbl.csv", sep =""), stringsAsFactors = F)
+dt   <- read.csv(paste("assets/data/","bird_trait_db-v0.1.csv", sep =""))
+
+
+### PACKAGES #################################################################
+
+require(knitr)
+require(listviewer)
+library(tibble)
+
+```
+
+<br>
+
+## data 
+
+```{r, echo=FALSE}
+kable(head(as_data_frame(dt), 9), caption = "bird trait networks dataTable")
+```
+
+- Like many real data sets, column headings are convenient for data entry and manipulation, but **not particularly descriptive to a user not already familiar with this data**. 
+
+- More importantly, they **don't let us know what units they are measured in** (or in the case of categorical / factor data like species names or life stages, **what the factor abbreviations refer to**). So let us take a moment to be more explicit:
+
+
+
+<br>
+
+## EML rOpenScience package
+
+<p class="accentborder"><b>We can store this in
+
+```{r, eval=FALSE}
+install.packages("EML")
+```
+
+
+## EML
+
+#### functions in the package help build an `eml` object from modular elements
+
+    - eml
+      - dataset
+        - creator
+        - title
+        - publisher
+        - pubDate
+        - keywords
+        - abstract 
+        - intellectualRights
+        - contact
+        - methods
+        - coverage
+          - geographicCoverage
+          - temporalCoverage
+          - taxonomicCoverage
+        - dataTable
+          - entityName
+          - entityDescription
+          - physical
+          - attributeList
+
+<br>
+          
+## creating an EML
+
+#### start with `dataTable`
+
+        - dataTable
+          - entityName
+          - entityDescription
+          - physical
+          - attributeList
+
+We will build this `eml` file from the bottom up, starting with the **two main components** of a `dataTable` indicated above: 
+
+- `attributeList` 
+- `physical`  
+    
+We will then slip these two pieces into place inside a dataTable element, and slip that into our eml element along with the rest of the generic metadata
+
+
+<br>
+
+## attributesList structure
+
+### we need to supply two `data.frames`
+
+- #### `attributes`
+- #### `factors`
+
+and a vector of:
+
+- #### `columnClass`
+
+<br>
+
+- create a `attr_tbl` in which to complete all info required
+- use **`eml_utils.R`** functions to extract `attributeList` elements from `attr_tbl`
+
+```{r, eval=FALSE}
+library(RCurl)
+eval(parse(text = getURL(
+    "https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/R/eml_utils.R", 
+    ssl.verifypeer = FALSE)))
+```
+
+```{r, echo = FALSE}
+library(RCurl)
+eval(parse(text = getURL(
+    "https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/R/eml_utils.R", 
+    ssl.verifypeer = FALSE)), envir = environment())
+```
+
+<br>
+
+## `attributes` df
+
+
+The attributes data frame must use only the recognized column headers shown here. The attributes
+data frame must contain columns for required metadata. These are:
+For all data: 
+
+- attributeName (required, free text field) 
+- attributeDefinition (required, free text field)
+- columnClasses (required, `"numeric"`, `"character"`, `"factor"`, `"ordered"`, 
+    or `"Date"`, case sensitive)
+
+<br>
+
+#### `columnClasses` dependant attributes  
+
+- For `numeric` (ratio or interval) data:
+    - unit (required, see [eml-unitTypeDefinitions](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/./eml-unitTypeDefinitions.html) and [working with units](https://github.com/ropensci/EML/blob/master/vignettes/working-with-units.Rmd))
+- For `character` (textDomain) data: 
+    - definition (required)
+- For `dateTime` data: 
+    - formatString (required)
+    e.g for date `11-03-2001` formatString would be `"DD-MM-YYYY"`
+
+<br>
+
+## create `attr_tbl` shell
+
+- #### load data
+```{r, eval=FALSE}
+dt   <- read.csv("data/bird_trait_db-v0.1.csv")
+```
+
+
+- #### create `attr_tbl` shell from **your data (`dt`)** 
+    - use function `get_attr_shell` from `eml_utils.R`.
+
+```{r}
+attr_shell <- get_attr_shell(dt)
+str(attr_shell)
+```
+
+## complete `attr_tbl`
+
+#### save shell
+- write `attr_shell` to `.csv`
+
+```{r, eval=FALSE}
+write.csv(attr_shell, file = "data/attr_shell.csv")
+```
+<br>
+
+#### complete attr_tbl
+- complete in excel and save to **attr_tbl.csv**
+- read in completed **attr_tbl.csv**
+
+```{r, eval=FALSE}
+attr_tbl <- read.csv(file = "data/attr_tbl.csv")
+```
+
+<br>
+
+## `attr_tbl`
+```{r, echo = F}
+if(names(rmarkdown::metadata$output)[1] == "html_document"){
+kable(head(attr_tbl, 9), caption = "table 2. bird trait networks attr_tbl")}
+
+if(names(rmarkdown::metadata$output)[1] == "ioslides_presentation"){
+kable(head(attr_tbl[1:7], 9), caption = "table 2a. bird trait networks attr_tbl")}
+
+```
+
+##
+
+```{r, echo = F}
+if(names(rmarkdown::metadata$output)[1] == "ioslides_presentation"){
+kable(head(attr_tbl[c(1,8:11)], 9), caption = "table 2b. bird trait networks attr_tbl")}
+
+```
+
+<br>
+
+- I use the columns `code` and `levels` to store information on factors. Use `";"` to separate code and level descriptions. These can be extracted by `eml_utils.R` function `get_attr_factors()` later on.
+
+## make `attributes` df
+```{r}
+attributes <- extract_attr_tbl(attr_tbl)
+str(attributes, max.level = 2)
+```
+
+## make `factors` df
+
+```{r}
+factors <- get_attr_factors(attr_tbl)
+kable(head(factors, 9))
+```
+formation by creating EML files and explicity supply variable descriptions and units.</b></p>
+
+![](http://ivanhanigan.github.io/images/workflow-rmd-md.png)
