@@ -3,7 +3,7 @@ title: "Basic statistics in R"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -27,7 +27,7 @@ library(ggfortify)
 ```
 
 #### 3. Import the data
-We are going to work with the dataset `plant.growth.rate.csv`
+First we are going to work with the dataset `plant.growth.rate.csv`
 ```{r}
 growth <- read_csv("plant.growth.rate.csv")
 ```
@@ -42,7 +42,7 @@ Before you start think very carefully about what your *question* is, why it is i
 
 As a (very) vague rule of thumb: 
 
-1. If you have a continuous response (Y) variable, and a categorical predictor/explanatory (X) variable you'll need a t-test (two groups), or analysis of variance (ANOVA; two or more groups). You'd plot this as a boxplot (or barplot if you really want to). 
+1. If you have a continuous response (Y) variable, and a categorical predictor/explanatory (X) variable you'll need a t-test (two groups), or analysis of variance (ANOVA; two or more groups). You'd plot this as a boxplot (or barplot if you really want to - barplots suck). 
 
 2. If you have a continuous response (Y) variable, and a continuous predictor/explanatory (X) variable you'll need a regression (one X), or multiple regression (two or more Xs). You'd plot this as a scatter plot.
 
@@ -64,9 +64,8 @@ First we'll use the plant growth dataset to demonstrate a linear regression...
 #### 1. Plot the data
 Make a scatter plot of `soil.moisture.content` on the x axis and `plant.growth.rate` on the y axis.
 ```{r}
-ggplot(growth, aes(x = soil.moisture.content, 
-               y = plant.growth.rate)) + 
-	geom_point(col = "cornflowerblue", size = 3) +
+ggplot(growth, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
+  geom_point(col = "cornflowerblue", size = 3) +
   labs(x = "Soil Moisture", y = "Growth Rate") +
   theme_bw()
 ```
@@ -97,23 +96,27 @@ How do you add a regression line in `ggplot`?
 ```{r}
 ggplot(growth, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
 	geom_point(col = "cornflowerblue", size = 3) + 
+  labs(x = "Soil Moisture", y = "Growth Rate") +
+  theme_bw() +
   geom_smooth(method = "lm", se = TRUE)
 ```
 
 
-`geom_smooth(method = “lm”)` is designed so you can explore your data quickly. However, it only draw the correct line and confidence intervals when you have one Y and one X variable. Otherwise we need a more complex workflow…
+`geom_smooth(method = “lm”)` is designed so you can explore your data quickly. However, it only draws the correct line and confidence intervals when you have one Y and one X variable. Otherwise we need a more complex workflow…
 
 #### Adding lines to regression plots - predictions workflow
 
-##### 1. Create a new X variable, with the same name as the one in your graph, ranging from the minimum and maximum values of the variable in your data. We can use `expand.grid` to do this, and the function `seq`.
+##### 1. Create a new X variable
+It needs the same name as the one in your graph, ranging from the minimum and maximum values of the variable in your data. We can use `expand.grid` to do this, and the function `seq`.
 ```{r}
-newX <- expand.grid(soil.moisture.content = select(growth, seq(min(soil.moisture.content), max(soil.moisture.content), length = 100)))
+newX <- expand.grid(soil.moisture.content = seq(from = 0.25, to = 2, length = 100))
 
 # Look at newX
 head(newX)
 ```
 
-##### 2. Next make your new Y variable, by using the model you created to predict what Y values go with the X values you just made. We can make predictions using `predict`. Look at `newY`. What are `fit`, `lwr` and `upr`?
+##### 2. Next make your new Y variable.
+Use the model you created to predict what Y values go with the X values you just made. We can make predictions using `predict`. Look at `newY`. What are `fit`, `lwr` and `upr`?
 
 ```{r}
 newY <- predict(model1, newdata = newX, interval = "confidence")
@@ -122,7 +125,7 @@ newY <- predict(model1, newdata = newX, interval = "confidence")
 head(newY)
 ```
 
-3. Do some "housekeeping": stick `newX` and `newY` together into one dataframe.
+##### 3. Stick `newX` and `newY` together into one dataframe.
 
 ```{r}
 addThese <- data.frame(newX, newY)
@@ -131,7 +134,8 @@ addThese <- data.frame(newX, newY)
 head(addThese)
 ```
 
-##### 4. Final bit of "housekeeping": rename `fit` to the name of your Y variable, in this case `plant.growth.rate`.
+##### 4. Rename `fit` to the name of your Y variable
+In this case `plant.growth.rate`.
 
 ```{r}
 addThese <- rename(addThese, plant.growth.rate = fit)
@@ -140,11 +144,14 @@ addThese <- rename(addThese, plant.growth.rate = fit)
 head(addThese)
 ```
 
-##### 5. Now we can plot the graph. We plot the same graph as earlier, but with a different `geom_smooth` line. Note that we are using the `addThese` data for the line, and the `growth` data for the original data points.
+##### 5. Plot the graph! 
+We plot the same graph as earlier, but with a different `geom_smooth` line. Note that we are using the `addThese` data for the line, and the `growth` data for the original data points.
 
 ```{r}
 ggplot(growth, aes(x = soil.moisture.content, y = plant.growth.rate)) + 
   geom_point(col = "cornflowerblue", size = 3) +
+  labs(x = "Soil Moisture", y = "Growth Rate") +
+  theme_bw() +
   geom_smooth(data = addThese, aes(ymin = lwr, ymax = upr), stat = "identity")
 ```
 
@@ -234,7 +241,7 @@ summary(model2)
 
 #### Releveling when reference is not alphabetically first
 
-This is pretty simple, you just set as the `ref` whatever all your groups need to be comapred to. Note that you need to tell R to treat `parasite` as a factor using `as.factor`.
+This is pretty simple, you just set as the `ref` whatever all your groups need to be compared to. Note that you need to tell R to treat `parasite` as a factor using `as.factor`.
 ```{r}
 daphnia.relevel <- mutate(daphnia, parasite = relevel(as.factor(parasite), ref = "Pasteuria ramosa"))
 ```
@@ -245,7 +252,7 @@ ggplot(daphnia.relevel, aes(x = parasite, y = growth.rate)) +
   geom_boxplot()
 ```
 
-#### How to fit a Tukey or other *post-hoc* comparison
+#### How to fit a Tukey test or another *post-hoc* comparison
 
 If you have a balanced design this is easy. First change the model as it is fitted using `aov` not `lm`, then use `TukeyHSD`.
 ```{r}
@@ -254,7 +261,7 @@ tukey.out <- TukeyHSD(model2.aov) # generate Tukey test
 tukey.out 
 ```
 
-Alternatively you can use the package `multicomp`. Remember to install it first. ***CAVEAT, loading `multicomp` qill mask the `dplyr` function `select`***. To fix you have to shut down R and start it up again. I have commented this out here to prevent this issue.
+Alternatively you can use the package `multicomp`. Remember to install it first. ***CAVEAT, loading `multicomp` will mask the `dplyr` function `select`***. To fix you have to shut down R and start it up again. I have commented this out here to prevent this issue.
 
 ```{r}
 # library(multcomp)
@@ -318,11 +325,12 @@ summary(model3)
 #### 5. Add interpretation to the graph
 How do you add a regression line in `ggplot`?
 
-Remember `geom_smooth(method = “lm”)` is designed so you can explore your data quickly. However, it only draw the correct line and confidence intervals when you have one Y and one X variable. This is not true here. In fact here it will split the data into two groups (spring and summer) and fit models separately to each. This artificially makes the confidence intervals smaller.
+Remember `geom_smooth(method = “lm”)` is designed so you can explore your data quickly. However, it only draws the correct line and confidence intervals when you have one Y and one X variable. This is not true here. In fact here it will split the data into two groups (spring and summer) and fit models separately to each. This artificially makes the confidence intervals smaller.
 
 #### Adding lines to regression plots - predictions workflow
 
-##### 1. Create a new X variable, with the same name as the one in your graph, ranging from the minimum and maximum values of the variable in your data. We can use `expand.grid` to do this, and the function `seq`.
+##### 1. Create a new X variable.
+It needs the same name as the one in your graph, ranging from the minimum and maximum values of the variable in your data. We can use `expand.grid` to do this, and the function `seq`.
 ```{r}
 newX <- expand.grid(DENSITY = seq(from = 8, to = 45, length = 100),
                     SEASON = c("spring", "summer"))
@@ -332,7 +340,8 @@ head(newX)
 ```
 
 
-##### 2. Next make your new Y variable, by using the model you created to predict what Y values go with the X values you just made. We can make predictions using `predict`. Look at `newY`. What are `fit`, `lwr` and `upr`?
+##### 2. Next make your new Y variable.
+Use the model you created to predict what Y values go with the X values you just made. We can make predictions using `predict`. Look at `newY`. What are `fit`, `lwr` and `upr`?
 
 ```{r}
 newY <- predict(model3, newdata = newX, interval = "confidence")
@@ -341,7 +350,7 @@ newY <- predict(model3, newdata = newX, interval = "confidence")
 head(newY)
 ```
 
-3. Do some "housekeeping": stick `newX` and `newY` together into one dataframe.
+##### 3. Stick `newX` and `newY` together into one dataframe.
 
 ```{r}
 addThese <- data.frame(newX, newY)
@@ -350,7 +359,8 @@ addThese <- data.frame(newX, newY)
 head(addThese)
 ```
 
-##### 4. Final bit of "housekeeping": rename `fit` to the name of your Y variable, in this case `EGGS`.
+##### 4. Rename `fit` to the name of your Y variable.
+In this case `EGGS`.
 
 ```{r}
 addThese <- rename(addThese, EGGS = fit)
@@ -359,7 +369,8 @@ addThese <- rename(addThese, EGGS = fit)
 head(addThese)
 ```
 
-##### 5. Now we can plot the graph. We plot the same graph as earlier, but with a different `geom_smooth` line. Note that we are using the `addThese` data for the line, and the `limpet` data for the original data points.
+##### 5. Plot the graph! 
+We plot the same graph as earlier, but with a different `geom_smooth` line. Note that we are using the `addThese` data for the line, and the `limpet` data for the original data points.
 
 ```{r}
 ggplot(limpet, aes(x = DENSITY, y = EGGS, colour = SEASON)) + 
@@ -369,7 +380,7 @@ ggplot(limpet, aes(x = DENSITY, y = EGGS, colour = SEASON)) +
 
 Note there is a bug in `ggplot2` which means you might get the error message `Ignoring unknown aesthetics: ymin, ymax`. Just ignore this!
 
-If you want to set custom colours do so for the raw data (colour) and the bands (fill).
+If you want to set custom colours you can do so for the raw data (colour) and the bands (fill).
 ```{r}
 ggplot(limpet, aes(x = DENSITY, y = EGGS, colour = SEASON, fill = SEASON)) + 
   geom_point(size = 3) +
@@ -379,7 +390,7 @@ ggplot(limpet, aes(x = DENSITY, y = EGGS, colour = SEASON, fill = SEASON)) +
 ```
 
 ##### Getting specific predictions
-If you want to predict the value of `EGGS` for a `DENSITY = 40` and `SEASON = spring`:
+If you want to predict the value of `EGGS` for `DENSITY = 40` and `SEASON = spring`:
 ```{r}
 newX <- expand.grid(DENSITY = 40, SEASON = "spring")
 prediction <- predict(model3, newdata = newX, interval = "confidence")
@@ -388,8 +399,8 @@ prediction <- predict(model3, newdata = newX, interval = "confidence")
 prediction
 ```
 
-### T tests
-Let's do some slightly simpler tests now and look at the t test.
+### T-tests
+Let's do some slightly simpler tests now and look at the t-test.
 
 To start, we need to add the data and look at it. We are going to work with the dataset `garden.ozone.csv`.
 ```{r}
@@ -420,6 +431,7 @@ model4 <- t.test(Ozone ~ Garden.location,
 ```
 
 #### 3. Check the assumptions
+What are the assumptions of a t-test?
 ```{r}
 ozone %>%
   group_by(Garden.location) %>%
@@ -431,6 +443,7 @@ ozone %>%
 ```{r}
 model4
 ```
+Note that this is a Welch's t-test, because we don't have equal variances. R will fit this kind of t-test by default.
 
 Another way to plot the results with all the data.
 ```{r}
@@ -440,7 +453,7 @@ ggplot(ozone, aes(x = Garden.location, y = Ozone)) +
 ```
 
 ### Chi Squared tests
-Finally let's do a chi squared test
+Finally let's do a chi squared test.
 
 To start, we need to add the data and look at it. We are going to work with the dataset `ladybirds.csv`.
 ```{r}
@@ -457,7 +470,7 @@ We will then follow the same steps as before:
 5. Add interpretation to your graph
 
 #### 1. Plot the data
-This is a little tricker for Chi squared, as the numbers we are interested in are the number of ladybirds in each of four groups - black rural, black urban, red rural and red urban. So first we need to extract these numbers using `dplyr`.
+This is a little tricker for Chi squared, as the numbers we are interested in are the total number of ladybirds in each of four groups - black rural, black urban, red rural and red urban. So first we need to extract these numbers using `dplyr`.
 
 ```{r}
 lb <- 
@@ -478,7 +491,7 @@ ggplot(lb, aes(x = colour, y = obs, fill = colour)) +
 ```
 
 #### 2. Make a model
-This bit is also slightly different as we need the numbers to be in a matrix. In a chi square test we call this  matrix a *contingency table*. We can make one easily using a function called `xtabs`.
+This bit is also slightly different as we need the numbers to be in a matrix. In a chi square test we call this  matrix a *contingency table*. We can make one using a function called `xtabs`.
 ```{r}
 lb.matrix <- xtabs(obs ~ Habitat + colour, data = lb)
 
