@@ -3,15 +3,16 @@ title: "Introduction to Project and Data Management"
 author: "Computational and data literacy skills for research"
 date: "15 May 2017, NHM"
 output:
-  ioslides_presentation:
-    highlight: pygments
-    widescreen: yes
   html_document:
     fig_width: 7
     self_contained: no
+    theme: journal
     toc: yes
     toc_depth: 2
     toc_float: yes
+  ioslides_presentation:
+    highlight: pygments
+    widescreen: yes
 ---
 
 
@@ -56,6 +57,8 @@ if(names(rmarkdown::metadata$output)[1] == "ioslides_presentation"){
 
 - File naming
 
+<br>
+<br>
 
 ## **The grand vision**
 
@@ -66,12 +69,17 @@ if(names(rmarkdown::metadata$output)[1] == "ioslides_presentation"){
 <p class="accent_border"><b>How do we get there?</p></b>
 
 <br>
+<br>
 
 
 ## **Getting a handle on our research materials**
 
-![](assets/img/beer_messy_tidy.png)
+<center>
+<img src="assets/img/beer_messy_tidy.png" height=400px>
+</center>
 
+<br>
+<br>
 
 ## **21st Century Research meta-responsibilities**
 
@@ -80,7 +88,13 @@ Better digital curation of the workhorses of modern science: **code** & **data**
 - accessible
 - reusable
 - searchable
+<center>
+<h3><b>We all need to do our bit</b></h3>
+<img src="https://metrouk2.files.wordpress.com/2012/08/article-1344528089185-0d5e3c8900000578-276474_636x362.jpg" height=250px>
+</center>
 
+<br>
+<br>
 
 ## **Drivers of better digital management**
 
@@ -96,53 +110,47 @@ Better digital curation of the workhorses of modern science: **code** & **data**
 
 > **aim to create secure materials that are easy to use and REUSE**
 
+<br>
+<br>
+
 # Resources
 
-##
-
-### **Nine simple ways to make it easier to (re)use your data**
-
-<br>
+## **Nine simple ways to make it easier to (re)use your data**
 
 We describe nine simple ways to make it easy to reuse the data that you share and also make it easier to work with it yourself. Our recommendations focus on making your data understandable, easy to analyze, and readily available to the wider community of scientists.
 
-<br>
-
+<center>
 <img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/ethan.png" height=200px>
-
-
+</center>
 
 #### [download](http://ojs.library.queensu.ca/index.php/IEE/article/view/4608/4898)
 
 <br>
 <br>
 
-
-##
-
-### [storify](https://storify.com/tomjwebb/advice-on-research-data-management) by Tom Webb [\@tomjwebb](https://twitter.com/tomjwebb)
+## [storify](https://storify.com/tomjwebb/advice-on-research-data-management) by Tom Webb [\@tomjwebb](https://twitter.com/tomjwebb)
 
 <br>
 
-<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/storify.png" height=200px>
-
-<br>
-<br>
-
-##
-
-### [**Blog post**](https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/) **by Dynamic ecology** [\@DynamicEcology](https://twitter.com/DynamicEcology)
-
-<br>
-
-<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/vulpes.png" height=250px>
+<center>
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/storify.png" height=250px>
+</center>
 
 <br>
 <br>
 
-##
+## [**Blog post**](https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/) **by Dynamic ecology** [\@DynamicEcology](https://twitter.com/DynamicEcology)
 
-### **Data carpentry**
+<br>
+
+<center>
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/vulpes.png" height=300px>
+</center>
+
+<br>
+<br>
+
+## **Data carpentry**
 
 - **Domain specific lessons available** [**free online**](http://www.datacarpentry.org/lessons/)
     + Ecology materials
@@ -160,9 +168,7 @@ We describe nine simple ways to make it easy to reuse the data that you share an
 <br>
 <br>
 
-## 
-
-### **Seek help from support teams**
+## **Seek help from support teams**
 
 Most university libraries have assistants dedicated to Research Data Management:
 
@@ -171,9 +177,6 @@ Most university libraries have assistants dedicated to Research Data Management:
 
 <br>
 <br>
-
-
-
 
 # Basic Data Hygiene
 
@@ -185,7 +188,7 @@ Most university libraries have assistants dedicated to Research Data Management:
 - Anticipate **data products** as part of your thesis **outputs**
 - Think about what technologies to use
 
-### **Take initiative & responsibility. Think long term**
+### **Take initiative & responsibility. Think long term.**
 
 <br>
 
@@ -195,7 +198,6 @@ Most university libraries have assistants dedicated to Research Data Management:
 
 <br>
 <br>
-
 
 ## **Data entering**
 
@@ -243,6 +245,7 @@ Most university libraries have assistants dedicated to Research Data Management:
 
 
 <br>
+<br>
 
 ## **Data formats**
 
@@ -250,13 +253,13 @@ Most university libraries have assistants dedicated to Research Data Management:
 - **`.tsv`**: *tab* separated values.
 - **`.txt`**: no formatting specified.
 
-<br>
 
 <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> It has to be interoperability/openness - can I read your data with whatever I use, without having to convert it?</p>&mdash; Paul Swaddle (@paul_swaddle) <a href="https://twitter.com/paul_swaddle/status/556148166270406656">January 16, 2015</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 > **more unusual formats will need instructions on use.**
 
+<br>
 <br>
 
 ## **Ensure data is machine readable**
@@ -285,6 +288,7 @@ Most university libraries have assistants dedicated to Research Data Management:
 - `.csv` or `.tsv` copy would need to be saved.
 
 <br>
+<br>
 
 
 ## **Use good null values**
@@ -297,6 +301,7 @@ Most university libraries have assistants dedicated to Research Data Management:
 - Don’t make up your own code for missing values
 
 
+<br>
 <br>
 
 ## [**`read.csv()`**](http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html) **utilities**
@@ -311,6 +316,7 @@ read.csv(file, na.strings = c("NA", "-999"), strip.white = TRUE,
          blank.lines.skip = TRUE, fileEncoding = "mac")
 ```
 
+<br>
 <br>
 
 ## [**`readr::read_csv()`**](https://cran.r-project.org/web/packages/readr/readr.pdf) **utilities**
@@ -328,6 +334,7 @@ read_csv(file, col_names = TRUE, col_types = NULL, locale = default_locale(),
 ```
 
 <br>
+<br>
 
 
 ## **Basic quality control**
@@ -343,6 +350,8 @@ read_csv(file, col_names = TRUE, col_types = NULL, locale = default_locale(),
     for a data frame `df`;
     - `head(df)` (see top few rows) and `str(df)` (see object structure) are useful.
 - consider writing some **simple QA tests** (eg. checks against *number of dimensions*, *sum of numeric columns* etc)
+
+<br>
 <br>
 
 ## **Raw data are sacrosanct**
@@ -354,8 +363,9 @@ read_csv(file, col_names = TRUE, col_types = NULL, locale = default_locale(),
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <br>
+<br>
 
-## **Know your masters**
+## **Know your masters** {.columns-2}
 
 - identify the `master` copy of files
 - keep it safe and and accessible
@@ -363,22 +373,22 @@ read_csv(file, col_names = TRUE, col_types = NULL, locale = default_locale(),
 - consider centralising
 
 <center>
-<img src="http://www.thebugplanetstore.com/2014/wp-content/uploads/2012/03/master-file-03.jpg" width=250px>
+<img src="http://www.thebugplanetstore.com/2014/wp-content/uploads/2012/03/master-file-03.jpg" width=400px>
 
 source: http://www.thebugplanetstore.com/store/master-file/
 </center>
 
-
+<br>
 <br>
 
 ## **Avoid catastrophe**
 
-### Backup: on disk
+### **Backup: on disk**
 
 - consider using backup software like [Time Machine](https://support.apple.com/en-gb/HT201250) (mac) or [File History](http://www.thundercloud.net/infoave/new/windows-10-has-a-time-machine/) (Windows 10)
 
 
-### Backup: in the cloud
+### **Backup: in the cloud**
 
 - dropbox, googledrive etc.
 - if [installed](https://tools.google.com/dlpage/drive) on your system, can programmatically access them through `R`
@@ -388,6 +398,7 @@ source: http://www.thebugplanetstore.com/store/master-file/
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <br>
+
 
 ## **Backup: the Open Science Framework** [osf.io](https://osf.io/)
 
@@ -407,11 +418,14 @@ source: http://www.thebugplanetstore.com/store/master-file/
 
 - Can be problematic with really large files.
 
-
+<br>
+<br>
 
 # Metadata 
 
 ### Documenting your data
+
+<br>
 
 
 ## You got data. Is it enough?
@@ -437,18 +451,13 @@ source: http://www.thebugplanetstore.com/store/master-file/
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <br>
+<br>
 
-## **#otherpeoplesdata dream match!**
+## **#otherpeoplesdata dream match!** {.columns-2}
 
 ### **Thought experiment: Imagine a dream open data set**
 
 It's out there somewhere:
-
-<center>
-<img src="assets/img/missing-unicorn.jpg" height="200px">
-</center>
-
-<br>
 
 ### **How would you locate it?**
 
@@ -457,6 +466,11 @@ It's out there somewhere:
 
 <br>
 
+<center>
+<img src="assets/img/missing-unicorn.jpg" height="400px">
+</center>
+
+<br>
 <br>
 
 ## **metadata = data about data**
@@ -467,10 +481,9 @@ It's out there somewhere:
 
 <img src="http://chiphouston.com/wp-content/uploads/2016/06/who-what-when-where-and-why11.jpg" width="300px">
 
-source: http://chiphouston.com/wp-content/uploads/2016/06/who-what-when-where-and-why11.jpg
+<smaller>source: http://chiphouston.com/wp-content/uploads/2016/06/who-what-when-where-and-why11.jpg </smaller>
 
 <br>
-
 <br>
 
 
@@ -485,6 +498,7 @@ http://mozillascience.github.io/checklist/
 <img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/msl logo.png" width="300px">
 
 <br>
+<br>
 
 ## **Backbone of digital curation**
 
@@ -492,21 +506,22 @@ http://mozillascience.github.io/checklist/
 #### **Without it a digital resource may be irretrievable, unidentifiable or unusable**
 
 
-### Descriptive
+### **Descriptive**
 
-- *enables identification, location and retrieval of data, often includes use of controlled vocabularies for classification and indexing.*
+- enables **identification, location** and **retrieval** of data, often includes use of **controlled vocabularies** for classification and indexing.
 
-### Technical
+### **Technical**
 
-- *describes the technical processes used to produce, or required to use a digital data object.*
+- describes the **technical processes** used to **produce**, or required to **use** a digital data object.
 
-### Administrative
+### **Administrative**
 
-- *used to manage administrative aspects of the digital object e.g. intellectual property rights and acquisition.*
+- used to manage **administrative aspects** of the digital object e.g. **intellectual property rights and acquisition.**
 
 
 This usually takes the form of a structured set of elements. 
 
+<br>
 <br>
 
 ## **Elements of metadata**
@@ -517,27 +532,31 @@ This usually takes the form of a structured set of elements.
     - allows for connectivity of data
     
 ### **KEY TO SEARCH FUNCTION**
-- By structuring & adhering to controlled vocabularies, data can be combined, accessed and searched!
-- Different communities develop different standards which define both the structure and content of metadata
+- By structuring & adhering to controlled vocabularies, data can be **combined, accessed** and **searched!**
+- **Different communities** develop **different standards** which define both the structure and content of metadata
 
+<br>
 <br>
 
 ## **Organising data and metadata**
 
-- Start at the very least by **creating a metadata tab within your raw data spreadsheet**
+- Start at the very least by **creating a metadata tab within your raw data spreadsheets**
 
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/tomjwebb">@tomjwebb</a> Create a tab on your excel sheet that explains exactly what you did to get each part of the data and how you have treat it so far.</p>&mdash; Erika Berenguer (@Erika_Berenguer) <a href="https://twitter.com/Erika_Berenguer/status/556109844659597312">January 16, 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+- Ideally set up a system of **normalised tables** ([see section 3 in this post](https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/)) and **`README`** documents to manage and document metadata.
 
-- Ensure everything someone might need to understand your data is documented
-- Ideally set up a system of **normalised tables** [see section 3 in this post](https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/) and **`README`** documents to manage and document metadata.
+
+- **Ensure everything someone might need to understand your data is documented**
+
 - **Different types data require different metadata**
 
-- When you're ready to publish, structure metadata into an [**`XML`**](https://en.wikipedia.org/wiki/XML) file, a **searchable, shareable file**.
+- ### **When you're ready to publish, structure metadata into an** [**`XML`**](https://en.wikipedia.org/wiki/XML) file, a **searchable, shareable file**.
+
+<br>
+<br>
 
 ## **Make your data alignable and generalisable**
 
-What information would other users require to combine your data with theirs?
+### **What information would other users need to combine your data with theirs?**
 
 - time `temporal (time of day, day, month, year, season)`
 - space `geography (lat, lon, postcode)`
@@ -548,10 +567,11 @@ What information would other users require to combine your data with theirs?
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <br>
-
 <br>
 
 # Example metadata structure
+
+<br>
 
 ## **Bird Trait Networks dataset**
 
@@ -584,18 +604,24 @@ library(tibble)
 ```
 
 <br>
+<br>
 
-## data 
+## **Data** 
 
 ```{r, echo=FALSE}
 kable(head(as_data_frame(dt), 9), caption = "bird trait networks dataTable")
 ```
 
-- Like many real data sets, column headings are convenient for data entry and manipulation, but **not particularly descriptive to a user not already familiar with this data**. 
+##
 
-- More importantly, they **don't let us know what units they are measured in** (or in the case of categorical / factor data like species names or life stages, **what the factor abbreviations refer to**). So let us take a moment to be more explicit:
+- Like many real data sets, column headings are convenient for data entry and manipulation, but **not particularly descriptive to a user not already familiar with the data**. 
 
-## make an attribute table
+- More importantly, they **don't let us know what units they are measured in** (or in the case of categorical / factor data, **what the factor abbreviations refer to**). So let us take a moment to be more explicit:
+
+<br>
+<br>
+
+## **Make an attribute table**
 
 I use functions in [**`eml_utils.R`**](https://github.com/annakrystalli/ACCE_RDM/blob/master/R/eml_utils.R) to:
 
@@ -617,8 +643,9 @@ eval(parse(text = getURL(
 ```
 
 <br>
+<br>
 
-## create `attr_tbl` shell
+## **Create `attr_tbl` shell**
 
 - #### load data
 ```{r, eval=FALSE}
@@ -631,12 +658,21 @@ dt   <- read.csv("data/bird_trait_db-v0.1.csv")
 
 ```{r}
 attr_shell <- get_attr_shell(dt)
+```
+
+## **`attr_tbl` shell structure**
+
+```{r}
 str(attr_shell)
 ```
 
-## `attributes` df columns
+<br>
+<br>
+
+## **`attributes` df columns**
 
 I use recognized column headers shown here to make it easier to create an EML object down the line. I focus on the core columns required but you can add additional ones for your own purposes.
+
 Attributes associated with all variables: 
 
 - attributeName (required, free text field) 
@@ -646,7 +682,7 @@ Attributes associated with all variables:
 
 <br>
 
-#### `columnClasses` dependant attributes  
+## **`columnClasses` dependant attributes**  
 
 - For `numeric` (ratio or interval) data:
     - unit (required, see [eml-unitTypeDefinitions](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/./eml-unitTypeDefinitions.html) and [working with units](https://github.com/ropensci/EML/blob/master/vignettes/working-with-units.Rmd))
@@ -659,8 +695,10 @@ Attributes associated with all variables:
 
 - I use the columns `code` and `levels` to store information on factors. Use `";"` to separate code and level descriptions. These can be extracted by `eml_utils.R` function `get_attr_factors()` later on.
 
+<br>
+<br>
 
-## complete `attr_tbl`
+## **Complete `attr_tbl`**
 
 #### save shell
 - write `attr_shell` to `.csv`
@@ -671,7 +709,7 @@ write.csv(attr_shell, file = "data/attr_shell.csv")
 <br>
 
 #### complete attr_tbl
-- complete in excel and save to **attr_tbl.csv**
+- complete in your prefered spreadsheet editing software and save to **attr_tbl.csv**
 - read in completed **attr_tbl.csv**
 
 ```{r, eval=FALSE}
@@ -679,8 +717,9 @@ attr_tbl <- read.csv(file = "data/attr_tbl.csv")
 ```
 
 <br>
+<br>
 
-## `attr_tbl`
+## **Completed attribute table `attr_tbl`**
 ```{r, echo = F}
 if(names(rmarkdown::metadata$output)[1] == "html_document"){
 kable(head(attr_tbl, 9), caption = "table 2. bird trait networks attr_tbl")}
@@ -698,47 +737,14 @@ kable(head(attr_tbl[c(1,8:11)], 9), caption = "table 2b. bird trait networks att
 
 ```
 
-
-
-          
-## attributesList structure
-
-### we need to supply two `data.frames`
-
-- #### `attributes`
-- #### `factors`
-
-and a vector of:
-
-- #### `columnClass`
-
 <br>
-
-
-
-
-
 <br>
-
-
-## make `attributes` df
-```{r}
-attributes <- extract_attr_tbl(attr_tbl)
-str(attributes, max.level = 2)
-```
-
-## make `factors` df
-
-```{r}
-factors <- get_attr_factors(attr_tbl)
-kable(head(factors, 9))
-```
-formation by creating EML files and explicity supply variable descriptions and units.</b></p>
-
 
 # Project Organisation
 
-## from raw to analytical data
+<br>
+
+## **From raw to analytical data**
 
 ### [the reproducible pipeline](https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/)
 <p class="accent_border"><b>Do not manually edit raw data</b></p>
@@ -749,19 +755,18 @@ formation by creating EML files and explicity supply variable descriptions and u
 
 
 - Ideally, incorporate checks to ensure correct processing of data through to analytical.
-- Clearly document any processing.
-    - Well-commented script-based manipulation (e.g. in R) makes this easy
-  
+
+<br>
 <br>
 
-## automated == reproducible
+## **Automated == reproducible**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/s3JldKoA0zw" frameborder="0" allowfullscreen></iframe>
 
 <br>
+<br>
 
-
-## HOW?
+## **HOW?**
 
 ### Let's face it...
 
@@ -775,7 +780,17 @@ formation by creating EML files and explicity supply variable descriptions and u
 
 ### It'll probably get complicated
 
-## Strategy against chaos
+<br>
+<br>
+
+## {.flexbox .vcenter}
+
+![](assets/img/files_messy_tidy.png)
+
+<br>
+<br>
+
+## **Strategy against chaos**
 
 ### **File organization** and **naming** is a mighty weapon against chaos
 
@@ -788,7 +803,12 @@ formation by creating EML files and explicity supply variable descriptions and u
 
 - **READMEs** are great, but don't document something if you could just make that thing self-documenting by definition
 
+<br>
+<br>
+
 # File system organisation
+
+<br>
 
 ## {.flexbox .vcenter}
 
@@ -800,29 +820,33 @@ formation by creating EML files and explicity supply variable descriptions and u
 
 Benjamin Franklin
 
-## {.flexbox .vcenter}
+<br>
+<br>
 
-![files_messy_tidy](assets/img/files_messy_tidy.png)
-
-## use R projects
+## **Use R projects**
 
 ### Keep your work [tidy and self-contained](https://nicercode.github.io/blog/2013-04-05-projects/)
 
-<img src="https://image.slidesharecdn.com/20150422reproresr8-160404131652/95/reproducible-research-in-r-and-r-studio-21-638.jpg?cb=1459775831" height="150">
 
-## Data analysis workflow {.flexbox .vcenter}
+![](https://image.slidesharecdn.com/20150422reproresr8-160404131652/95/reproducible-research-in-r-and-r-studio-21-638.jpg?cb=1459775831)
+
+<br>
+<br>
+
+## **Data analysis workflow** {.flexbox .vcenter}
 
 ![](assets/img/workflow.png)
 
 
-#### use sensible / standardised file system structure
+#### **Use sensible / standardised file system structure**
 
 <img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/proj_str.png" height="150">
 source: https://nicercode.github.io/blog/2013-04-05-projects/
 
 <br>
+<br>
 
-## Raw data $\rightarrow$ data
+## **Raw data $\rightarrow$ data**
 
 Pick a strategy, any strategy, just pick one!
 
@@ -840,7 +864,10 @@ data/
 ~~~
 </div>
 
-## Data $\rightarrow$ results
+<br>
+<br>
+
+## **Data $\rightarrow$ results**
 
 Pick a strategy, any strategy, just pick one!
 
@@ -859,6 +886,9 @@ analysis
 bin
 ~~~
 </div>
+
+<br>
+<br>
 
 # A real (and imperfect!) example
 
@@ -883,7 +913,10 @@ bin
   drwxr-xr-x   4 jenny  staff        136 Jun  3  2014 results/
 ~~~
 
-## Data
+<br>
+<br>
+
+## **Data**
 
 Ready to **analyze data**:
 
@@ -896,8 +929,10 @@ Ready to **analyze data**:
 
 ![](assets/img/sample_raw_data.png)
 
+<br>
+<br>
 
-## Analysis and figures
+## **Analysis and figures**
 
 **`R` scripts** + the **Markdown** files:
 
@@ -909,31 +944,46 @@ The **figures created in those `R` scripts** and **linked in those Markdown file
 
 ![sample_raw_data](assets/img/sample_figures.png)
 
-## Scripts
+<br>
+<br>
+
+## **Scripts**
 
 **Linear progression of R scripts**, and **Makefile** to run the entire analysis:
 
 ![sample_scripts](assets/img/sample_scripts.png)
 
-## Results
+<br>
+<br>
+
+## **Results**
 
 **Tab-delimited files** with one row per gene of parameter estimates, test statistics, etc.:
 
 ![sample_results](assets/img/sample_results.png)
 
-## Expository files
+<br>
+<br>
+
+## **Expository files**
 
 Files to **help collaborators understand the model we fit:** some markdown docs, a Keynote presentation, Keynote slides exported as PNGs for viewability on GitHub:
 
 ![sample_expository](assets/img/sample_expository.png)
 
-## Caveats / problems with this example
+<br>
+<br>
+
+## **Caveats / problems with this example**
 
 - This project is **nowhere near done**, i.e. *no manuscript or publication-ready figs*
 
 - **File naming has inconsistencies** due to three different people being involved
 
 - **Code and reports/figures all sit together** because it’s just much easier that way w/ `knitr` & `rmarkdown`
+
+<br>
+<br>
 
 ## Wins of this example
 
@@ -945,10 +995,14 @@ Files to **help collaborators understand the model we fit:** some markdown docs,
 <b>GOOD ENOUGH!</b>
 </center>
 
-# Other tips
+<br>
+<br>
 
+# More project management tips
 
-## Evolution of your file system
+<br>
+
+## **Evolution of your file system**
 
 - **Be consistent** – when developing a naming scheme for folders it is important that once you have decided on a method, you stick to it. If you can, try to agree on a naming scheme from the outset of your research project
 
@@ -958,19 +1012,29 @@ Files to **help collaborators understand the model we fit:** some markdown docs,
         
 - **Separate ongoing and completed work**: as you start to create lots of folders and files, it is a good idea to think about separating older documents from those you are currently working on 
 
+<br>
+<br>
 
+## **The `from_joe` directory** {.columns-2}
 
-## The `from_joe` directory
+- Let's say your collaborator and data producer is **Joe**. 
 
-- Let's say my collaborator and data producer is Joe. 
+- He will send you data with **weird space-containing file names**, data in **Microsoft Excel workbooks**, etc. 
 
-- He will send me data with weird space-containing file names, data in Microsoft Excel workbooks, etc. 
+- It is **futile to fight this**, just **quarantine all the crazy in a `from_joe` directory**. 
 
-- It is **futile to fight this**, just **quarantine all the crazy in a `from_joe` directory**. Then **rename** things and/or **export to plain text** and **put those files in your data directory**. 
+- **Rename** things and/or **export to plain text** and **put those files in your data directory**. 
 
-- **Record whatever you do you do to those inputs in a README or in comments in your R code** -- whatever makes it easiest to remind yourself of a file's provenance, if it came from the outside world in a state that was not ready for programmatic analysis.
+- **Record whatever you do you do to those inputs in a README or in comments in your R code**
 
-## Give yourself less rope
+<center>
+<img src="http://cdn.c.photoshelter.com/img-get/I0000rvodBzQVVBg/s/860/860/James-E-Rothman-Phd-2013-Nobel-Prize-Medicine-2.jpg" height="480px">
+</center>
+
+<br>
+<br>
+
+## **Give yourself less rope** {.columns-2}
 
 - It's a good idea to **revoke your own write permission to the raw data file**.
 
@@ -978,11 +1042,21 @@ Files to **help collaborators understand the model we fit:** some markdown docs,
 
 - It also makes it **harder to do manual edits** in a moment of weakness, when you know you should **just add a line to your data cleaning script**.
 
-## Prose
+<center>
+![](https://codex.wordpress.org/images/e/eb/podz_filezilla_13.gif)
+</center>
+
+<br>
+<br>
+
+## **Prose**
 
 - Sometimes you need a place to park key emails, internal documentation and explanations, random Word and PowerPoint docs people send, etc.
 
 - This is kind of like `from_joe`, where I don’t force myself to keep same standards with respect to file names and open formats.
+
+<br>
+<br>
 
 ## Recap
 
@@ -1000,6 +1074,8 @@ drwxr-xr-x   4 jenny  staff        136 Jun  3  2014 results
 <img src="assets/img/workflow.png" height="290px" />
 </center>
 
+<br>
+<br>
 
 ## Prepare data $\rightarrow$ Do stats $\rightarrow$ Make tables & figs
 
@@ -1027,18 +1103,21 @@ drwxr-xr-x   4 jenny  staff        136 Jun  3  2014 results
 90_limma-model-term-name-fiasco-second-voom.png
 ~~~
 
-
-
-
+<br>
+<br>
 
 # File naming
 
+<br>
 
-## Names matter
+## **Names matter**
 
 ![](assets/img/cheers.png)
 
-## What works, what doesn't?
+<br>
+<br>
+
+## **What works, what doesn't?**
 
 **NO**
 
@@ -1060,52 +1139,76 @@ fig02_histogram-talk-attendance.png
 1986-01-28_raw-data-from-challenger-o-rings.txt
 ~~~
 
-## Three principles for (file) names
+<br>
+<br>
+
+## **Three principles for (file) names**
+
+<br>
 
 #### **1. Machine readable**
 
+<br>
+
 #### **2. Human readable**
+
+<br>
 
 #### **3. Plays well with default ordering**
 
-## Awesome file names :)
+<br>
+<br>
 
-![awesome_names](assets/img/awesome_names.png)
+## **Awesome file names** :)
 
-## Machine readable
+![](assets/img/awesome_names.png)
+
+<br>
+<br>
+
+## **Machine readable**
 
 #### **- Regular expression and globbing friendly**
  + Avoid spaces, punctuation, accented characters, case sensitivity
 
 #### **- Easy to compute on**
  + Deliberate use of delimiters
-    
+
+<br>
+<br>
+
 ## [Globbing](http://searchsecurity.techtarget.com/definition/globbing)
 
 **Excerpt of complete file listing:**
 
-![plasmid_names](assets/img/plasmid_names.png)
-
-
+![](assets/img/plasmid_names.png)
 
 **Example of globbing to narrow file listing:**
 
-![plasmid_names](assets/img/plasmid_glob.png)
+![](assets/img/plasmid_glob.png)
 
+<br>
+<br>
 
-## Same using Mac OS Finder search facilities
-
-<center>
-![plasmid_mac_os_search](assets/img/plasmid_mac_os_search.png)
-</center>
-
-## Same using regex in R
+## **Same using Mac OS Finder search facilities**
 
 <center>
-![plasmid_regex](assets/img/plasmid_regex.png)
+![](assets/img/plasmid_mac_os_search.png)
 </center>
 
-## Punctuation {.smaller}
+<br>
+<br>
+
+## **Same using regex in R**
+
+<center>
+![](assets/img/plasmid_regex.png)
+</center>
+
+<br>
+<br>
+
+## **Punctuation** {.smaller}
 
 #### **Deliberate use of `"-"` and `"_"` allows recovery of meta-data from the filenames:**
 
@@ -1113,18 +1216,21 @@ fig02_histogram-talk-attendance.png
 - `"-"` hyphen used to delimit words so my eyes don't bleed
 
 <center>
-![plasmid_delimiters](assets/img/plasmid_delimiters.png)
+![](assets/img/plasmid_delimiters.png)
 </center>
 
 <hr>
 
 <center>
-![plasmid_delimiters_code](assets/img/plasmid_delimiters_code.png)
+![](assets/img/plasmid_delimiters_code.png)
 </center>
 
-This happens to be R but also possible in the `shell`, `Python`, etc.
+This happens to be `R` but also possible in the `shell`, `Python`, etc.
 
-## Include important metadata
+<br>
+<br>
+
+## **Include important metadata**
 
 e.g. I'm saving a number of files of extracted environmental data at different resolutions (`res`) and for a number of months (`month`).
 
@@ -1137,58 +1243,92 @@ df <- read.csv(paste("variable_", res, month, sep ="_"))
 
 
 <br>
+<br>
 
 
-## Recap: machine readable
+## **Recap: machine readable**
 
-#### **- Easy to search for files later**
 
-#### **- Easy to narrow file lists based on names**
+### **- Easy to search for files later**
 
-#### **- Easy to extract info from file names, e.g. by splitting**
 
-#### **- New to regular expressions and globbing? be kind to yourself and avoid**
+### **- Easy to narrow file lists based on names**
+
+
+### **- Easy to extract info from file names, e.g. by splitting**
+
+
+### **- New to regular expressions and globbing? be kind to yourself and avoid**
  + Spaces in file names
  + Punctuation
  + Accented characters
 
+<br>
+<br>
 
-
-    
 # Human readable
 
-## Human readable
+<br>
 
-#### **- Name contains info on content**
+## **Human readable**
 
-#### **- Connects to concept of a [*slug*](https://en.wikipedia.org/wiki/Semantic_URL#Slug) from semantic URLs**
+<br>
 
-## Example
+### **- Name contains info on content**
+
+<br>
+
+### **- Connects to concept of a** [***slug***](https://en.wikipedia.org/wiki/Semantic_URL#Slug) **from semantic URLs**
+
+<br>
+<br>
+
+## **Example**
 
 **Which set of file(name)s do you want at 3 a.m. before a deadline?**
 
 ![](assets/img/human_readable_not_options.png)
 
-## Embrace the slug
+<br>
+<br>
+
+## **Embrace the slug**
 
 <div class="columns-2">
 ![](assets/img/slug_filenames.png)
 ![](assets/img/slug.jpg)
 </div>
 
-## Recap: Human readable
+<br>
+<br>
 
-Easy to figure out what the heck something is, based on its name
+## **Recap: Human readable**
+
+### $\rightarrow$ **Easy to figure out what the heck something is, based on its name**
+
+<br>
+<br>
 
 # Plays well with default ordering
 
-## Plays well with default ordering
+<br>
 
-#### **- Put something numeric first**
+## **Plays well with default ordering**
 
-#### **- Use the ISO 8601 standard for dates**
+<br>
 
-#### **- Left pad other numbers with zeros**
+### **- Put something numeric first**
+
+<br>
+
+### **- Use the ISO 8601 standard for dates**
+
+<br>
+
+### **- Left pad other numbers with zeros**
+
+<br>
+<br>
 
 ## Examples
 
@@ -1202,6 +1342,9 @@ Easy to figure out what the heck something is, based on its name
 
 ![](assets/img/logical_order.png)
 
+<br>
+<br>
+
 ## Dates
 
 Use the **ISO 8601** standard for dates: `YYYY-MM-DD`
@@ -1214,6 +1357,8 @@ Use the **ISO 8601** standard for dates: `YYYY-MM-DD`
 ![iso_psa](assets/img/iso_8601.tiff)
 </center>
 
+<br>
+<br>
 
 ## Left pad other numbers with zeros
 
@@ -1233,6 +1378,9 @@ Use the **ISO 8601** standard for dates: `YYYY-MM-DD`
 
 which is just sad :(
 
+<br>
+<br>
+
 ## Recap: Plays well with default ordering
 
 - Put something numeric first
@@ -1241,21 +1389,16 @@ which is just sad :(
 
 - Left pad other numbers with zeros
 
-## Recap
+<br>
+<br>
 
-## Three principles for (file) names
+## Recap: Three principles for (file) names
 
 1. Machine readable
 
 2. Human readable
 
 3. Plays well with default ordering
-
-## Pros
-
-- Easy to implement NOW
-
-- Payoffs accumulate as your skills evolve and projects get more complex
 
 ## Go forth and use awesome file names :)
 
@@ -1265,30 +1408,51 @@ which is just sad :(
 
 ![logical_order](assets/img/logical_order.png)
 
-
-
+<br>
+<br>
 
 # Let's set up our project!
 
+<br>
 
-## Activity
+## **Activity : Create an RStudio project**
+
+<br>
 
 #### **- Create an project in which we will work this week**
+
+<br>
+
 #### **- Create a `data` folder**
 
-## Creating an RStudio project
+<br>
+
+## **New Directory**
 
 **File** -> **New Project** -> **New Directory**
 
-![](assets/img/project_screen1.png)
+<img src="assets/img/project_screen1.png" height=200px>
+
+<br>
+
+## **Empty Project**
 
 In the **Project Type** screen, click on **Empty Project**.
 
-![](assets/img/project_screen2.png)
+
+<img src="assets/img/project_screen2.png" height=200px>
+
+<br>
+
+## **Name project directory**
 
 In the **Create New Project** screen, give your project a name and ensure that **create a git repository** is checked. Click on **Create Project**.
 
 ![](assets/img/project_screen3.png)
+
+<br>
+
+## **New project directory created**
 
 RStudio will create a new folder containing an empty project and set R's working directory to within it.
 
@@ -1299,11 +1463,25 @@ Two files are created in the otherwise empty project:-
 
 There is no need to worry about the contents of either of these for now.
 
-#### **Create a data folder**
+<br>
+
+## **Create a data folder**
 
 ![](assets/img/project_screen4.png)
 
-#### **Success!**
+<br>
+
+## **Success!**
 
 ![](assets/img/project_screen5.png)
+<br>
+<br>
+
+## Acknowledgements
+
+### **Materials remixed from:**
+
+- **ACCE Research Data Management** [workshop materials](https://annakrystalli.github.io/ACCE_RDM/Rmd/index.html)
+
+- **Data carpentry** [File Organization workshop materials](https://github.com/datacarpentry/rr-organization1)
 
