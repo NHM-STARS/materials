@@ -1028,7 +1028,7 @@ Files to **help collaborators understand the model we fit:** some markdown docs,
 - **Record whatever you do you do to those inputs in a README or in comments in your R code**
 
 <center>
-<img src="http://cdn.c.photoshelter.com/img-get/I0000rvodBzQVVBg/s/860/860/James-E-Rothman-Phd-2013-Nobel-Prize-Medicine-2.jpg" height="480px">
+<img src="http://cdn.c.photoshelter.com/img-get/I0000rvodBzQVVBg/s/860/860/James-E-Rothman-Phd-2013-Nobel-Prize-Medicine-2.jpg" height="480px" width="180px">
 </center>
 
 <br>
