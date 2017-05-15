@@ -3,6 +3,9 @@ title: "Introduction to Project and Data Management"
 author: "Computational and data literacy skills for research"
 date: "15 May 2017, NHM"
 output:
+  ioslides_presentation:
+    highlight: pygments
+    widescreen: yes
   html_document:
     fig_width: 7
     self_contained: no
@@ -10,9 +13,6 @@ output:
     toc: yes
     toc_depth: 2
     toc_float: yes
-  ioslides_presentation:
-    highlight: pygments
-    widescreen: yes
 ---
 
 
@@ -45,6 +45,7 @@ if(names(rmarkdown::metadata$output)[1] == "ioslides_presentation"){
 
 ## **Session Outline**
 
+
 ### **Research Data Management**
 
 - Basic Data Hygiene
@@ -56,6 +57,10 @@ if(names(rmarkdown::metadata$output)[1] == "ioslides_presentation"){
 - File system organisation
 
 - File naming
+
+<br>
+
+**Link to handout: <http://bit.ly/NHM_RDM_intro>**
 
 <br>
 <br>
@@ -124,6 +129,22 @@ We describe nine simple ways to make it easy to reuse the data that you share an
 </center>
 
 #### [download](http://ojs.library.queensu.ca/index.php/IEE/article/view/4608/4898)
+
+<br>
+<br>
+
+
+## BES guide to data management {.columns-2}
+
+<img src="assets/img/BES.png" height=500px>
+
+<br>
+
+This guide for early career researchers explains what data and data management are, and provides advice and examples of best practices in data management, including case studies from researchers currently working in ecology and evolution.
+
+<br>
+
+#### [download](http://www.britishecologicalsociety.org/wp-content/uploads/Publ_Data-Management-Booklet.pdf)
 
 <br>
 <br>
@@ -464,6 +485,8 @@ It's out there somewhere:
 - what details would you need to know to determine relevance? 
 - what information would you need to know to use it?
 
+<br>
+<br>
 <br>
 
 <center>
