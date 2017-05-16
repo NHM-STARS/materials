@@ -131,9 +131,9 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 
 # Exercise 1
 
-Generate the plot below (8ish minutes):
+Generate the plot below using a sample of 1000 points from the `diamonds` dataset (8ish minutes):
 
-tip: `d2 <- sample_n(diamonds, 1000)`
+tip: Create a smaller dataset (you can do it many ways but `sample_n` is one option).
 
 ```{r echo=FALSE, fig.height = 4}
 d2 <- diamonds[sample(1:dim(diamonds)[1], 1000),]
