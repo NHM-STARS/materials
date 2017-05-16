@@ -263,7 +263,10 @@ iris %&gt;% gather(variable, value,-Species) %&gt;%
 ```r
 download.file("https://ndownloader.figshare.com/files/2292169","portal_data_joined.csv")
 surveys &lt;- read.csv('portal_data_joined.csv')
+# View(surveys)
 ```
+
+What sorts of problems do you see with this real dataset?
 
        
 ---
@@ -348,7 +351,7 @@ ggplot(data = yearly_counts, aes(
   colour = species_id
   )) +
   geom_line() +
- facet_wrap( ~ species_id)
+* facet_wrap( ~ species_id) 
 ```
 
 ---
