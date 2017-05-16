@@ -324,7 +324,7 @@ ggplot(data = yearly_counts, aes(
   colour = species_id
   )) +
   geom_line() +
- facet_wrap( ~ species_id)
+{{ facet_wrap( ~ species_id) }}
 ```
 
 ---
