@@ -66,13 +66,23 @@ install.packages("ggplot2")
     
 ---
 
-# Let's make a first ggplot2
+class: inverse, center, middle
 
-```{r}
-head(iris)
-```
+"+" versus "%>%"
 
 ---
+
+# Let's make a first ggplot2
+
+```{r eval = FALSE}
+head(iris)
+View(head(iris))
+
+iris %>% head %>% View
+```
+
+
+
 
 # Let's try an example
 
