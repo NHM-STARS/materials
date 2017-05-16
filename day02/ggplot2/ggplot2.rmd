@@ -246,7 +246,10 @@ iris %>% gather(variable, value,-Species) %>%
 ```{r, eval = TRUE, cache = TRUE}
 download.file("https://ndownloader.figshare.com/files/2292169","portal_data_joined.csv")
 surveys <- read.csv('portal_data_joined.csv')
+View(surveys)
 ```
+
+What sorts of problems do you see with this real dataset?
 
        
 ---
