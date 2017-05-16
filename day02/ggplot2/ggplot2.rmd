@@ -55,7 +55,7 @@ class: center, middle
 
 -   **geoms** - geometric objects
 
-    -   `geom_point()`, `geom_bar()`, `geom`_density()`, `geom_line()`, `geom_area()`
+    -   `geom_point()`, `geom_bar()`, `geom_density()`, `geom_line()`, `geom_area()`
 
 -   **aes** - aesthetics
 
