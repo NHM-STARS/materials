@@ -1,6 +1,4 @@
 base
-methods
-utils
 devtools
 tidyverse
 ggplot2
@@ -10,7 +8,6 @@ readr
 purrr
 dplyr
 lookup
-datasets
-grDevices
-graphics
-stats
+xaringan
+bindrcpp
+ggthemes

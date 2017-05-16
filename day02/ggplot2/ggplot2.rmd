@@ -1,29 +1,20 @@
 ---
 title: "Introduction to ggplot2"
 subtitle: Karthik Ram
-date: "NHM, 2017/05/16"
+date: "NHM"
 output:
   xaringan::moon_reader:
+   # css: "my-theme.css"
     lib_dir: libs
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
 
-class: center, middle
-
-# Beginning
-
-### /ʃæ.'riŋ.ɡæn/
-
 ---
 class: inverse, center, middle
 
-# Get Started
-
----
-class: center, middle
-# Why Ggplot2?
+# Why ggplot2?
 
 ---
 ## ggplot2
@@ -43,6 +34,14 @@ class: center, middle
 
 -   There are better ways to describe statistical visualizations.
 
+
+---
+
+# Install ggplot2
+
+```r
+install.packages("ggplot2")
+```
 
 ---
 
@@ -91,8 +90,8 @@ geom_point()
 
 ```{r, code2, fig.height=4}
 library(ggplot2)
-ggplot(data = iris, 
-       aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
+ggplot(data = iris,
+aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
 ```
 ---
 # or build them interatively
@@ -106,7 +105,7 @@ myplot + geom_point()
 
 ```{r, fig.height=4}
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
-geom_point(size = 3)
+   geom_point(size = 3)
 ```
 
 ---
@@ -115,7 +114,7 @@ geom_point(size = 3)
 
 ```{r fig.height = 4}
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
-geom_point(aes(shape = Species), size = 3)
+  geom_point(aes(shape = Species), size = 3)
 ```
 
 ---
@@ -127,7 +126,7 @@ Generate the plot below (15 minutes):
 tip: `d2 <- sample_n(diamonds, 1000)`
 
 ```{r echo=FALSE, fig.height = 4}
-d2 <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
+d2 <- diamonds[sample(1:dim(diamonds)[1], 1000),]
 ggplot(d2, aes(carat, price, color = color)) + geom_point() + theme_gray()
 ```
 
@@ -145,7 +144,8 @@ Customize your histograms
 
 ```{r, fig.height=4}
 h <- ggplot(faithful, aes(x = waiting))
-h + geom_histogram(binwidth = 8, fill = "steelblue",
+h + geom_histogram(binwidth = 8,
+fill = "steelblue",
 colour = "black")
 ```
 
@@ -154,10 +154,14 @@ colour = "black")
 Let's read some climate data in:
 
 ```{r, fig.height = 4}
-climate <- read.csv("https://raw.githubusercontent.com/karthikram/ggplot-lecture/master/climate.csv", header = T)
-
-ggplot(climate, aes(Year, Anomaly10y)) +
-geom_line()
+climate <-
+  read.csv(
+  "https://raw.githubusercontent.com/karthikram/ggplot-lecture/master/climate.csv",
+  header = T
+  )
+  
+  ggplot(climate, aes(Year, Anomaly10y)) +
+  geom_line()
 ```
 
 URL is `https://raw.githubusercontent.com/karthikram/ggplot-lecture/master/climate.csv`
@@ -169,10 +173,13 @@ We can also plot confidence regions
 
 ```{r, fig.height=4}
 ggplot(climate, aes(Year, Anomaly10y)) +
-geom_ribbon(aes(ymin = Anomaly10y - Unc10y,
-ymax = Anomaly10y + Unc10y),
-fill = "blue", alpha = .1) +
-geom_line(color = "steelblue")
+  geom_ribbon(
+  aes(ymin = Anomaly10y - Unc10y,
+  ymax = Anomaly10y + Unc10y),
+  fill = "blue",
+  alpha = .1
+  ) +
+  geom_line(color = "steelblue")
 ```
 ---
 
@@ -181,8 +188,20 @@ Modify the previous plot and change it such that there are three lines instead o
 ```{r, fig.height=4, echo = FALSE}
 cplot <- ggplot(climate, aes(Year, Anomaly10y))
 cplot <- cplot + geom_line(size = 0.7, color = "black")
-cplot <- cplot + geom_line(aes(Year, Anomaly10y + Unc10y), linetype = "dashed", size = 0.7, color = "red")
-cplot <- cplot + geom_line(aes(Year, Anomaly10y - Unc10y), linetype = "dashed", size = 0.7, color = "red")
+cplot <-
+cplot + geom_line(
+aes(Year, Anomaly10y + Unc10y),
+linetype = "dashed",
+size = 0.7,
+color = "red"
+)
+cplot <-
+cplot + geom_line(
+aes(Year, Anomaly10y - Unc10y),
+linetype = "dashed",
+size = 0.7,
+color = "red"
+)
 cplot + theme_gray()
 ```
 
@@ -202,9 +221,9 @@ geom_bar(stat = "identity")
 # A stacked bar
 
 ```{r fig.height = 4}
- iris %>% gather(variable, value, -Species) %>%
-ggplot(aes(Species, value, fill = variable)) +
-geom_bar(stat = "identity")
+iris %>% gather(variable, value,-Species) %>%
+  ggplot(aes(Species, value, fill = variable)) +
+  geom_bar(stat = "identity")
 ```
 
 ---
@@ -230,7 +249,7 @@ import::from(dplyr, filter)
   
 ```{r}
 surveys_complete <- surveys %>%
- 		filter(species_id != "",         # remove missing species_id
+ 		filter(species_id != "",       # remove missing species_id
          !is.na(weight),           # remove missing weight
          !is.na(hindfoot_length),  # remove missing hindfoot_length
          sex != "")   
@@ -365,8 +384,8 @@ ggplot(mtcars, aes(
   )) +
   geom_point() +
   ggtitle("Cars") + geom_smooth(method = "lm", se = FALSE) +
-  scale_color_fivethirtyeight("cyl") +
-  theme_fivethirtyeight()
+  {{ scale_color_fivethirtyeight("cyl") }} +
+  {{ theme_fivethirtyeight() }}
 ```
 
 
@@ -383,9 +402,9 @@ myplt <- ggplot(mtcars, aes(
   geom_point() +
   ggtitle("Cars") + geom_smooth(method = "lm", se = FALSE) +
   scale_color_fivethirtyeight("cyl") +
-  theme_fivethirtyeight()
+  theme_fivethirtyeight() 
 
-ggsave(myplt, filename = "myplot.png", width = 6, height = 4)
+{{ ggsave(filename = "myplot.png", width = 6, height = 4) }}
 ```
 
 
