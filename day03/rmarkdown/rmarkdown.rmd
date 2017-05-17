@@ -1,0 +1,162 @@
+---
+title: "R Markdown and seeking help"
+subtitle: Karthik Ram
+date: "NHM"
+output:
+  xaringan::moon_reader:
+   # css: "my-theme.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+class: inverse, center, middle
+
+# Basics of rmarkdown
+
+---
+
+# What's markdown?
+
+It's a very simple mark up language that's easy to write, easy to read, and quite easy to convert into other formats
+
+```
+# This is a heading
+## Add hash signs to make sub headings
+[link text](google.com)
+![nice work](http://i.imgur.com/lTs4S2k.gif)
+```
+---
+
+# This is a heading
+## Add hash signs to make sub headings
+[link text](google.com)  
+![nice work](http://i.imgur.com/lTs4S2k.gif)
+
+---
+
+# Cheatsheet
+
+https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+
+---
+
+## Try visual markdown (5 minutes)
+
+## stackedit.io
+
+---
+
+## How to add R code to a markdown file
+
+![](code_chunj.png)
+
+---
+# Options in knitr
+
+You can set them at the chunk level or globally. See full list here: https://yihui.name/knitr/options/
+
+Common options: `cache`, `eval`, `echo`, `fig.width`, `fig.height`, `results`.
+
+```
+knitr::opts_chunk$set(echo = TRUE)
+```
+---
+
+# Tables in R
+
+### Use the `kable` function in knitr.
+### Try the `kableExtra` package for more options
+
+---
+
+# Example table
+
+You can render tables using the `kable`, `kableExtra`, and `pander` packages.
+```{r results = 'asis'}
+library(knitr)
+kable(head(iris))
+```
+
+---
+# Other things to note about rmarkdown
+
+Each notebook is self contained and runs in a new session. So any variables or packages you have loaded in your current session are entirely independent. 
+
+This is a good thing for reproducibility!
+
+---
+# Extract code from a Rmd to a R file
+
+```
+library(knitr)
+purl("test.Rmd", output = "test2.R")
+```
+---
+
+## Reference variables inline in the document!
+
+![](inline.png)
+
+---
+
+## Exercise (6.5 minutes)
+
+- Create a new rmarkdown document
+- Write some rmarkdown to generate this text (without actually writing it verbatim):  
+
+The `iris` dataset contains `r nrow(iris)` rows with `r length(unique(iris$Species))` unique species. 
+
+---
+# Convert Rmd to other formats
+
+```
+library(knitr)
+library(markdown)
+knit("example.Rmd")  # produces the md file
+pandoc("example.md", format = "docx")  # converts md file into docx
+```
+
+---
+class: inverse, center, middle
+
+# How to make a reproducible example in R
+
+---
+
+# Generate a `reprex`
+
+```
+install.packages("reprex")
+install.packages("shinyjs")
+```
+
+More information at https://github.com/jennybc/reprex
+
+---
+
+# Try to make a small reproducible example (5 minutes)
+
+## Method 1
+
+Write some R code,
+Copy it
+then run `reprex()` from R
+
+## Method 2
+
+Open a small `R script`, and click the `reprex` option in the `Addins` menu.
+
+## Method 3 (only works for really trivial examples)
+
+`reprex(mean(rnorm(25)))`
+
+---
+
+# Other ways to find help
+
+- Search Stackoverflow with the `[r]` tag to restrict to R questions ony
+- Try other package specific tags
+- Any question you might have (at this stage) is almost likely answered.
