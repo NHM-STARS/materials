@@ -171,14 +171,15 @@ class: inverse, center, middle
 # Pick useful object names
 
 ## Good
-day_one
-day_1
+day_one  
+day_1  
 
+  
 ## Bad
-first_day_of_the_month
-DayOne
-dayone
-djm1
+first_day_of_the_month  
+DayOne  
+dayone  
+djm1  
 
 ---
 
@@ -218,3 +219,10 @@ x <- 5
 x = 5
 
 ---
+
+## RStudio helps you with this!
+
+- Click `Code > Reflow comments` (to keep line width to 80)  
+- or try `Code > Reformat code` as well. 
+
+
