@@ -98,7 +98,7 @@ geom_point()
 # Basic structure of a ggplot2
 
 
-```{r, code2, fig.height=4}
+```{r, code2, fig.height = 4}
 library(ggplot2)
 ggplot(data = iris,
 aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
