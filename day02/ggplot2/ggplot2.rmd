@@ -1,0 +1,424 @@
+---
+title: "Introduction to ggplot2"
+subtitle: Karthik Ram
+date: "NHM"
+output:
+  xaringan::moon_reader:
+   # css: "my-theme.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+class: inverse, center, middle
+
+# Why ggplot2?
+
+---
+## ggplot2
+
+-   Follows a grammar, just like any language.
+
+-   It defines basic components that make up a sentence. In this case,
+    the grammar defines components in a plot.
+--
+
+---
+
+# Why not Base graphics?
+
+
+-   Ugly, laborious, and verbose
+
+-   There are better ways to describe statistical visualizations.
+
+
+---
+
+# Install ggplot2
+
+```r
+install.packages("ggplot2")
+```
+
+---
+
+# Basics of ggplot2
+
+### Some terminology
+
+-   **ggplot** - The main function where you specify the dataset and
+    variables to plot
+
+-   **geoms** - geometric objects
+
+    -   `geom_point()`, `geom_bar()`, `geom_density()`, `geom_line()`, `geom_area()`
+
+-   **aes** - aesthetics
+
+    -   shape, transparency (alpha), color, fill, linetype.
+
+-   **scales** Define how your data will be plotted
+
+    -   *continuous*, *discrete*, *log*
+    
+---
+
+class: inverse, center, middle
+
+"+" versus "%>%"
+
+---
+
+# Let's make a first ggplot2
+
+```{r eval = FALSE}
+head(iris)
+View(head(iris))
+
+iris %>% head %>% View
+```
+
+
+
+
+# Let's try an example
+
+```{r, code, fig.height=4}
+library(ggplot2)
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+geom_point()
+```
+
+
+---
+
+# Basic structure of a ggplot2
+
+
+```{r, code2, fig.height = 4}
+library(ggplot2)
+ggplot(data = iris,
+aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
+```
+---
+# or build them interatively
+```{r fig.height=4}  
+myplot <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width))
+myplot + geom_point()
+```
+
+---
+# Add some color
+
+```{r, fig.height=4}
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
+   geom_point(size = 3)
+```
+
+---
+
+# Add some shape
+
+```{r fig.height = 4}
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
+  geom_point(aes(shape = Species), size = 3)
+```
+
+---
+
+# Exercise 1
+
+Generate the plot below using a sample of 1000 points from the `diamonds` dataset (8ish minutes):
+
+tip: Create a smaller dataset (you can do it many ways but `sample_n` is one option).
+
+```{r echo=FALSE, fig.height = 4}
+d2 <- diamonds[sample(1:dim(diamonds)[1], 1000),]
+ggplot(d2, aes(carat, price, color = color)) + geom_point() + theme_gray()
+```
+
+---
+
+# Histograms are similarly easy
+
+```{r, fig.height = 4}
+h <- ggplot(faithful, aes(x = waiting))
+h + geom_histogram(binwidth = 30, colour = "black")
+```
+---
+
+Customize your histograms
+
+```{r, fig.height=4}
+h <- ggplot(faithful, aes(x = waiting))
+h + geom_histogram(binwidth = 8,
+fill = "steelblue",
+colour = "black")
+```
+
+---
+
+Let's read some climate data in:
+
+```{r, fig.height = 4}
+climate <-
+  read.csv(
+  "https://raw.githubusercontent.com/karthikram/ggplot-lecture/master/climate.csv",
+  header = T
+  )
+  
+  ggplot(climate, aes(Year, Anomaly10y)) +
+  geom_line()
+```
+
+URL is `https://raw.githubusercontent.com/karthikram/ggplot-lecture/master/climate.csv`
+
+---
+
+We can also plot confidence regions
+
+
+```{r, fig.height=4}
+ggplot(climate, aes(Year, Anomaly10y)) +
+  geom_ribbon(
+  aes(ymin = Anomaly10y - Unc10y,
+  ymax = Anomaly10y + Unc10y),
+  fill = "blue",
+  alpha = .1
+  ) +
+  geom_line(color = "steelblue")
+```
+---
+
+Modify the previous plot and change it such that there are three lines instead of one with a confidence band. (Take 15 minutes)
+
+```{r, fig.height=4, echo = FALSE}
+cplot <- ggplot(climate, aes(Year, Anomaly10y))
+cplot <- cplot + geom_line(size = 0.7, color = "black")
+cplot <-
+cplot + geom_line(
+aes(Year, Anomaly10y + Unc10y),
+linetype = "dashed",
+size = 0.7,
+color = "red"
+)
+cplot <-
+cplot + geom_line(
+aes(Year, Anomaly10y - Unc10y),
+linetype = "dashed",
+size = 0.7,
+color = "red"
+)
+cplot + theme_gray()
+```
+
+Tips: You can keep adding geoms to an existing plot
+
+You can add or subtract values from a column on the fly
+
+Look up `?geom_line` for options on how to make it dashed.
+---
+# Bar plots
+
+```{r fig.height=4}
+ggplot(iris, aes(Species, Sepal.Length)) +
+geom_bar(stat = "identity")
+```
+---
+
+# A stacked bar
+
+```{r fig.height = 4}
+iris %>% gather(variable, value,-Species) %>%
+  ggplot(aes(Species, value, fill = variable)) +
+  geom_bar(stat = "identity")
+```
+
+---
+
+
+# Let's try some other data : mammal survey data
+
+
+```{r, eval = TRUE, cache = TRUE}
+download.file("https://ndownloader.figshare.com/files/2292169","portal_data_joined.csv")
+surveys <- read.csv('portal_data_joined.csv')
+# View(surveys)
+```
+
+What sorts of problems do you see with this real dataset?
+
+       
+---
+
+# Minor data cleanup
+
+```{r echo = FALSE}
+import::from(dplyr, filter)
+```
+
+  
+```{r}
+surveys_complete <- surveys %>%
+ 		filter(species_id != "",       # remove missing species_id
+         !is.na(weight),           # remove missing weight
+         !is.na(hindfoot_length),  # remove missing hindfoot_length
+         sex != "")   
+```
+---
+
+# Plotting time series data
+
+
+```{r}
+yearly_counts <- surveys_complete %>%
+                 group_by(year, species_id) %>%
+                 tally
+```
+
+
+---
+
+## Timelapse data can be visualized as a line plot with years on the x axis and counts on the y axis:
+
+```{r fig.height = 4}
+ggplot(data = yearly_counts, aes(x = year, y = n)) +
+     geom_line()
+```
+---
+
+
+# Grouping variables in R
+
+```{r fig.height = 4}
+ggplot(data = yearly_counts, aes(x = year, y = n, group = species_id)) +
+  geom_line()
+```
+
+---
+
+# Group and add a color
+
+```{r fig.height=4}
+ggplot(data = yearly_counts, aes(
+  x = year,
+  y = n,
+  group = species_id,
+  colour = species_id
+  )) +
+  geom_line()
+```
+
+---
+
+# Facet plots
+
+```{r fig.height = 4, eval = FALSE}
+ggplot(data = yearly_counts, aes(
+  x = year,
+  y = n,
+  group = species_id,
+  colour = species_id
+  )) +
+  geom_line() +
+{{ facet_wrap( ~ species_id) }}
+```
+
+---
+
+```{r fig.height = 6, echo = FALSE, message = FALSE}
+ggplot(data = yearly_counts, aes(
+  x = year,
+  y = n,
+  group = species_id,
+  colour = species_id
+  )) +
+  geom_line() +
+ facet_wrap( ~ species_id)
+```
+
+---
+
+# ggplot2 has themes
+
+The complete list of themes is available at http://docs.ggplot2.org/current/ggtheme.html. `theme_minimal()` and `theme_light()` are popular, and theme_void() can be useful as a starting point to create a new hand-crafted theme.
+
+---
+
+## ggthemes
+
+```r
+install.packages("ggthemes")
+```
+
+---
+
+## Revisiting an old plot
+
+```{r}
+climate_plot <- ggplot(climate, aes(Year, Anomaly10y)) +
+  geom_ribbon(
+  aes(ymin = Anomaly10y - Unc10y,
+  ymax = Anomaly10y + Unc10y),
+  fill = "blue",
+  alpha = .1
+  ) +
+  geom_line(color = "steelblue")
+```
+
+
+---
+# Add an Excel 2004 theme 🙀
+
+```{r, fig.height = 3}
+library(ggthemes)
+climate_plot + theme_excel()
+```
+
+---
+
+# An economist article?
+
+```{r, fig.height = 3}
+climate_plot + theme_economist()
+```
+
+---
+class: middle
+# What about something nice?
+
+```{r, fig.height = 4}
+ggplot(mtcars, aes(
+  x = wt,
+  y = mpg,
+  colour = factor(gear)
+  )) +
+  geom_point() +
+  ggtitle("Cars") + geom_smooth(method = "lm", se = FALSE) +
+  {{ scale_color_fivethirtyeight("cyl") }} +
+  {{ theme_fivethirtyeight() }}
+```
+
+
+---
+
+## How to save these plots
+
+```{r, warning = FALSE}
+myplt <- ggplot(mtcars, aes(
+  x = wt,
+  y = mpg,
+  colour = factor(gear)
+  )) +
+  geom_point() +
+  ggtitle("Cars") + geom_smooth(method = "lm", se = FALSE) +
+  scale_color_fivethirtyeight("cyl") +
+  theme_fivethirtyeight() 
+
+{{ ggsave(filename = "myplot.png", width = 6, height = 4) }}
+```
+
+

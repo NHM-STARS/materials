@@ -1,0 +1,15 @@
+---
+title: "test"
+author: "Karthik Ram"
+date: "5/17/2017"
+output: html_document
+params:
+  pop_size: 100
+  generations: 20
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The starting population size is `r params$pop_size`. The simulation will run for `r params$generations` generations.
