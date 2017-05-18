@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Computational and data literacy skills for research" />
+
+
+<title>Introduction to Project and Data Management</title>
+
+<script src="RDM_intro_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="RDM_intro_files/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="RDM_intro_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="RDM_intro_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="RDM_intro_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="RDM_intro_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="RDM_intro_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="RDM_intro_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="RDM_intro_files/navigation-1.1/tabsets.js"></script>
+<link href="RDM_intro_files/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="RDM_intro_files/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introduction to Project and Data Management</h1>
+<h4 class="author"><em>Computational and data literacy skills for research</em></h4>
+<h4 class="date"><em>15 May 2017, NHM</em></h4>
+
+</div>
+
+
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+<p><br></p>
+<div id="session-outline" class="section level2">
+<h2><strong>Session Outline</strong></h2>
+<div id="research-data-management" class="section level3">
+<h3><strong>Research Data Management</strong></h3>
+<ul>
+<li><p>Basic Data Hygiene</p></li>
+<li><p>Metadata</p></li>
+</ul>
+</div>
+<div id="project-management" class="section level3">
+<h3><strong>Project Management</strong></h3>
+<ul>
+<li><p>File system organisation</p></li>
+<li><p>File naming</p></li>
+</ul>
+<p><br></p>
+<p><strong>Link to handout: <a href="http://bit.ly/NHM_RDM_intro" class="uri">http://bit.ly/NHM_RDM_intro</a></strong></p>
+<p><br> <br></p>
+</div>
+</div>
+<div id="the-grand-vision" class="section level2">
+<h2><strong>The grand vision</strong></h2>
+<blockquote>
+<p>Hans Rosling on open data in 2006</p>
+</blockquote>
+<iframe width="470" height="250" src="https://goo.gl/ry6AiG" frameborder="0" allowfullscreen>
+</iframe>
+<p class="accent_border">
+<b>How do we get there?
+</p>
+<p></b></p>
+<p><br> <br></p>
+</div>
+<div id="getting-a-handle-on-our-research-materials" class="section level2">
+<h2><strong>Getting a handle on our research materials</strong></h2>
+<center>
+<img src="day01/assets/img/beer_messy_tidy.png" height=400px>
+</center>
+<p><br> <br></p>
+</div>
+<div id="st-century-research-meta-responsibilities" class="section level2">
+<h2><strong>21st Century Research meta-responsibilities</strong></h2>
+<p>Better digital curation of the workhorses of modern science: <strong>code</strong> &amp; <strong>data</strong></p>
+<ul>
+<li>accessible</li>
+<li>reusable</li>
+<li>searchable
+<center>
+<h3>
+<b>We all need to do our bit</b>
+</h3>
+<img src="https://metrouk2.files.wordpress.com/2012/08/article-1344528089185-0d5e3c8900000578-276474_636x362.jpg" height=250px>
+</center></li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="drivers-of-better-digital-management" class="section level2">
+<h2><strong>Drivers of better digital management</strong></h2>
+<ul>
+<li>Funders: value for money, impact, reputation</li>
+<li>Publishers: many now require code and data.
+<ul>
+<li>Specialist journals for <strong>software</strong> (e.g <a href="http://joss.theoj.org/">Journal of Open Source Software</a> and <strong>data</strong> (e.g. <a href="https://www.nature.com/sdata/">Scientific Data</a>) have emerged.</li>
+</ul></li>
+<li>Your wider scientific community</li>
+<li>PIs, Supervisors and immediate research group</li>
+</ul>
+<div id="yourselves" class="section level3">
+<h3><strong>Yourselves!</strong></h3>
+</div>
+<div id="be-your-own-best-friend" class="section level3">
+<h3><strong>be your own best friend:</strong></h3>
+<blockquote>
+<p><strong>aim to create secure materials that are easy to use and REUSE</strong></p>
+</blockquote>
+<p><br> <br></p>
+</div>
+</div>
+<div id="resources" class="section level1">
+<h1>Resources</h1>
+<div id="nine-simple-ways-to-make-it-easier-to-reuse-your-data" class="section level2">
+<h2><strong>Nine simple ways to make it easier to (re)use your data</strong></h2>
+<p>We describe nine simple ways to make it easy to reuse the data that you share and also make it easier to work with it yourself. Our recommendations focus on making your data understandable, easy to analyze, and readily available to the wider community of scientists.</p>
+<center>
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/ethan.png" height=200px>
+</center>
+<div id="download" class="section level4">
+<h4><a href="http://ojs.library.queensu.ca/index.php/IEE/article/view/4608/4898">download</a></h4>
+<p><br> <br></p>
+</div>
+</div>
+<div id="bes-guide-to-data-management" class="section level2 columns-2">
+<h2>BES guide to data management</h2>
+<p><img src="day01/assets/img/BES.png" height=500px></p>
+<p><br></p>
+<p>This guide for early career researchers explains what data and data management are, and provides advice and examples of best practices in data management, including case studies from researchers currently working in ecology and evolution.</p>
+<p><br></p>
+<div id="download-1" class="section level4">
+<h4><a href="http://www.britishecologicalsociety.org/wp-content/uploads/Publ_Data-Management-Booklet.pdf">download</a></h4>
+<p><br> <br></p>
+</div>
+</div>
+<div id="storify-by-tom-webb-tomjwebb" class="section level2">
+<h2><a href="https://storify.com/tomjwebb/advice-on-research-data-management">storify</a> by Tom Webb <a href="https://twitter.com/tomjwebb">@tomjwebb</a></h2>
+<p><br></p>
+<center>
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/storify.png" height=250px>
+</center>
+<p><br> <br></p>
+</div>
+<div id="blog-post-by-dynamic-ecology-dynamicecology" class="section level2">
+<h2><a href="https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/"><strong>Blog post</strong></a> <strong>by Dynamic ecology</strong> <a href="https://twitter.com/DynamicEcology">@DynamicEcology</a></h2>
+<p><br></p>
+<center>
+<img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/vulpes.png" height=300px>
+</center>
+<p><br> <br></p>
+</div>
+<div id="data-carpentry" class="section level2">
+<h2><strong>Data carpentry</strong></h2>
+<ul>
+<li><strong>Domain specific lessons available</strong> <a href="http://www.datacarpentry.org/lessons/"><strong>free online</strong></a>
+<ul>
+<li>Ecology materials</li>
+<li>Genomics materials</li>
+<li>Geospatial data materials</li>
+<li>Biology semester long materials</li>
+</ul></li>
+<li><strong>Look out for training sessions</strong></li>
+</ul>
+<center>
+<img src="day01/assets/img/data_carpentry.png" height="180">
+</center>
+<p><br> <br></p>
+</div>
+<div id="seek-help-from-support-teams" class="section level2">
+<h2><strong>Seek help from support teams</strong></h2>
+<p>Most university libraries have assistants dedicated to Research Data Management:</p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> <a href="https://twitter.com/ScientificData"><span class="citation">@ScientificData</span></a> Talk to their librarian for data management strategies <a href="https://twitter.com/hashtag/datainfolit?src=hash">#datainfolit</a>
+</p>
+— Yasmeen Shorish (<span class="citation">@yasmeen_azadi</span>) <a href="https://twitter.com/yasmeen_azadi/status/556129700129800192">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p><br> <br></p>
+</div>
+</div>
+<div id="basic-data-hygiene" class="section level1">
+<h1>Basic Data Hygiene</h1>
+<div id="plan-your-research-data-management" class="section level2">
+<h2><strong>Plan your Research Data Management</strong></h2>
+<ul>
+<li><strong>Start early</strong>. Make an RDM plan before collecting data.
+<ul>
+<li><a href="http://www.dcc.ac.uk/sites/default/files/documents/resource/DMP/DMP_Checklist_2013.pdf"><strong>RDM checklist</strong></a></li>
+</ul></li>
+<li>Anticipate <strong>data products</strong> as part of your thesis <strong>outputs</strong></li>
+<li>Think about what technologies to use</li>
+</ul>
+<div id="take-initiative-responsibility.-think-long-term." class="section level3">
+<h3><strong>Take initiative &amp; responsibility. Think long term.</strong></h3>
+<p><br></p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+Act as though every short term study will become a long term one <a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a>. Needs to be reproducible in 3, 20, 100 yrs
+</p>
+— oceans initiative (<span class="citation">@oceansresearch</span>) <a href="https://twitter.com/oceansresearch/status/556107891610894337">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p><br> <br></p>
+</div>
+</div>
+<div id="data-entering" class="section level2">
+<h2><strong>Data entering</strong></h2>
+<div id="extreme-but-in-many-ways-defendable" class="section level3">
+<h3>extreme but in many ways defendable</h3>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> stay away from excel at all costs?
+</p>
+— Timothée Poisot (<span class="citation">@tpoi</span>) <a href="https://twitter.com/tpoi/status/556107000950829056">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+</div>
+<div id="excel-read-only" class="section level2">
+<h2><strong>excel: <code>read only</code></strong></h2>
+<blockquote class="twitter-tweet" data-conversation="none" data-cards="hidden" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> <a href="https://twitter.com/tpoi"><span class="citation">@tpoi</span></a> excel is fine for data entry. Just save in plain text format like csv. Some additional tips: <a href="https://t.co/8fUv9PyVjC">pic.twitter.com/8fUv9PyVjC</a>
+</p>
+— Jaime Ashander (<span class="citation">@jaimedash</span>) <a href="https://twitter.com/jaimedash/status/556113131932381185">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/jaimedash"><span class="citation">@jaimedash</span></a> just don’t let excel anywhere near dates or times. <a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> <a href="https://twitter.com/tpoi"><span class="citation">@tpoi</span></a> <a href="https://twitter.com/larysar"><span class="citation">@larysar</span></a>
+</p>
+— Dave Harris (<span class="citation">@davidjayharris</span>) <a href="https://twitter.com/davidjayharris/status/556126474550263809">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p><br></p>
+</div>
+<div id="databases-more-robust" class="section level2">
+<h2><strong>Databases: more robust</strong></h2>
+<ul>
+<li>good qc and advisable for multiple contributors</li>
+</ul>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> databases? <a href="https://twitter.com/swcarpentry"><span class="citation">@swcarpentry</span></a> has a good course on SQLite
+</p>
+— Timothée Poisot (<span class="citation">@tpoi</span>) <a href="https://twitter.com/tpoi/status/556142573308608513">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> <a href="https://twitter.com/tpoi"><span class="citation">@tpoi</span></a> if the data are moderately complex, or involve multiple people, best to set up a database with well designed entry form 1/2
+</p>
+— Luca Borger (<span class="citation">@lucaborger</span>) <a href="https://twitter.com/lucaborger/status/556226732496535552">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div id="databases-benefits" class="section level2 columns-2">
+<h2><strong>Databases: benefits</strong></h2>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> Entering via a database management system (e.g., Access, Filemaker) can make entry easier &amp; help prevent data entry errors <a href="https://twitter.com/tpoi"><span class="citation">@tpoi</span></a>
+</p>
+— Ethan White (<span class="citation">@ethanwhite</span>) <a href="https://twitter.com/ethanwhite/status/556119480493813760">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> it also prevents a lot of different bad practices. It is possible to do some of this in Excel. <a href="https://twitter.com/tpoi"><span class="citation">@tpoi</span></a>
+</p>
+— Ethan White (<span class="citation">@ethanwhite</span>) <a href="https://twitter.com/ethanwhite/status/556119826582605824">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p><br> <br> <br></p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/ethanwhite"><span class="citation">@ethanwhite</span></a> +1 Enforcing data types, options from selection etc, just some useful things a DB gives you, if you turn them on <a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> <a href="https://twitter.com/tpoi"><span class="citation">@tpoi</span></a>
+</p>
+— Gavin Simpson (<span class="citation">@ucfagls</span>) <a href="https://twitter.com/ucfagls/status/556120176748290048">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p><br> <br></p>
+</div>
+<div id="data-formats" class="section level2">
+<h2><strong>Data formats</strong></h2>
+<ul>
+<li><strong><code>.csv</code></strong>: <em>comma</em> separated values.</li>
+<li><strong><code>.tsv</code></strong>: <em>tab</em> separated values.</li>
+<li><strong><code>.txt</code></strong>: no formatting specified.</li>
+</ul>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> It has to be interoperability/openness - can I read your data with whatever I use, without having to convert it?
+</p>
+— Paul Swaddle (<span class="citation">@paul_swaddle</span>) <a href="https://twitter.com/paul_swaddle/status/556148166270406656">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote>
+<p><strong>more unusual formats will need instructions on use.</strong></p>
+</blockquote>
+<p><br> <br></p>
+</div>
+<div id="ensure-data-is-machine-readable" class="section level2">
+<h2><strong>Ensure data is machine readable</strong></h2>
+<div id="bad" class="section level3">
+<h3>bad</h3>
+<p><img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/bad_xl1.png" width=600px></p>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2></h2>
+<div id="bad-1" class="section level3">
+<h3>bad</h3>
+<p><img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/bad_xl2.png" width=600px></p>
+</div>
+</div>
+<div id="section-1" class="section level2">
+<h2></h2>
+<div id="good" class="section level3">
+<h3>good</h3>
+<p><img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/good_xl.png" width=600px></p>
+</div>
+</div>
+<div id="section-2" class="section level2">
+<h2></h2>
+<div id="ok" class="section level3">
+<h3>ok</h3>
+<p><img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/ok_xl.png" width=600px></p>
+<ul>
+<li>could help data entry</li>
+<li><code>.csv</code> or <code>.tsv</code> copy would need to be saved.</li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+<div id="use-good-null-values" class="section level2">
+<h2><strong>Use good null values</strong></h2>
+<div id="missing-values-are-a-fact-of-life" class="section level3">
+<h3>Missing values are a fact of life</h3>
+<ul>
+<li>Usually, best solution is to <strong>leave blank</strong></li>
+<li><strong><code>NA</code></strong> or <strong><code>NULL</code></strong> are also good options</li>
+<li><strong>NEVER use <code>0</code></strong>. Avoid numbers like <strong><code>-999</code></strong></li>
+<li>Don’t make up your own code for missing values</li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+<div id="read.csv-utilities" class="section level2">
+<h2><a href="http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html"><strong><code>read.csv()</code></strong></a> <strong>utilities</strong></h2>
+<ul>
+<li><strong><code>na.string</code>:</strong> character vector of values to be coded missing and replaced with <code>NA</code> to argument eg</li>
+<li><strong><code>strip.white</code>:</strong> Logical. if <code>TRUE</code> strips leading and trailing white space from unquoted character fields</li>
+<li><strong><code>blank.lines.skip</code>:</strong> Logical: if <code>TRUE</code> blank lines in the input are ignored.</li>
+<li><strong><code>fileEncoding</code>:</strong> if you’re getting funny characters, you probably need to specify the correct encoding.</li>
+</ul>
+<pre class="r"><code>read.csv(file, na.strings = c(&quot;NA&quot;, &quot;-999&quot;), strip.white = TRUE, 
+         blank.lines.skip = TRUE, fileEncoding = &quot;mac&quot;)</code></pre>
+<p><br> <br></p>
+</div>
+<div id="readrread_csv-utilities" class="section level2">
+<h2><a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><strong><code>readr::read_csv()</code></strong></a> <strong>utilities</strong></h2>
+<ul>
+<li><strong><code>na</code>:</strong> character vector of values to be coded missing and replaced with <code>NA</code> to argument eg</li>
+<li><strong><code>trim_ws</code>:</strong> Logical. if <code>TRUE</code> strips leading and trailing white space from unquoted character fields</li>
+<li><strong><code>col_types</code>:</strong> Allows for column data type specification. (<a href="https://cran.r-project.org/web/packages/readxl/vignettes/cell-and-column-types.html">see more</a>)</li>
+<li><strong><code>locale</code>:</strong> controls things like the default time zone, encoding, decimal mark, big mark, and day/month names</li>
+<li><strong><code>skip</code>:</strong> Number of lines to skip before reading data.</li>
+<li><strong><code>n_max</code>:</strong> Maximum number of records to read.</li>
+</ul>
+<pre class="r"><code>read_csv(file, col_names = TRUE, col_types = NULL, locale = default_locale(), 
+         na = c(&quot;&quot;, &quot;NA&quot;, &quot;-999&quot;), trim_ws = TRUE, skip = 0, n_max = Inf)</code></pre>
+<p><br> <br></p>
+</div>
+<div id="basic-quality-control" class="section level2">
+<h2><strong>Basic quality control</strong></h2>
+<div id="have-a-look-at-your-data-with-viewerdf" class="section level4">
+<h4>Have a look at your data with <code>Viewer(df)</code></h4>
+<p><br></p>
+<ul>
+<li>Check <strong>empty cells</strong></li>
+<li>Check the <strong>range of values</strong> (and value types) in each column matches expectation. Use <code>summary(df)</code></li>
+<li>Check <strong>units of measurement</strong></li>
+<li>Check your <strong>software interprets your data correctly</strong> eg.<br />
+for a data frame <code>df</code>;
+<ul>
+<li><code>head(df)</code> (see top few rows) and <code>str(df)</code> (see object structure) are useful.</li>
+</ul></li>
+<li>consider writing some <strong>simple QA tests</strong> (eg. checks against <em>number of dimensions</em>, <em>sum of numeric columns</em> etc)</li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+<div id="raw-data-are-sacrosanct" class="section level2">
+<h2><strong>Raw data are sacrosanct</strong></h2>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> don't, not even with a barge pole, not for one second, touch or otherwise edit the raw data files. Do any manipulations in script
+</p>
+— Gavin Simpson (<span class="citation">@ucfagls</span>) <a href="https://twitter.com/ucfagls/status/556107371634634755">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> <a href="https://twitter.com/srsupp"><span class="citation">@srsupp</span></a> Keep one or a few good master data files (per data collection of interest), and code your formatting with good annotation.
+</p>
+— Desiree Narango (<span class="citation">@DLNarango</span>) <a href="https://twitter.com/DLNarango/status/556128407445323778">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p><br> <br></p>
+</div>
+<div id="know-your-masters" class="section level2 columns-2">
+<h2><strong>Know your masters</strong></h2>
+<ul>
+<li>identify the <code>master</code> copy of files</li>
+<li>keep it safe and and accessible</li>
+<li>consider version control</li>
+<li>consider centralising</li>
+</ul>
+<p><br> <br></p>
+<center>
+<p><img src="http://www.thebugplanetstore.com/2014/wp-content/uploads/2012/03/master-file-03.jpg" width=400px></p>
+source: <a href="http://www.thebugplanetstore.com/store/master-file/" class="uri">http://www.thebugplanetstore.com/store/master-file/</a>
+</center>
+<p><br> <br></p>
+</div>
+<div id="avoid-catastrophe" class="section level2">
+<h2><strong>Avoid catastrophe</strong></h2>
+<div id="backup-on-disk" class="section level3">
+<h3><strong>Backup: on disk</strong></h3>
+<ul>
+<li>consider using backup software like <a href="https://support.apple.com/en-gb/HT201250">Time Machine</a> (mac) or <a href="http://www.thundercloud.net/infoave/new/windows-10-has-a-time-machine/">File History</a> (Windows 10)</li>
+</ul>
+</div>
+<div id="backup-in-the-cloud" class="section level3">
+<h3><strong>Backup: in the cloud</strong></h3>
+<ul>
+<li>dropbox, googledrive etc.</li>
+<li>if <a href="https://tools.google.com/dlpage/drive">installed</a> on your system, can programmatically access them through <code>R</code></li>
+<li>some version control</li>
+</ul>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> Back it up
+</p>
+— Ben Bond-Lamberty (<span class="citation">@BenBondLamberty</span>) <a href="https://twitter.com/BenBondLamberty/status/556120946722222080">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p><br></p>
+</div>
+</div>
+<div id="backup-the-open-science-framework-osf.io" class="section level2">
+<h2><strong>Backup: the Open Science Framework</strong> <a href="https://osf.io/">osf.io</a></h2>
+<ul>
+<li>version controlled</li>
+<li>easily shareable</li>
+<li>works with other apps (eg googledrive, github)</li>
+<li>work on an interface with R (<a href="https://github.com/chartgerink/osfr">OSFr</a>) is in progress. See more <a href="https://youtu.be/cnE3AcdeGVY">here</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="backup-github" class="section level2">
+<h2><strong>Backup: Github</strong></h2>
+<ul>
+<li><p>most solid version control.</p></li>
+<li><p>keep everything in one project folder.</p></li>
+<li><p>Can be problematic with really large files.</p></li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+<div id="metadata" class="section level1">
+<h1>Metadata</h1>
+<div id="documenting-your-data" class="section level3">
+<h3>Documenting your data</h3>
+<p><br></p>
+</div>
+<div id="you-got-data.-is-it-enough" class="section level2">
+<h2>You got data. Is it enough?</h2>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> I see tons of spreadsheets that i don't understand anything (or the stduent), making it really hard to share.
+</p>
+— Erika Berenguer (<span class="citation">@Erika_Berenguer</span>) <a href="https://twitter.com/Erika_Berenguer/status/556111838715580417">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> <a href="https://twitter.com/ScientificData"><span class="citation">@ScientificData</span></a> “Document. Everything.” Data without documentation has no value.
+</p>
+— Sven Kochmann (<span class="citation">@indianalytics</span>) <a href="https://twitter.com/indianalytics/status/556120920881115136">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div id="section-3" class="section level2">
+<h2></h2>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="it" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> Annotate, annotate, annotate!
+</p>
+— CanJFishAquaticSci (<span class="citation">@cjfas</span>) <a href="https://twitter.com/cjfas/status/556109252788379649">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="und" dir="ltr">
+Document all the metadata (including protocols).<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a>
+</p>
+— Ward Appeltans (<span class="citation">@WrdAppltns</span>) <a href="https://twitter.com/WrdAppltns/status/556108414955560961">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div id="section-4" class="section level2">
+<h2></h2>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+You download a zip file of <a href="https://twitter.com/hashtag/OpenData?src=hash">#OpenData</a>. Apart from your data file(s), what else should it contain?
+</p>
+— Leigh Dodds (<span class="citation">@ldodds</span>) <a href="https://twitter.com/ldodds/status/828657155863638016">February 6, 2017</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p><br> <br></p>
+</div>
+<div id="otherpeoplesdata-dream-match" class="section level2 columns-2">
+<h2><strong>#otherpeoplesdata dream match!</strong></h2>
+<div id="thought-experiment-imagine-a-dream-open-data-set" class="section level3">
+<h3><strong>Thought experiment: Imagine a dream open data set</strong></h3>
+<p>It’s out there somewhere:</p>
+</div>
+<div id="how-would-you-locate-it" class="section level3">
+<h3><strong>How would you locate it?</strong></h3>
+<ul>
+<li>what details would you need to know to determine relevance?</li>
+<li>what information would you need to know to use it?</li>
+</ul>
+<p><br> <br> <br></p>
+<center>
+<img src="day01/assets/img/missing-unicorn.jpg" height="400px">
+</center>
+<p><br> <br></p>
+</div>
+</div>
+<div id="metadata-data-about-data" class="section level2">
+<h2><strong>metadata = data about data</strong></h2>
+<blockquote>
+<h3 id="information-that-describes-explains-locates-or-in-some-way-makes-it-easier-to-find-access-and-use-a-resource-in-this-case-data.">Information that <strong>describes, explains, locates</strong>, or in some way makes it easier to <strong>find, access</strong>, and <strong>use</strong> a resource (in this case, data).</h3>
+</blockquote>
+<p><br></p>
+<p><img src="http://chiphouston.com/wp-content/uploads/2016/06/who-what-when-where-and-why11.jpg" width="300px"></p>
+<p><smaller>source: <a href="http://chiphouston.com/wp-content/uploads/2016/06/who-what-when-where-and-why11.jpg" class="uri">http://chiphouston.com/wp-content/uploads/2016/06/who-what-when-where-and-why11.jpg</a> </smaller></p>
+<p><br> <br></p>
+</div>
+<div id="data-reuse-checklist" class="section level2">
+<h2><strong>Data Reuse Checklist</strong></h2>
+<p><a href="http://mozillascience.github.io/checklist/" class="uri">http://mozillascience.github.io/checklist/</a></p>
+<p><br> <br></p>
+<p><img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/msl logo.png" width="300px"></p>
+<p><br> <br></p>
+</div>
+<div id="backbone-of-digital-curation" class="section level2">
+<h2><strong>Backbone of digital curation</strong></h2>
+<div id="without-it-a-digital-resource-may-be-irretrievable-unidentifiable-or-unusable" class="section level4">
+<h4><strong>Without it a digital resource may be irretrievable, unidentifiable or unusable</strong></h4>
+</div>
+<div id="descriptive" class="section level3">
+<h3><strong>Descriptive</strong></h3>
+<ul>
+<li>enables <strong>identification, location</strong> and <strong>retrieval</strong> of data, often includes use of <strong>controlled vocabularies</strong> for classification and indexing.</li>
+</ul>
+</div>
+<div id="technical" class="section level3">
+<h3><strong>Technical</strong></h3>
+<ul>
+<li>describes the <strong>technical processes</strong> used to <strong>produce</strong>, or required to <strong>use</strong> a digital data object.</li>
+</ul>
+</div>
+<div id="administrative" class="section level3">
+<h3><strong>Administrative</strong></h3>
+<ul>
+<li>used to manage <strong>administrative aspects</strong> of the digital object e.g. <strong>intellectual property rights and acquisition.</strong></li>
+</ul>
+<p>This usually takes the form of a structured set of elements.</p>
+<p><br> <br></p>
+</div>
+</div>
+<div id="elements-of-metadata" class="section level2">
+<h2><strong>Elements of metadata</strong></h2>
+<ul>
+<li><h4 id="structured-data-files"><strong>Structured data files:</strong></h4>
+<ul>
+<li>readable by machines and humans, accessible through the web</li>
+</ul></li>
+<li><h4 id="controlled-vocabularies-eg.-nerc-vocabulary-server"><strong>Controlled vocabularies</strong> eg. <a href="https://www.bodc.ac.uk/resources/products/web_services/vocab/">NERC Vocabulary server</a></h4>
+<ul>
+<li>allows for connectivity of data</li>
+</ul></li>
+</ul>
+<div id="key-to-search-function" class="section level3">
+<h3><strong>KEY TO SEARCH FUNCTION</strong></h3>
+<ul>
+<li>By structuring &amp; adhering to controlled vocabularies, data can be <strong>combined, accessed</strong> and <strong>searched!</strong></li>
+<li><strong>Different communities</strong> develop <strong>different standards</strong> which define both the structure and content of metadata</li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+<div id="organising-data-and-metadata" class="section level2">
+<h2><strong>Organising data and metadata</strong></h2>
+<ul>
+<li><p>Start at the very least by <strong>creating a metadata tab within your raw data spreadsheets</strong></p></li>
+<li><p>Ideally set up a system of <strong>normalised tables</strong> (<a href="https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/">see section 3 in this post</a>) and <strong><code>README</code></strong> documents to manage and document metadata.</p></li>
+<li><p><strong>Ensure everything someone might need to understand your data is documented</strong></p></li>
+<li><p><strong>Different types data require different metadata</strong></p></li>
+<li><h3 id="when-youre-ready-to-publish-structure-metadata-into-an-xml-file-a-searchable-shareable-file."><strong>When you’re ready to publish, structure metadata into an</strong> <a href="https://en.wikipedia.org/wiki/XML"><strong><code>XML</code></strong></a> file, a <strong>searchable, shareable file</strong>.</h3></li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="make-your-data-alignable-and-generalisable" class="section level2">
+<h2><strong>Make your data alignable and generalisable</strong></h2>
+<div id="what-information-would-other-users-need-to-combine-your-data-with-theirs" class="section level3">
+<h3><strong>What information would other users need to combine your data with theirs?</strong></h3>
+<ul>
+<li>time <code>temporal (time of day, day, month, year, season)</code></li>
+<li>space <code>geography (lat, lon, postcode)</code></li>
+<li>taxonomy <code>species name; authority / source</code></li>
+<li>provide information on <strong>extent</strong> and <strong>resolution</strong></li>
+</ul>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/tomjwebb"><span class="citation">@tomjwebb</span></a> record every detail about how/where/why it is collected
+</p>
+— Sal Keith (<span class="citation">@Sal_Keith</span>) <a href="https://twitter.com/Sal_Keith/status/556110605053349888">January 16, 2015</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p><br> <br></p>
+</div>
+</div>
+</div>
+<div id="example-metadata-structure" class="section level1">
+<h1>Example metadata structure</h1>
+<p><br></p>
+<div id="bird-trait-networks-dataset" class="section level2">
+<h2><strong>Bird Trait Networks dataset</strong></h2>
+<p><br></p>
+<ul>
+<li><p>I’m using data from a project in which we <strong><em>compiled large dataset on bird reproductive, morphological, physiological, life history and ecological traits across as many bird species as possible</em></strong> to perform a network analysis on associations between trait pairs.</p></li>
+<li><p>I’ll use a simplified subset of the data to show a <strong>simple metadata (attribute) structure</strong> that can easily form the basis of a more formal <a href="https://en.wikipedia.org/wiki/Ecological_Metadata_Language"><strong>EML</strong></a> (ecological XML) using function in the package <a href="https://cran.r-project.org/web/packages/EML/vignettes/creating-EML.html">EML</a></p></li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="data" class="section level2">
+<h2><strong>Data</strong></h2>
+<table>
+<caption>bird trait networks dataTable</caption>
+<thead>
+<tr class="header">
+<th align="left">species</th>
+<th align="right">max.altitude</th>
+<th align="right">dev.mode</th>
+<th align="right">courtship.feed.m</th>
+<th align="right">song.dur</th>
+<th align="right">breed.system</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Acridotheres_tristis</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Aix_galericulata</td>
+<td align="right">NA</td>
+<td align="right">1</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Anas_americana</td>
+<td align="right">NA</td>
+<td align="right">1</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Anas_clypeata</td>
+<td align="right">NA</td>
+<td align="right">1</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Anthracothorax_nigricollis</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Anthus_hodgsoni</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Aphelocoma_coerulescens</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">Aphelocoma_ultramarina</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">Ardea_cinerea</td>
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-5" class="section level2">
+<h2></h2>
+<ul>
+<li><p>Like many real data sets, column headings are convenient for data entry and manipulation, but <strong>not particularly descriptive to a user not already familiar with the data</strong>.</p></li>
+<li><p>More importantly, they <strong>don’t let us know what units they are measured in</strong> (or in the case of categorical / factor data, <strong>what the factor abbreviations refer to</strong>). So let us take a moment to be more explicit:</p></li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="make-an-attribute-table" class="section level2">
+<h2><strong>Make an attribute table</strong></h2>
+<p>I use functions in <a href="https://github.com/annakrystalli/ACCE_RDM/blob/master/R/eml_utils.R"><strong><code>eml_utils.R</code></strong></a> to:</p>
+<ul>
+<li>create an <code>attr_tbl</code> in which to complete all info required</li>
+<li>to extract elements from <code>attr_tbl</code> to supply to EML generating functions.</li>
+</ul>
+<pre class="r"><code>library(RCurl)
+eval(parse(text = getURL(
+    &quot;https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/R/eml_utils.R&quot;, 
+    ssl.verifypeer = FALSE)))</code></pre>
+<p><br> <br></p>
+</div>
+<div id="create-attr_tbl-shell" class="section level2">
+<h2><strong>Create <code>attr_tbl</code> shell</strong></h2>
+<ul>
+<li><h4 id="load-data">load data</h4></li>
+</ul>
+<pre class="r"><code>dt   &lt;- read.csv(&quot;data/bird_trait_db-v0.1.csv&quot;)</code></pre>
+<ul>
+<li><h4 id="create-attr_tbl-shell-from-your-data-dt">create <code>attr_tbl</code> shell from <strong>your data (<code>dt</code>)</strong></h4>
+<ul>
+<li>use function <code>get_attr_shell</code> from <code>eml_utils.R</code>.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>attr_shell &lt;- get_attr_shell(dt)</code></pre>
+</div>
+<div id="attr_tbl-shell-structure" class="section level2">
+<h2><strong><code>attr_tbl</code> shell structure</strong></h2>
+<pre class="r"><code>str(attr_shell)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    6 obs. of  11 variables:
+##  $ attributeName      : chr  &quot;species&quot; &quot;max.altitude&quot; &quot;dev.mode&quot; &quot;courtship.feed.m&quot; ...
+##  $ attributeDefinition: logi  NA NA NA NA NA NA
+##  $ columnClasses      : chr  &quot;character&quot; &quot;numeric&quot; &quot;numeric&quot; &quot;numeric&quot; ...
+##  $ numberType         : logi  NA NA NA NA NA NA
+##  $ unit               : logi  NA NA NA NA NA NA
+##  $ minimum            : logi  NA NA NA NA NA NA
+##  $ maximum            : logi  NA NA NA NA NA NA
+##  $ formatString       : logi  NA NA NA NA NA NA
+##  $ definition         : logi  NA NA NA NA NA NA
+##  $ code               : logi  NA NA NA NA NA NA
+##  $ levels             : logi  NA NA NA NA NA NA</code></pre>
+<p><br> <br></p>
+</div>
+<div id="attributes-df-columns" class="section level2">
+<h2><strong><code>attributes</code> df columns</strong></h2>
+<p>I use recognized column headers shown here to make it easier to create an EML object down the line. I focus on the core columns required but you can add additional ones for your own purposes.</p>
+<p>Attributes associated with all variables:</p>
+<ul>
+<li>attributeName (required, free text field)</li>
+<li>attributeDefinition (required, free text field)</li>
+<li>columnClasses (required, <code>&quot;numeric&quot;</code>, <code>&quot;character&quot;</code>, <code>&quot;factor&quot;</code>, <code>&quot;ordered&quot;</code>, or <code>&quot;Date&quot;</code>, case sensitive)</li>
+</ul>
+<p><br></p>
+</div>
+<div id="columnclasses-dependant-attributes" class="section level2">
+<h2><strong><code>columnClasses</code> dependant attributes</strong></h2>
+<ul>
+<li>For <code>numeric</code> (ratio or interval) data:
+<ul>
+<li>unit (required, see <a href="https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/./eml-unitTypeDefinitions.html">eml-unitTypeDefinitions</a> and <a href="https://github.com/ropensci/EML/blob/master/vignettes/working-with-units.Rmd">working with units</a>)</li>
+</ul></li>
+<li>For <code>character</code> (textDomain) data:
+<ul>
+<li>definition (required)</li>
+</ul></li>
+<li>For <code>dateTime</code> data:
+<ul>
+<li>formatString (required) e.g for date <code>11-03-2001</code> formatString would be <code>&quot;DD-MM-YYYY&quot;</code> <br></li>
+</ul></li>
+<li>I use the columns <code>code</code> and <code>levels</code> to store information on factors. Use <code>&quot;;&quot;</code> to separate code and level descriptions. These can be extracted by <code>eml_utils.R</code> function <code>get_attr_factors()</code> later on.</li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="complete-attr_tbl" class="section level2">
+<h2><strong>Complete <code>attr_tbl</code></strong></h2>
+<div id="save-shell" class="section level4">
+<h4>save shell</h4>
+<ul>
+<li>write <code>attr_shell</code> to <code>.csv</code></li>
+</ul>
+<pre class="r"><code>write.csv(attr_shell, file = &quot;data/attr_shell.csv&quot;)</code></pre>
+<p><br></p>
+</div>
+<div id="complete-attr_tbl-1" class="section level4">
+<h4>complete attr_tbl</h4>
+<ul>
+<li>complete in your prefered spreadsheet editing software and save to <strong>attr_tbl.csv</strong></li>
+<li>read in completed <strong>attr_tbl.csv</strong></li>
+</ul>
+<pre class="r"><code>attr_tbl &lt;- read.csv(file = &quot;data/attr_tbl.csv&quot;)</code></pre>
+<p><br> <br></p>
+</div>
+</div>
+<div id="completed-attribute-table-attr_tbl" class="section level2">
+<h2><strong>Completed attribute table <code>attr_tbl</code></strong></h2>
+<table>
+<caption>table 2a. bird trait networks attr_tbl</caption>
+<thead>
+<tr class="header">
+<th align="left">attributeName</th>
+<th align="left">attributeDefinition</th>
+<th align="left">columnClasses</th>
+<th align="left">numberType</th>
+<th align="left">unit</th>
+<th align="right">minimum</th>
+<th align="left">maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">species</td>
+<td align="left">species</td>
+<td align="left">character</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">max.altitude</td>
+<td align="left">Maximum altitudinal distribution</td>
+<td align="left">numeric</td>
+<td align="left">integer</td>
+<td align="left">meter</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">dev.mode</td>
+<td align="left">Developmental mode</td>
+<td align="left">ordered</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">courtship.feed.m</td>
+<td align="left">Courtship feeding (by the male)</td>
+<td align="left">factor</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">song.dur</td>
+<td align="left">Song duration</td>
+<td align="left">numeric</td>
+<td align="left">real</td>
+<td align="left">second</td>
+<td align="right">0</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">breed.system</td>
+<td align="left">Which adult(s) provides the majority of care:</td>
+<td align="left">factor</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-6" class="section level2">
+<h2></h2>
+<table>
+<caption>table 2b. bird trait networks attr_tbl</caption>
+<thead>
+<tr class="header">
+<th align="left">attributeName</th>
+<th align="left">formatString</th>
+<th align="left">definition</th>
+<th align="left">code</th>
+<th align="left">levels</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">species</td>
+<td align="left">NA</td>
+<td align="left">species</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">max.altitude</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">dev.mode</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">1;2;3</td>
+<td align="left">Altricial;Semiprecocial;Precocial</td>
+</tr>
+<tr class="even">
+<td align="left">courtship.feed.m</td>
+<td align="left">NA</td>
+<td align="left">Courtship feeding (by the male)</td>
+<td align="left">0;1</td>
+<td align="left">FALSE;TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">song.dur</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">breed.system</td>
+<td align="left">NA</td>
+<td align="left">Breeding system</td>
+<td align="left">1;2;3;4;5</td>
+<td align="left">Pair;Female;Male;Cooperative;Occassional</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br></p>
+</div>
+</div>
+<div id="project-organisation" class="section level1">
+<h1>Project Organisation</h1>
+<p><br></p>
+<div id="from-raw-to-analytical-data" class="section level2">
+<h2><strong>From raw to analytical data</strong></h2>
+<div id="the-reproducible-pipeline" class="section level3">
+<h3><a href="https://dynamicecology.wordpress.com/2016/08/22/ten-commandments-for-good-data-management/">the reproducible pipeline</a></h3>
+<p class="accent_border">
+<b>Do not manually edit raw data</b>
+</p>
+<p class="accent_border">
+<b>Keep a clean pipeline of data processing from raw to analytical.</b>
+</p>
+<p><img src="https://dynamicecology.files.wordpress.com/2016/08/pipeline1.jpg" height="150"></p>
+<ul>
+<li>Ideally, incorporate checks to ensure correct processing of data through to analytical.</li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+<div id="automated-reproducible" class="section level2">
+<h2><strong>Automated == reproducible</strong></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/s3JldKoA0zw" frameborder="0" allowfullscreen>
+</iframe>
+<p><br> <br></p>
+</div>
+<div id="how" class="section level2">
+<h2><strong>HOW?</strong></h2>
+<div id="lets-face-it" class="section level3">
+<h3>Let’s face it…</h3>
+<ul>
+<li><p>There are going to be files</p></li>
+<li><p><strong>LOTS</strong> of files</p></li>
+<li><p>The files will <strong>change over time</strong></p></li>
+<li><p>The files will <strong>have relationships to each other</strong></p></li>
+</ul>
+</div>
+<div id="itll-probably-get-complicated" class="section level3">
+<h3>It’ll probably get complicated</h3>
+<p><br> <br></p>
+</div>
+</div>
+<div id="section-7" class="section level2 flexbox vcenter">
+<h2></h2>
+<div class="figure">
+<img src="day01/assets/img/files_messy_tidy.png" />
+
+</div>
+<p><br> <br></p>
+</div>
+<div id="strategy-against-chaos" class="section level2">
+<h2><strong>Strategy against chaos</strong></h2>
+<div id="file-organization-and-naming-is-a-mighty-weapon-against-chaos" class="section level3">
+<h3><strong>File organization</strong> and <strong>naming</strong> is a mighty weapon against chaos</h3>
+<ul>
+<li>Make a file’s <strong>name</strong> and <strong>location</strong> <strong><em>VERY INFORMATIVE</em></strong> about:
+<ul>
+<li>what it is,</li>
+<li>why it exists,</li>
+<li>how it relates to other things</li>
+</ul></li>
+<li><p>The more things are <strong>self-explanatory</strong>, the better</p></li>
+<li><p><strong>READMEs</strong> are great, but don’t document something if you could just make that thing self-documenting by definition</p></li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+</div>
+<div id="file-system-organisation" class="section level1">
+<h1>File system organisation</h1>
+<p><br></p>
+<div id="section-8" class="section level2 flexbox vcenter">
+<h2></h2>
+<center>
+<blockquote>
+<h3 id="a-place-for-everything-everything-in-its-place.">A place for everything, everything in its place.</h3>
+</blockquote>
+</center>
+<p><br></p>
+<p>Benjamin Franklin</p>
+<p><br> <br></p>
+</div>
+<div id="use-r-projects" class="section level2">
+<h2><strong>Use R projects</strong></h2>
+<div id="keep-your-work-tidy-and-self-contained" class="section level3">
+<h3>Keep your work <a href="https://nicercode.github.io/blog/2013-04-05-projects/">tidy and self-contained</a></h3>
+<div class="figure">
+<img src="https://image.slidesharecdn.com/20150422reproresr8-160404131652/95/reproducible-research-in-r-and-r-studio-21-638.jpg?cb=1459775831" />
+
+</div>
+<p><br> <br></p>
+</div>
+</div>
+<div id="data-analysis-workflow" class="section level2 flexbox vcenter">
+<h2><strong>Data analysis workflow</strong></h2>
+<div class="figure">
+<img src="day01/assets/img/workflow.png" />
+
+</div>
+<div id="use-sensible-standardised-file-system-structure" class="section level4">
+<h4><strong>Use sensible / standardised file system structure</strong></h4>
+<p><img src="https://raw.githubusercontent.com/annakrystalli/ACCE_RDM/master/Rmd/assets/img/proj_str.png" height="150"> source: <a href="https://nicercode.github.io/blog/2013-04-05-projects/" class="uri">https://nicercode.github.io/blog/2013-04-05-projects/</a></p>
+<p><br> <br></p>
+</div>
+</div>
+<div id="raw-data-rightarrow-data" class="section level2">
+<h2><strong>Raw data <span class="math inline">\(\rightarrow\)</span> data</strong></h2>
+<p>Pick a strategy, any strategy, just pick one!</p>
+<div class="columns-2">
+<div class="figure">
+<img src="day01/assets/img/workflow_raw_data_to_data.png" />
+
+</div>
+<pre><code>data/
+data-raw
+data-clean
+
+data/
+  - raw/
+  - clean/</code></pre>
+</div>
+<p><br> <br></p>
+</div>
+<div id="data-rightarrow-results" class="section level2">
+<h2><strong>Data <span class="math inline">\(\rightarrow\)</span> results</strong></h2>
+<p>Pick a strategy, any strategy, just pick one!</p>
+<div class="columns-2">
+<div class="figure">
+<img src="day01/assets/img/workflow_data_to_results_1.png" />
+
+</div>
+<pre><code>R
+
+code
+
+scripts
+
+analysis
+
+bin</code></pre>
+</div>
+<p><br> <br></p>
+</div>
+</div>
+<div id="a-real-and-imperfect-example" class="section level1">
+<h1>A real (and imperfect!) example</h1>
+<div id="section-9" class="section level2">
+<h2></h2>
+<pre><code>  /Users/jenny/research/bohlmann/White_Pine_Weevil_DE:
+  total used in directory 246648 available 131544558
+  drwxr-xr-x  14 jenny  staff        476 Jun 23  2014 .
+  drwxr-xr-x   4 jenny  staff        136 Jun 23  2014 ..
+  -rw-r--r--@  1 jenny  staff      15364 Apr 23 10:19 .DS_Store
+  -rw-r--r--   1 jenny  staff  126231190 Jun 23  2014 .RData
+  -rw-r--r--   1 jenny  staff      19148 Jun 23  2014 .Rhistory
+  drwxr-xr-x   3 jenny  staff        102 May 16  2014 .Rproj.user
+  drwxr-xr-x  17 jenny  staff        578 Apr 29 10:20 .git
+  -rw-r--r--   1 jenny  staff         50 May 30  2014 .gitignore
+  -rw-r--r--   1 jenny  staff       1003 Jun 23  2014 README.md
+  -rw-r--r--   1 jenny  staff        205 Jun  3  2014 White_Pine_Weevil_DE.Rproj
+  drwxr-xr-x  20 jenny  staff        680 Apr 14 15:44 analysis/
+  drwxr-xr-x   7 jenny  staff        238 Jun  3  2014 data/
+  drwxr-xr-x  22 jenny  staff        748 Jun 23  2014 model-exposition/
+  drwxr-xr-x   4 jenny  staff        136 Jun  3  2014 results/</code></pre>
+<p><br> <br></p>
+</div>
+<div id="data-1" class="section level2">
+<h2><strong>Data</strong></h2>
+<p>Ready to <strong>analyze data</strong>:</p>
+<div class="figure">
+<img src="day01/assets/img/sample_ready_to_analyze_data.png" />
+
+</div>
+<hr>
+<p><strong>Raw data</strong>:</p>
+<div class="figure">
+<img src="day01/assets/img/sample_raw_data.png" />
+
+</div>
+<p><br> <br></p>
+</div>
+<div id="analysis-and-figures" class="section level2">
+<h2><strong>Analysis and figures</strong></h2>
+<p><strong><code>R</code> scripts</strong> + the <strong>Markdown</strong> files:</p>
+<div class="figure">
+<img src="day01/assets/img/sample_analysis.png" alt="sample_ready_to_analyze_data" />
+<p class="caption">sample_ready_to_analyze_data</p>
+</div>
+</div>
+<div id="section-10" class="section level2">
+<h2></h2>
+<hr>
+<p>The <strong>figures created in those <code>R</code> scripts</strong> and <strong>linked in those Markdown files</strong>:</p>
+<div class="figure">
+<img src="day01/assets/img/sample_figures.png" alt="sample_raw_data" />
+<p class="caption">sample_raw_data</p>
+</div>
+<p><br> <br></p>
+</div>
+<div id="scripts" class="section level2">
+<h2><strong>Scripts</strong></h2>
+<p><strong>Linear progression of R scripts</strong>, and <strong>Makefile</strong> to run the entire analysis:</p>
+<div class="figure">
+<img src="day01/assets/img/sample_scripts.png" alt="sample_scripts" />
+<p class="caption">sample_scripts</p>
+</div>
+<p><br> <br></p>
+</div>
+<div id="results" class="section level2">
+<h2><strong>Results</strong></h2>
+<p><strong>Tab-delimited files</strong> with one row per gene of parameter estimates, test statistics, etc.:</p>
+<div class="figure">
+<img src="day01/assets/img/sample_results.png" alt="sample_results" />
+<p class="caption">sample_results</p>
+</div>
+<p><br> <br></p>
+</div>
+<div id="expository-files" class="section level2">
+<h2><strong>Expository files</strong></h2>
+<p>Files to <strong>help collaborators understand the model we fit:</strong> some markdown docs, a Keynote presentation, Keynote slides exported as PNGs for viewability on GitHub:</p>
+<div class="figure">
+<img src="day01/assets/img/sample_expository.png" alt="sample_expository" />
+<p class="caption">sample_expository</p>
+</div>
+<p><br> <br></p>
+</div>
+<div id="caveats-problems-with-this-example" class="section level2">
+<h2><strong>Caveats / problems with this example</strong></h2>
+<ul>
+<li><p>This project is <strong>nowhere near done</strong>, i.e. <em>no manuscript or publication-ready figs</em></p></li>
+<li><p><strong>File naming has inconsistencies</strong> due to three different people being involved</p></li>
+<li><p><strong>Code and reports/figures all sit together</strong> because it’s just much easier that way w/ <code>knitr</code> &amp; <code>rmarkdown</code></p></li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="wins-of-this-example" class="section level2">
+<h2>Wins of this example</h2>
+<ul>
+<li><p>Someone can walk away from the project and <strong>come back to it a year later and resume work</strong> fairly quickly</p></li>
+<li><p><strong>Collaborators</strong> (the two other people, the post-doc whose project it is + the bioinformatician for that lab) were able to figure out what I did and decide which files they needed to look at, etc.</p></li>
+</ul>
+<center>
+<b>GOOD ENOUGH!</b>
+</center>
+<p><br> <br></p>
+</div>
+</div>
+<div id="more-project-management-tips" class="section level1">
+<h1>More project management tips</h1>
+<p><br></p>
+<div id="evolution-of-your-file-system" class="section level2">
+<h2><strong>Evolution of your file system</strong></h2>
+<ul>
+<li><p><strong>Be consistent</strong> – when developing a naming scheme for folders it is important that once you have decided on a method, you stick to it. If you can, try to agree on a naming scheme from the outset of your research project</p></li>
+<li><p><strong>Structure folders hierarchically</strong>: - start with a limited number of folders for the broader topics - create more specific folders within these</p></li>
+<li><p><strong>Separate ongoing and completed work</strong>: as you start to create lots of folders and files, it is a good idea to think about separating older documents from those you are currently working on</p></li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="the-from_joe-directory" class="section level2 columns-2">
+<h2><strong>The <code>from_joe</code> directory</strong></h2>
+<ul>
+<li><p>Let’s say your collaborator and data producer is <strong>Joe</strong>.</p></li>
+<li><p>He will send you data with <strong>weird space-containing file names</strong>, data in <strong>Microsoft Excel workbooks</strong>, etc.</p></li>
+<li><p>It is <strong>futile to fight this</strong>, just <strong>quarantine all the crazy in a <code>from_joe</code> directory</strong>.</p></li>
+<li><p><strong>Rename</strong> things and/or <strong>export to plain text</strong> and <strong>put those files in your data directory</strong>.</p></li>
+<li><p><strong>Record whatever you do you do to those inputs in a README or in comments in your R code</strong></p></li>
+</ul>
+<center>
+<img src="http://cdn.c.photoshelter.com/img-get/I0000rvodBzQVVBg/s/860/860/James-E-Rothman-Phd-2013-Nobel-Prize-Medicine-2.jpg" height="480px" width="180px">
+</center>
+<p><br> <br></p>
+</div>
+<div id="give-yourself-less-rope" class="section level2 columns-2">
+<h2><strong>Give yourself less rope</strong></h2>
+<ul>
+<li><p>It’s a good idea to <strong>revoke your own write permission to the raw data file</strong>.</p></li>
+<li><p>Then you <strong>can’t accidentally edit it</strong>.</p></li>
+<li><p>It also makes it <strong>harder to do manual edits</strong> in a moment of weakness, when you know you should <strong>just add a line to your data cleaning script</strong>.</p></li>
+</ul>
+<center>
+<img src="https://codex.wordpress.org/images/e/eb/podz_filezilla_13.gif" />
+</center>
+<p><br> <br></p>
+</div>
+<div id="prose" class="section level2">
+<h2><strong>Prose</strong></h2>
+<ul>
+<li><p>Sometimes you need a place to park key emails, internal documentation and explanations, random Word and PowerPoint docs people send, etc.</p></li>
+<li><p>This is kind of like <code>from_joe</code>, where I don’t force myself to keep same standards with respect to file names and open formats.</p></li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="recap" class="section level2">
+<h2>Recap</h2>
+<blockquote>
+<p>File organization should <strong>reflect inputs vs outputs</strong> and the <strong>flow of information</strong></p>
+</blockquote>
+<pre><code>/Users/jenny/research/bohlmann/White_Pine_Weevil_DE:
+drwxr-xr-x  20 jenny  staff        680 Apr 14 15:44 analysis
+drwxr-xr-x   7 jenny  staff        238 Jun  3  2014 data
+drwxr-xr-x  22 jenny  staff        748 Jun 23  2014 model-exposition
+drwxr-xr-x   4 jenny  staff        136 Jun  3  2014 results</code></pre>
+<center>
+<img src="day01/assets/img/workflow.png" height="290px" />
+</center>
+<p><br> <br></p>
+</div>
+<div id="prepare-data-rightarrow-do-stats-rightarrow-make-tables-figs" class="section level2">
+<h2>Prepare data <span class="math inline">\(\rightarrow\)</span> Do stats <span class="math inline">\(\rightarrow\)</span> Make tables &amp; figs</h2>
+<div id="the-r-scripts" class="section level4">
+<h4><strong>The <code>R</code> scripts:</strong></h4>
+<pre><code>01_marshal-data.r
+02_pre-dea-filtering.r
+03_dea-with-limma-voom.r
+04_explore-dea-results.r
+90_limma-model-term-name-fiasco.r</code></pre>
+<hr>
+</div>
+<div id="the-figures-left-behind" class="section level4">
+<h4><strong>The figures left behind:</strong></h4>
+<pre><code>02_pre-dea-filtering-preDE-filtering.png
+03-dea-with-limma-voom-voom-plot.png
+04_explore-dea-results-focus-term-adjusted-p-values1.png
+04_explore-dea-results-focus-term-adjusted-p-values2.png
+...
+90_limma-model-term-name-fiasco-first-voom.png
+90_limma-model-term-name-fiasco-second-voom.png</code></pre>
+<p><br> <br></p>
+</div>
+</div>
+</div>
+<div id="file-naming" class="section level1">
+<h1>File naming</h1>
+<p><br></p>
+<div id="names-matter" class="section level2">
+<h2><strong>Names matter</strong></h2>
+<div class="figure">
+<img src="day01/assets/img/cheers.png" />
+
+</div>
+<p><br> <br></p>
+</div>
+<div id="what-works-what-doesnt" class="section level2">
+<h2><strong>What works, what doesn’t?</strong></h2>
+<p><strong>NO</strong></p>
+<pre><code>myabstract.docx
+Joe’s Filenames Use Spaces and Punctuation.xlsx
+figure 1.png
+fig 2.png
+JW7d^(2sl@deletethisandyourcareerisoverWx2*.txt</code></pre>
+<p><strong>YES</strong></p>
+<pre><code>2014-06-08_abstract-for-sla.docx
+joes-filenames-are-getting-better.xlsx
+fig01_scatterplot-talk-length-vs-interest.png
+fig02_histogram-talk-attendance.png
+1986-01-28_raw-data-from-challenger-o-rings.txt</code></pre>
+<p><br> <br></p>
+</div>
+<div id="three-principles-for-file-names" class="section level2">
+<h2><strong>Three principles for (file) names</strong></h2>
+<p><br></p>
+<div id="machine-readable" class="section level4">
+<h4><strong>1. Machine readable</strong></h4>
+<p><br></p>
+</div>
+<div id="human-readable" class="section level4">
+<h4><strong>2. Human readable</strong></h4>
+<p><br></p>
+</div>
+<div id="plays-well-with-default-ordering" class="section level4">
+<h4><strong>3. Plays well with default ordering</strong></h4>
+<p><br> <br></p>
+</div>
+</div>
+<div id="awesome-file-names" class="section level2">
+<h2><strong>Awesome file names</strong> :)</h2>
+<div class="figure">
+<img src="day01/assets/img/awesome_names.png" />
+
+</div>
+<p><br> <br></p>
+</div>
+<div id="machine-readable-1" class="section level2">
+<h2><strong>Machine readable</strong></h2>
+<div id="regular-expression-and-globbing-friendly" class="section level4">
+<h4><strong>- Regular expression and globbing friendly</strong></h4>
+<ul>
+<li>Avoid spaces, punctuation, accented characters, case sensitivity</li>
+</ul>
+</div>
+<div id="easy-to-compute-on" class="section level4">
+<h4><strong>- Easy to compute on</strong></h4>
+<ul>
+<li>Deliberate use of delimiters</li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+<div id="globbing" class="section level2">
+<h2><a href="http://searchsecurity.techtarget.com/definition/globbing">Globbing</a></h2>
+<p><strong>Excerpt of complete file listing:</strong></p>
+<div class="figure">
+<img src="day01/assets/img/plasmid_names.png" />
+
+</div>
+<p><strong>Example of globbing to narrow file listing:</strong></p>
+<div class="figure">
+<img src="day01/assets/img/plasmid_glob.png" />
+
+</div>
+<p><br> <br></p>
+</div>
+<div id="same-using-mac-os-finder-search-facilities" class="section level2">
+<h2><strong>Same using Mac OS Finder search facilities</strong></h2>
+<center>
+<img src="day01/assets/img/plasmid_mac_os_search.png" />
+</center>
+<p><br> <br></p>
+</div>
+<div id="same-using-regex-in-r" class="section level2">
+<h2><strong>Same using regex in R</strong></h2>
+<center>
+<img src="day01/assets/img/plasmid_regex.png" />
+</center>
+<p><br> <br></p>
+</div>
+<div id="punctuation" class="section level2 smaller">
+<h2><strong>Punctuation</strong></h2>
+<div id="deliberate-use-of---and-_-allows-recovery-of-meta-data-from-the-filenames" class="section level4">
+<h4><strong>Deliberate use of <code>&quot;-&quot;</code> and <code>&quot;_&quot;</code> allows recovery of meta-data from the filenames:</strong></h4>
+<ul>
+<li><code>&quot;_&quot;</code> underscore used to delimit units of meta-data I want later</li>
+<li><code>&quot;-&quot;</code> hyphen used to delimit words so my eyes don’t bleed</li>
+</ul>
+<center>
+<img src="day01/assets/img/plasmid_delimiters.png" />
+</center>
+<hr>
+<center>
+<img src="day01/assets/img/plasmid_delimiters_code.png" />
+</center>
+<p>This happens to be <code>R</code> but also possible in the <code>shell</code>, <code>Python</code>, etc.</p>
+<p><br> <br></p>
+</div>
+</div>
+<div id="include-important-metadata" class="section level2">
+<h2><strong>Include important metadata</strong></h2>
+<p>e.g. I’m saving a number of files of extracted environmental data at different resolutions (<code>res</code>) and for a number of months (<code>month</code>).</p>
+<pre class="r"><code>write.csv(df, paste(&quot;variable_&quot;, res, month, sep =&quot;_&quot;))
+
+df &lt;- read.csv(paste(&quot;variable_&quot;, res, month, sep =&quot;_&quot;))</code></pre>
+<p><br> <br></p>
+</div>
+<div id="recap-machine-readable" class="section level2">
+<h2><strong>Recap: machine readable</strong></h2>
+<div id="easy-to-search-for-files-later" class="section level3">
+<h3><strong>- Easy to search for files later</strong></h3>
+</div>
+<div id="easy-to-narrow-file-lists-based-on-names" class="section level3">
+<h3><strong>- Easy to narrow file lists based on names</strong></h3>
+</div>
+<div id="easy-to-extract-info-from-file-names-e.g.by-splitting" class="section level3">
+<h3><strong>- Easy to extract info from file names, e.g. by splitting</strong></h3>
+</div>
+<div id="new-to-regular-expressions-and-globbing-be-kind-to-yourself-and-avoid" class="section level3">
+<h3><strong>- New to regular expressions and globbing? be kind to yourself and avoid</strong></h3>
+<ul>
+<li>Spaces in file names</li>
+<li>Punctuation</li>
+<li>Accented characters</li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+</div>
+<div id="human-readable-1" class="section level1">
+<h1>Human readable</h1>
+<p><br></p>
+<div id="human-readable-2" class="section level2">
+<h2><strong>Human readable</strong></h2>
+<p><br></p>
+<div id="name-contains-info-on-content" class="section level3">
+<h3><strong>- Name contains info on content</strong></h3>
+<p><br></p>
+</div>
+<div id="connects-to-concept-of-a-slug-from-semantic-urls" class="section level3">
+<h3><strong>- Connects to concept of a</strong> <a href="https://en.wikipedia.org/wiki/Semantic_URL#Slug"><strong><em>slug</em></strong></a> <strong>from semantic URLs</strong></h3>
+<p><br> <br></p>
+</div>
+</div>
+<div id="example" class="section level2">
+<h2><strong>Example</strong></h2>
+<p><strong>Which set of file(name)s do you want at 3 a.m. before a deadline?</strong></p>
+<div class="figure">
+<img src="day01/assets/img/human_readable_not_options.png" />
+
+</div>
+<p><br> <br></p>
+</div>
+<div id="embrace-the-slug" class="section level2">
+<h2><strong>Embrace the slug</strong></h2>
+<div class="columns-2">
+<p><img src="day01/assets/img/slug_filenames.png" /> <img src="day01/assets/img/slug.jpg" /></p>
+</div>
+<p><br> <br></p>
+</div>
+<div id="recap-human-readable" class="section level2">
+<h2><strong>Recap: Human readable</strong></h2>
+<div id="rightarrow-easy-to-figure-out-what-the-heck-something-is-based-on-its-name" class="section level3">
+<h3><span class="math inline">\(\rightarrow\)</span> <strong>Easy to figure out what the heck something is, based on its name</strong></h3>
+<p><br> <br></p>
+</div>
+</div>
+</div>
+<div id="plays-well-with-default-ordering-1" class="section level1">
+<h1>Plays well with default ordering</h1>
+<p><br></p>
+<div id="plays-well-with-default-ordering-2" class="section level2">
+<h2><strong>Plays well with default ordering</strong></h2>
+<p><br></p>
+<div id="put-something-numeric-first" class="section level3">
+<h3><strong>- Put something numeric first</strong></h3>
+<p><br></p>
+</div>
+<div id="use-the-iso-8601-standard-for-dates" class="section level3">
+<h3><strong>- Use the ISO 8601 standard for dates</strong></h3>
+<p><br></p>
+</div>
+<div id="left-pad-other-numbers-with-zeros" class="section level3">
+<h3><strong>- Left pad other numbers with zeros</strong></h3>
+<p><br> <br></p>
+</div>
+</div>
+<div id="examples" class="section level2">
+<h2>Examples</h2>
+<p><strong>Chronological order:</strong></p>
+<div class="figure">
+<img src="day01/assets/img/chronological_order.png" />
+
+</div>
+<hr>
+<p><strong>Logical order:</strong> Put something numeric first</p>
+<div class="figure">
+<img src="day01/assets/img/logical_order.png" />
+
+</div>
+<p><br> <br></p>
+</div>
+<div id="dates" class="section level2">
+<h2>Dates</h2>
+<p>Use the <strong>ISO 8601</strong> standard for dates: <code>YYYY-MM-DD</code></p>
+<div class="figure">
+<img src="day01/assets/img/chronological_order.png" />
+
+</div>
+</div>
+<div id="section-11" class="section level2">
+<h2></h2>
+<center>
+<img src="day01/assets/img/iso_8601.tiff" alt="iso_psa" />
+</center>
+<p><br> <br></p>
+</div>
+<div id="left-pad-other-numbers-with-zeros-1" class="section level2">
+<h2>Left pad other numbers with zeros</h2>
+<center>
+<img src="day01/assets/img/logical_order.png" />
+</center>
+<p><br></p>
+<p><strong>If you don’t left pad, you get this:</strong></p>
+<pre><code>10_final-figs-for-publication.R
+1_data-cleaning.R
+2_fit-model.R</code></pre>
+<p>which is just sad :(</p>
+<p><br> <br></p>
+</div>
+<div id="recap-plays-well-with-default-ordering" class="section level2">
+<h2>Recap: Plays well with default ordering</h2>
+<ul>
+<li><p>Put something numeric first</p></li>
+<li><p>Use the ISO 8601 standard for dates</p></li>
+<li><p>Left pad other numbers with zeros</p></li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="recap-three-principles-for-file-names" class="section level2">
+<h2>Recap: Three principles for (file) names</h2>
+<ol style="list-style-type: decimal">
+<li><p>Machine readable</p></li>
+<li><p>Human readable</p></li>
+<li><p>Plays well with default ordering</p></li>
+</ol>
+</div>
+<div id="go-forth-and-use-awesome-file-names" class="section level2">
+<h2>Go forth and use awesome file names :)</h2>
+<div class="figure">
+<img src="day01/assets/img/chronological_order.png" alt="chronological_order" />
+<p class="caption">chronological_order</p>
+</div>
+<p><br></p>
+<div class="figure">
+<img src="day01/assets/img/logical_order.png" alt="logical_order" />
+<p class="caption">logical_order</p>
+</div>
+<p><br> <br></p>
+</div>
+</div>
+<div id="lets-set-up-our-project" class="section level1">
+<h1>Let’s set up our project!</h1>
+<p><br></p>
+<div id="activity-create-an-rstudio-project" class="section level2">
+<h2><strong>Activity : Create an RStudio project</strong></h2>
+<p><br></p>
+<div id="create-an-project-in-which-we-will-work-this-week" class="section level4">
+<h4><strong>- Create an project in which we will work this week</strong></h4>
+<p><br></p>
+</div>
+<div id="create-a-data-folder" class="section level4">
+<h4><strong>- Create a <code>data</code> folder</strong></h4>
+<p><br></p>
+</div>
+</div>
+<div id="new-directory" class="section level2">
+<h2><strong>New Directory</strong></h2>
+<p><strong>File</strong> -&gt; <strong>New Project</strong> -&gt; <strong>New Directory</strong></p>
+<p><img src="day01/assets/img/project_screen1.png" height=200px></p>
+<p><br></p>
+</div>
+<div id="empty-project" class="section level2">
+<h2><strong>Empty Project</strong></h2>
+<p>In the <strong>Project Type</strong> screen, click on <strong>Empty Project</strong>.</p>
+<p><img src="day01/assets/img/project_screen2.png" height=200px></p>
+<p><br></p>
+</div>
+<div id="name-project-directory" class="section level2">
+<h2><strong>Name project directory</strong></h2>
+<p>In the <strong>Create New Project</strong> screen, give your project a name and ensure that <strong>create a git repository</strong> is checked. Click on <strong>Create Project</strong>.</p>
+<div class="figure">
+<img src="day01/assets/img/project_screen3.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="new-project-directory-created" class="section level2">
+<h2><strong>New project directory created</strong></h2>
+<p>RStudio will create a new folder containing an empty project and set R’s working directory to within it.</p>
+<p>Two files are created in the otherwise empty project:-</p>
+<ul>
+<li><strong>.gitignore</strong> - Specifies files that should be ignored by the version control system.</li>
+<li><strong>NHM_Advanced_comp_course.Rproj</strong> - Configuration information for the RStudio project</li>
+</ul>
+<p>There is no need to worry about the contents of either of these for now.</p>
+<p><br></p>
+</div>
+<div id="create-a-data-folder-1" class="section level2">
+<h2><strong>Create a data folder</strong></h2>
+<div class="figure">
+<img src="day01/assets/img/project_screen4.png" />
+
+</div>
+<p><br></p>
+</div>
+<div id="success" class="section level2">
+<h2><strong>Success!</strong></h2>
+<p><img src="day01/assets/img/project_screen5.png" /> <br> <br></p>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2>Acknowledgements</h2>
+<div id="materials-remixed-from" class="section level3">
+<h3><strong>Materials remixed from:</strong></h3>
+<ul>
+<li><p><strong>ACCE Research Data Management</strong> <a href="https://annakrystalli.github.io/ACCE_RDM/Rmd/index.html">workshop materials</a></p></li>
+<li><p><strong>Data carpentry</strong> <a href="https://github.com/datacarpentry/rr-organization1">File Organization workshop materials</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
