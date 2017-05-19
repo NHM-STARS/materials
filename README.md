@@ -18,13 +18,22 @@ Repository containing materials and useful links associated with the course.
 ## Day 2
 - Introduction to R
 - Data wrangling and tidying in R
+  + Materials [folder](https://github.com/NHM-STARS/materials/tree/master/day02)
+  
 - Data visualisation in R
+  + Session [slides](bit.ly/nhm_ggplot2)
+  + Materials [folder](https://github.com/NHM-STARS/materials/tree/master/day02/ggplot2)
 
 ## Day 3
 - Basic statistics in R
-- Tidy code, tidy practices and literate programming in R
+  + Materials [folder](https://github.com/NHM-STARS/materials/tree/master/day03)
+  
+- Tidy code, tidy practices and literate programming in R  
 - Reproducible reports with RMarkdown
 - How to get help! Reproducible example
+  + Sessions [slides](bit.ly/nhm_rmarkdown)
+  + Materials [folder](https://github.com/NHM-STARS/materials/tree/master/day03/rmarkdown) 
+
 
 ## Day 4
 - git and GitHub through RStudio
@@ -37,6 +46,6 @@ Repository containing materials and useful links associated with the course.
 ## Day 5
 - Open Science, data archiving and code archiving
 - Mapping in R
-  + ggmap: 
-  + mapr:
+  + ggmap 
+  + [Interactive leaflet maps & mapr](bit.ly/nhm_map)
 - Reports back on Museum data exercise
