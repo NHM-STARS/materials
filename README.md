@@ -12,7 +12,7 @@ Repository containing materials and useful links associated with the course.
 ## Day 1 
 - Introduction to the course
 - Data literacy and Project Management
-  + [handout](https://nhm-stars.github.io/materials/RDM_intro.html): https://nhm-stars.github.io/materials/RDM_intro.html
+  + [Session handout](https://nhm-stars.github.io/materials/RDM_intro.html)
 - Museum data collection exercise
 
 ## Day 2
@@ -28,10 +28,10 @@ Repository containing materials and useful links associated with the course.
 
 ## Day 4
 - git and GitHub through RStudio
-  + handout: https://nhm-stars.github.io/materials/collab_gh_intro.html
-  + Practical 1: https://github.com/annakrystalli/ISBE_Symposium-1
-  + Practical 2: 
-  + Evolottery results: http://rpubs.com/annakrystalli/278074
+  + [Session handout](https://nhm-stars.github.io/materials/collab_gh_intro.html)
+  + [Practical 1 handout](https://github.com/annakrystalli/ISBE_Symposium-1)
+  + [Practical 2: Evolottery handout](https://nhm-stars.github.io/materials/evolottery.html)
+  + Evolottery [results](http://rpubs.com/annakrystalli/278074)
 - More complex gitting
 
 ## Day 5
