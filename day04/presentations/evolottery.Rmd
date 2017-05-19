@@ -3,19 +3,19 @@ title: '**Practical 2: `GitHub` & `Rstudio` for collaborative coding**'
 author: "NHM STARS, London, Thu 18 May 201"
 subtitle: Anna Krystalli
 output:
-  xaringan::moon_reader:
-    lib_dir: libs
-    nature:
-      countIncrementalSlides: no
-      highlightLines: yes
-      highlightStyle: github
-  nature: default
   html_document:
     fig_width: 7
     theme: journal
     toc: no
     toc_depth: 2
     toc_float: yes
+  nature: default
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      countIncrementalSlides: no
+      highlightLines: yes
+      highlightStyle: github
 ---
 
 # **Welcome to the evolutionary lottery of skull and beak morphology**
