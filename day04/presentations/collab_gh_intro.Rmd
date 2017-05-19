@@ -1,0 +1,383 @@
+---
+title: "Collaborative `Github` in `Rstudio`"
+author: "NHM STARS, London, Thu 18 May 201"
+subtitle: Anna Krystalli
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      countIncrementalSlides: no
+      highlightLines: yes
+      highlightStyle: github
+  nature: default
+  html_document:
+    fig_width: 7
+    theme: journal
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+---
+
+<br>
+
+***handout:*** [**https://nhm-stars.github.io/materials/collab_gh_intro.html**](https://nhm-stars.github.io/materials/collab_gh_intro.html)
+
+<br>
+
+***
+---
+ 
+# Session Roadmap
+
+<br>
+
+### 1 Introductions 
+
+
+#### - **get to know github** (25 mins)
+
+  - github as a computational research tool
+
+<br>
+
+---
+
+### 2 Get stuck in
+
+
+#### - [Version control with github and rstudio](https://github.com/annakrystalli/ISBE_Symposium-1) (30 mins)
+
+
+  - In this session, we are going to get you started with using version control from within RStudio.
+
+  - The material is self-paced and includes a worked-example. It is suggested that you work through the sections in order.
+
+
+#### - [Collaborative github through rstudio](https://nhm-stars.github.io/materials/evolottery.html) #EvoLottery (40 mins)
+  - In this exercise, each participant will fork a github repo, and contribute a file required to simulate the **evolutionary trajectory of an imaginary species' body size**.
+  
+  - We'll use github to collate all species files and plot them all up together at the end! We'll also **discover the skull and beak shapes** associated with each simulated species size.
+
+
+<br>
+<br>
+
+---
+class: inverse, center, middle
+
+### introductions: **get to know github** 
+
+***
+---
+
+<br>
+
+# Version Control
+
+## **version control examples**
+
+- Numbering of book editions
+- Wikipedia's Page history
+
+- Your thesis!
+    + mythesis_draft.docx
+    + mythesis_final.docx
+    + mythesis_final_from_supervisor.docx
+    + mythesis_final_from_supervisor_corrected.docx
+    + etc. *ad infinitum*
+
+<br>
+---
+
+## **version control and computing**
+
+> \"*The need for a logical way to organize and control revisions has existed for almost as long as writing has existed, but revision control became much more important, and complicated, when the era of computing began.*\"
+
+<br>
+---
+
+## **version control technologies**
+
+### **GitHub**
+
+- #### Relies on the open-source **version control system Git** 
+    + originally designed by Linus Torvalds for the development of the Linux kernel
+    + now developed and maintained by the Git community
+    
+- #### Much more effcient workflow:
+    + revisions are associated with a timestamp person making the change.
+    + only changes recorded rather than full copy of new file.
+    + enables reverting to a previous version
+
+- #### More than a simple source code hosting service. 
+    + Provides a dynamic and collaborative social coding platform  
+
+<br>
+<center>
+<img src="http://www.palermo.edu/Archivos_content/ingenieria/top/130712_git_github_topdenota1.jpg" width="250px" /> 
+</center>
+
+
+<br>
+<br>
+
+---
+class: inverse, center, middle
+
+# Next Gen Science
+
+***
+---
+
+## modern science workflows
+
+***can be overwhelming***
+
+<img src="images/workflows.png" width="500px" />
+
+<br>
+
+---
+
+## **Next Generation Science demands**
+
+- #### **science increasingly computational**
+
+    > demands for increased openness, transparency & reproducibility
+    
+- #### **science always benefits from collaboration**
+
+    > push to harness the power of the internet 
+
+<br>  
+
+---
+## succesful modern science workflows
+
+***can be extremely powerful***
+
+<img src="images/collab.png" width="500px" />
+
+<br>
+<br>
+
+---
+class: inverse, center, middle
+
+# **GitHub for science**
+
+***
+---
+<br>
+
+[![](images/git4sci.png)](http://scfbm.biomedcentral.com/articles/10.1186/1751-0473-8-7)
+
+
+
+> - ideal for managing the full suite of research outputs such as datasets, statistical code, figures, lab notes, and manuscripts.
+
+> - supports peer review, commenting, and discussion. 
+
+> - Diverse range of efforts, from individual to large bioinformatics projects, laboratory repositories, as well as global collaborations have found a home on GitHub
+
+<br>
+
+---
+## **Rstudio for r users**
+
+![](https://status.github.com/images/invertocat.png)
+
+<br> 
+
+###           **♡**
+
+<img src="https://pbs.twimg.com/profile_images/487277095681150976/aEp2vlJy.png" width="200px" />
+
+<br>
+<br>
+
+---
+class: inverse, center, middle
+
+# **GitHub features**
+***
+---
+
+## repos
+
+centralising information e.g. [**weecology** / ***"Nine simple ways to make it easier to (re)use your data" paper***](http://ojs.library.queensu.ca/index.php/IEE/article/view/4608/0)
+
+[<img src="images/repo-1.png" width="500px"/>](https://github.com/weecology/data-sharing-paper)
+
+<br>
+---
+## commits
+
+traceability
+
+[<img src="images/commits-1.png" width="500px"/>](https://github.com/ropensci/rfishbase/commits/master)
+
+<br>
+---
+
+## issues
+
+project management
+
+[<img src="images/issues-1.png" width="500px"/>](https://github.com/weecology/data-sharing-paper/issues)
+
+<br>
+---
+
+## graphs 
+
+### project & team tracking
+
+tracking contributors
+
+[<img src="images/track-1.png" width="500px"/>](https://github.com/weecology/data-sharing-paper/graphs/contributors)
+
+---
+tracking commits
+
+[<img src="images/track-2.png" width="500px"/>](https://github.com/weecology/data-sharing-paper/network)
+
+<br>
+---
+class: inverse, center, middle
+
+# **entire process of project evolution reproducible**
+
+<br>
+<br>
+
+---
+
+
+
+
+## **more on github for science**
+
+<br>
+
+#### [**Ten Simple Rules for Taking Advantage of Git and GitHub**](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4945047/)
+
+#### **Github as part of** [**Good Enough Practices in Scientific Computing**](https://arxiv.org/abs/1609.00037)
+
+#### e.g [***My research workflow, based on Github***](https://status.github.com/images/invertocat.png) by [*Carl Boettiger*](https://twitter.com/cboettig)
+
+<br>
+
+---
+
+## **Example `GitHub` uses**
+
+[![](images/example_table.png)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4945047/table/pcbi.1004947.t001/)
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4945047/
+
+<br>
+<br>
+
+---
+class: inverse, center, middle
+
+# **PRACTICALS**
+
+***
+
+---
+
+<br>
+
+## **Practical 1: Github & Rstudio for version control**
+
+Practical adapted from Code Cafe Style tutorial by [Mike Croucher](http://www.walkingrandomly.com/) that will get you set up with all required software and able to link rstudio projects to github repos.
+
+### [**Enter Practical**](https://github.com/annakrystalli/ISBE_Symposium-1)
+
+<https://github.com/annakrystalli/ISBE_Symposium-1>
+
+<br>
+<br>
+<br>
+
+---
+
+## **Practical 2: Github & Rstudio for collaborative coding**
+### **#EvoLottery**
+
+**Beak and skull shapes in birds of prey (“raptors”) are strongly coupled and largely controlled by size.** 
+
+
+  - In this exercise, each participant will **fork a github repo**, and **contribute a file** required to simulate the *evolutionary trajectory of an imaginary species' body size*.
+
+
+  - We'll use **github** to **collate all species files** and **plot** them all up together at the end! We'll also **discover the skull and beak shapes** associated with each simulated species size.
+
+### [**Enter Practical**](https://nhm-stars.github.io/materials/evolottery.html)
+
+<https://nhm-stars.github.io/materials/evolottery.html>
+
+<br>
+<br>
+<br>
+
+---
+class: inverse, center, middle
+
+# Recap
+
+***
+
+---
+
+<br>
+
+## GitHub amazing for:
+
+- **fostering reproducibility**
+
+- **empowering collaboration**
+
+<br>
+
+---
+
+## GitHub tips
+***
+
+- Use [README](https://github.com/matiassingers/awesome-readme) to provide an overview of your project
+- commit early, commit often
+- write meaninful messages
+- use issues to keep track of bugs, tasks, and enhancements
+- include a [LICENSE](https://github.com/blog/1530-choosing-an-open-source-license)
+- practice by collaborating with yourself on different machines!
+- [handy github glossary](https://help.github.com/enterprise/11.10.340/user/articles/github-glossary/)
+
+<br>
+<br>
+
+---
+
+## Visual Recap
+
+<img src="images/github_wkf.jpg" width="500px"/>
+
+<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4945047/>
+
+<br>
+
+---
+
+# Further resources
+
+[Getting started with GitHub](http://jennybc.github.io/2014-05-12-ubc/ubc-r/session2.4_github.html) from materials for a [software carpentry course at UBC](http://jennybc.github.io/2014-05-12-ubc/)
+
+[Slides for lecture](http://kbroman.org/Tools4RR/assets/lectures/04_git_withnotes.pdf)  Karl Broman gave on git/github, with notes
+
+[joeyklee's friendly github intro](https://github.com/joeyklee/friendly-github-intro). *Mozilla Science Lab* workshop
+
+
+
+

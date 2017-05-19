@@ -1,0 +1,289 @@
+---
+title: '**Practical 2: `GitHub` & `Rstudio` for collaborative coding**'
+author: "NHM STARS, London, Thu 18 May 201"
+subtitle: Anna Krystalli
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      countIncrementalSlides: no
+      highlightLines: yes
+      highlightStyle: github
+  nature: default
+  html_document:
+    fig_width: 7
+    theme: journal
+    toc: no
+    toc_depth: 2
+    toc_float: yes
+---
+
+# **Welcome to the evolutionary lottery of skull and beak morphology**
+## **#EvoLottery**
+
+*** 
+<br>
+
+#### **Beak and skull shapes in birds of prey (“raptors”) are strongly coupled and largely controlled by size.** 
+
+- In this exercise, each participant will **fork a GitHub repo**, and **contribute a file** required to simulate the *evolutionary trajectory of an imaginary species' body size*.
+
+- We'll use **GitHub to collate all species files** and **plot** them all up together at the end! We'll also **discover the skull and beak shapes** associated with each simulated species size.
+
+
+<br>
+<br>
+---
+
+# GO!
+## **GitHub:** 
+**start with a repo**
+
+<https://GitHub.com/RSE-Sheffield/collaborative_GitHub_exercise>
+
+<img src="images/repo.png" width="700px" />
+
+<br>
+
+---
+
+# **fork repo**
+
+## **GitHub:** 
+make your **own copy of the repository** on GitHub
+
+- fork are linked and traceable
+
+<img src="images/fork-1.png" width="700px" /> 
+
+<br>
+
+---
+
+## **GitHub:** 
+GitHub makes a **copy into your account**
+
+<img src="images/fork-2.png" width="700px" />
+ 
+<br>
+
+## 
+
+---
+
+## **GitHub:** 
+**clone it: copy repo link** to initiate Rstudio project
+    
+<img src="images/fork-3.png" width="700px" />
+
+<br>
+<br>
+
+---
+
+# **create new project in Rstudio**
+
+## **rstudio:** 
+Create **new project**
+
+<img src="images/newproj-1.png" width="700px" />
+
+<br>
+
+---
+
+## **rstudio:** 
+Checkout from **version control repository**
+
+<img src="images/newproj-2.png" width="700px" />
+
+<br>
+
+---
+
+## **rstudio:** 
+Clone project from a **git** repository
+
+<img src="images/newproj-3.png" width="700px" />
+
+<br>
+
+---
+
+## **rstudio:** 
+Paste **repo link copied from GitHub** into **Repository URL** field. Click **`Create Project`**. 
+
+<img src="images/newproj-4.png" width="700px" />
+
+<br>
+
+---
+
+## **rstudio:** 
+Rstudio project now **contains all files from the GitHub repo.**
+
+<img src="images/newproj-5.png" width="700px" />
+
+<br>
+<br>
+
+
+
+---
+
+# **make a change to the repo**
+## **rstudio:** 
+open **`params/params_tmpl.R`**
+
+<img src="images/edit-1.png" width="700px" />
+
+<br>
+
+---
+## **rstudio:** 
+**save as new** `.R` script in **`params/`** folder. 
+
+Use species name of your choice to name new file. Please **!!DO NOT OVERWRITE `params/params_tmpl.R`!!**.
+
+<img src="images/edit-2.png" width="700px" />
+
+<br>
+
+---
+## **rstudio:** 
+edit file with parameters of your choice and save.
+
+<img src="images/edit-3.png" width="700px" />
+
+<br>
+
+<br>
+
+---
+
+### The parameters each participants need to supply are:
+
+**NB: remember to save the changes to your file**
+
+<br>
+
+- **`sig2`:** A numeric value greater than 0 but smaller than 5
+
+- **`species.name`:** a character string e.g. `"anas_krystallinus"`. Try to create a species name out of your name!
+
+---
+
+- **`color`:**  a character string e.g. `"red"`, `"#FFFFFF"` (tip: **pick a color using Rstudio's Color picker:**)
+
+<img src="assets/colour_picker.png" width="700px" />
+
+
+<br>
+
+---
+
+# commit changes locally to git
+
+## **rstudio:** 
+in the *git* tab, select the **new file** you created and click **`Commit`**.
+### !! Please **ONLY COMMIT YOUR NEW FILE** !!
+
+<img src="images/commit-1.png" width="700px" />
+
+<br>
+
+---
+
+## **rstudio:** 
+write an informative commit message and click **`Commit`**  
+
+<img src="images/commit-2.png" width="700px" />
+
+<br>
+
+---
+## **rstudio:** 
+your new file has now been commited  
+
+<img src="images/commit-3.png" width="700px" />
+
+<br>
+<br>
+
+---
+# push changes to GitHub
+## **rstudio:** 
+on the *git* tab click ⇧  to **push changes to GitHub**
+
+<img src="images/push-1.png" width="700px" />
+
+<br>
+
+---
+
+## **rstudio:** 
+changes have now been updated in the **GitHub repo**
+
+<img src="images/push-2.png" width="700px" />
+
+<br>
+<br>
+
+---
+
+# create pull request
+
+## **GitHub:** 
+in your repository, create **`new pull request`** 
+to merge fork to master repo (ie the original repo you forked)
+
+<img src="images/merge-1.png" width="700px" />
+
+<br>
+
+---
+
+## **GitHub:** 
+GitHub checks whether your requested merge creates any coflicts. 
+If all is good, click on **`Create pull request`**
+
+<img src="images/merge-2.png" width="700px" />
+
+<br>
+
+---
+
+## **GitHub:** 
+write an informative message explaining your changes to the master repo administrators. Click on **`Create pull request`**
+
+<img src="images/merge-3.png" width="700px" />
+
+<br>
+
+---
+
+## **GitHub:** 
+check original repo to see **your merged changes**
+
+<img src="images/merged.png" width="700px" />
+
+<br>
+<br>
+<br>
+
+---
+
+# exercise
+
+## **your mission**
+
+- **fork the repo**: <https://GitHub.com/RSE-Sheffield/collaborative_GitHub_exercise>
+- **link** it up to a **new Rstudio project**.
+- **create a new params** `.R` script. Name it using your selected species name.
+- **enter parameters** for your species.
+- **commit & push** your changes
+- **create a pull request** to the master repo
+
+We'll merge all contributions and [plot them together at the end!](http://rpubs.com/annakrystalli/278074) 
+
+
