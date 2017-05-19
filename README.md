@@ -38,7 +38,7 @@ Repository containing materials and useful links associated with the course.
 ## Day 4
 - git and GitHub through RStudio
   + [Session handout](https://nhm-stars.github.io/materials/collab_gh_intro.html)
-  + [Practical 1 handout](https://github.com/annakrystalli/ISBE_Symposium-1)
+  + [Practical 1 exercise](https://github.com/annakrystalli/ISBE_Symposium-1)
   + [Practical 2: Evolottery handout](https://nhm-stars.github.io/materials/evolottery.html)
   + Evolottery [results](http://rpubs.com/annakrystalli/278074)
 - More complex gitting
