@@ -20,7 +20,7 @@ output:
 
 <br>
 
-***handout:*** [**https://nhm-stars.github.io/materials/collab_gh_intro.html**](https://nhm-stars.github.io/materials/collab_gh_intro.html)
+***handout:*** [**https://nhm-stars.github.io/materials/day04/collab_gh_intro.html**](https://nhm-stars.github.io/materials/day04/collab_gh_intro.html)
 
 <br>
 
@@ -53,7 +53,7 @@ output:
   - The material is self-paced and includes a worked-example. It is suggested that you work through the sections in order.
 
 
-#### - [Collaborative github through rstudio](https://nhm-stars.github.io/materials/evolottery.html) #EvoLottery (40 mins)
+#### - [Collaborative github through rstudio](https://nhm-stars.github.io/materials/day04/evolottery.html) #EvoLottery (40 mins)
   - In this exercise, each participant will fork a github repo, and contribute a file required to simulate the **evolutionary trajectory of an imaginary species' body size**.
   
   - We'll use github to collate all species files and plot them all up together at the end! We'll also **discover the skull and beak shapes** associated with each simulated species size.
@@ -315,9 +315,9 @@ Practical adapted from Code Cafe Style tutorial by [Mike Croucher](http://www.wa
 
   - We'll use **github** to **collate all species files** and **plot** them all up together at the end! We'll also **discover the skull and beak shapes** associated with each simulated species size.
 
-### [**Enter Practical**](https://nhm-stars.github.io/materials/evolottery.html)
+### [**Enter Practical**](https://nhm-stars.github.io/materials/day04/evolottery.html)
 
-<https://nhm-stars.github.io/materials/evolottery.html>
+<https://nhm-stars.github.io/materials/day04/evolottery.html>
 
 <br>
 <br>
