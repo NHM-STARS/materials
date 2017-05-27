@@ -3,9 +3,6 @@ title: "Introduction to Project and Data Management"
 author: "Computational and data literacy skills for research"
 date: "15 May 2017, NHM"
 output:
-  ioslides_presentation:
-    highlight: pygments
-    widescreen: yes
   html_document:
     fig_width: 7
     self_contained: no
@@ -13,6 +10,9 @@ output:
     toc: yes
     toc_depth: 2
     toc_float: yes
+  ioslides_presentation:
+    highlight: pygments
+    widescreen: yes
 ---
 
 
@@ -60,7 +60,9 @@ if(names(rmarkdown::metadata$output)[1] == "ioslides_presentation"){
 
 <br>
 
-**Link to handout: <http://bit.ly/NHM_RDM_intro>**
+**Link to handout: <http://bit.ly/NHM_RDM_introduction>**
+
+
 
 <br>
 <br>
@@ -77,6 +79,7 @@ if(names(rmarkdown::metadata$output)[1] == "ioslides_presentation"){
 <br>
 
 
+
 ## **Getting a handle on our research materials**
 
 <center>
@@ -85,6 +88,8 @@ if(names(rmarkdown::metadata$output)[1] == "ioslides_presentation"){
 
 <br>
 <br>
+
+
 
 ## **21st Century Research meta-responsibilities**
 
@@ -100,6 +105,7 @@ Better digital curation of the workhorses of modern science: **code** & **data**
 
 <br>
 <br>
+
 
 ## **Drivers of better digital management**
 
@@ -118,7 +124,9 @@ Better digital curation of the workhorses of modern science: **code** & **data**
 <br>
 <br>
 
+
 # Resources
+
 
 ## **Nine simple ways to make it easier to (re)use your data**
 
@@ -392,6 +400,9 @@ read_csv(file, col_names = TRUE, col_types = NULL, locale = default_locale(),
 - keep it safe and and accessible
 - consider version control
 - consider centralising
+
+<br>
+<br>
 
 <center>
 <img src="http://www.thebugplanetstore.com/2014/wp-content/uploads/2012/03/master-file-03.jpg" width=400px>
@@ -960,6 +971,8 @@ Ready to **analyze data**:
 **`R` scripts** + the **Markdown** files:
 
 ![sample_ready_to_analyze_data](assets/img/sample_analysis.png)
+
+##
 
 <hr>
 
