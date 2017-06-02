@@ -140,6 +140,7 @@ open **`params/params_tmpl.R`**
 <br>
 
 ---
+
 ## **rstudio:** 
 **save as new** `.R` script in **`params/`** folder. 
 
@@ -150,6 +151,7 @@ Use species name of your choice to name new file. Please **!!DO NOT OVERWRITE `p
 <br>
 
 ---
+
 ## **rstudio:** 
 edit file with parameters of your choice and save.
 
@@ -202,6 +204,7 @@ write an informative commit message and click **`Commit`**
 <br>
 
 ---
+
 ## **rstudio:** 
 your new file has now been commited  
 
@@ -211,6 +214,7 @@ your new file has now been commited
 <br>
 
 ---
+
 # push changes to GitHub
 ## **rstudio:** 
 on the *git* tab click ⇧  to **push changes to GitHub**
